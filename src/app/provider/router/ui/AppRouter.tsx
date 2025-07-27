@@ -3,7 +3,7 @@ import { routes } from '../model/routes';
 import { BrowserRouter } from 'react-router-dom';
 
 export const AppRouter = () => (
-  <BrowserRouter >
+  <BrowserRouter>
     <Routes>
       {routes.map((route) => (
         <Route key={route.path} {...route} />
