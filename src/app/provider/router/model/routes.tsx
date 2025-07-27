@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 
-import { HomePage } from '@/pages/home';
+import { AppShell } from "@/app/AppShell.tsx";
+import { NotFoundPage } from "@/pages/404/ui/NotFoundPage.tsx";
 
 interface Route {
   path: string;
@@ -8,9 +9,9 @@ interface Route {
 }
 
 export const routes: Route[] = [
-  { path: '/', Component: HomePage },
+  { path: '/', Component: AppShell },
   {
     path: '*',
-    Component: () => <div>404</div>,
+    Component: NotFoundPage,
   },
 ];
