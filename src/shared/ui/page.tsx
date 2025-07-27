@@ -1,24 +1,40 @@
-import { useNavigate } from 'react-router-dom';
-import { hideBackButton, onBackButtonClick, showBackButton } from '@telegram-apps/sdk-react';
-import { type PropsWithChildren, useEffect } from 'react';
+'use client';
 
-export function Page({ children, back = true }: PropsWithChildren<{
-  /**
-   * True if it is allowed to go back from this page.
-   */
-  back?: boolean
-}>) {
-  const navigate = useNavigate();
+import { backButton, hapticFeedback } from '@telegram-apps/sdk-react';
+import { PropsWithChildren, useEffect } from 'react';
+import { cn } from '../lib/utils';
+import { useNavigate } from 'react-router-dom';
+
+interface PageProps extends PropsWithChildren {
+  className?: string;
+  back?: boolean;
+}
+
+export const Page = (props: PageProps) => {
+  const { children, back = true, className } = props;
+
+  const router = useNavigate();
 
   useEffect(() => {
-    if (back) {
-      showBackButton();
-      return onBackButtonClick(() => {
-        navigate(-1);
-      });
+    if (backButton.isSupported()) {
+      if (back) {
+        backButton.show();
+      } else {
+        backButton.hide();
+      }
     }
-    hideBackButton();
   }, [back]);
 
-  return <>{children}</>;
-}
+  useEffect(() => {
+    if (backButton.isSupported()) {
+      return backButton.onClick(() => {
+        if (hapticFeedback.isSupported()) {
+          hapticFeedback.impactOccurred('light');
+        }
+        router(-1);
+      });
+    }
+  }, [router]);
+
+  return <section className={cn('min-h-full', className)}>{children}</section>;
+};

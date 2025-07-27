@@ -13,7 +13,9 @@ export function App() {
       appearance={isDark ? 'dark' : 'light'}
       platform={['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base'}
     >
-      <AppRouter />
+      <div className="overflow-y-auto h-full min-h-[100dvh] p-4 touch-manipulation">
+        <AppRouter />
+      </div>
     </AppRoot>
   );
 }

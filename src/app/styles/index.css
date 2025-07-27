@@ -1,12 +1,22 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
+/* TODO: пока уберем там тем вроде нет */
+/* @custom-variant dark (&:is(.dark *)); */
+
+html,
+body {
+  touch-action: none;
+  overflow: hidden;
+  overscroll-behavior: none;
+  height: 100%;
+}
 
 body {
-  background: var(--tg-theme-secondary-bg-color, white);
-  padding: 0;
-  margin: 0;
+  font-family: Inter, sans-serif;
+  color: var(--foreground);
+  background: var(--background);
+  min-height: 100dvh;
 }
 
 @theme inline {
@@ -48,9 +58,10 @@ body {
 }
 
 :root {
+  --background: #111217;
+  --foreground: #18a7fb;
+
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -82,7 +93,8 @@ body {
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+/* TODO: пока уберем там тем вроде нет */
+/* .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -114,20 +126,4 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/*TODO: Временно добавил, пока не разобрался с конфигом tailwind*/
-@layer components {
-  .btn-main {
-    @apply uppercase font-medium py-2.5 cursor-pointer;
-  }
-}
+} */
