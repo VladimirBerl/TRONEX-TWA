@@ -1,2 +1,4 @@
 export { SpinningFan } from "./farm-currency/ui/SpinningFan.tsx"
 export { ReferralSection } from "./referral-copy/ui/ReferralSection.tsx"
+export { UpgradeControl } from "./upgrade-level/ui/UpgradeControl.tsx"
+export { UpgradeTier } from "./upgrade/ui/UpgradeTier.tsx"

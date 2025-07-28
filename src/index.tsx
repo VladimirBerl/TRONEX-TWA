@@ -14,6 +14,19 @@ import '@/app/styles/index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
+// TODO Временно отключил логирование ошибки ton connect
+window.addEventListener('unhandledrejection', (event) => {
+  const reason = event.reason as unknown;
+
+  if (
+    reason instanceof Error &&
+    reason.message.includes('Operation aborted')
+  ) {
+    event.preventDefault();
+  }
+});
+
+
 try {
   const launchParams = retrieveLaunchParams();
   const { tgWebAppPlatform: platform } = launchParams;

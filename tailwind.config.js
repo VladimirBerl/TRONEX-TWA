@@ -1,18 +1,12 @@
-// const plugin = require('tailwindcss/plugin');
-//
-// module.exports = {
-//   content: ['./src/**/*.{js,ts,jsx,tsx}'],
-//   theme: {
-//     extend: {
-//       colors: {
-//         'primary-bg': '#1B1D29',
-//         'accent-blue': '#18A7FB',
-//       },
-//     },
-//   },
-//   plugins: [
-//     plugin(function () {
-//       console.log('✅ Tailwind конфиг загружен');
-//     }),
-//   ],
-// };
+module.exports = {
+  theme: {
+    extend: {},
+    screens: {
+      xs: '375px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
+  },
+};

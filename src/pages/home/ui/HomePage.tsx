@@ -3,11 +3,9 @@
 //   initDataState as _initDataState,
 //   useSignal,
 // } from '@telegram-apps/sdk-react';
-import { ActionButtons } from "@/widgets/action-buttons/index.ts";
-import { TonBalance } from "@/entities/ton-balance/index.ts";
-import { SpinningFan } from "@/features/farm-currency";
-import { PassiveIncome } from "@/entities/passive-income/index.ts";
-import { LevelUpgrade } from "@/entities/level/index.ts";
+import { ActionButtons } from "@/widgets";
+import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
+import { SpinningFan } from "@/features";
 import { Page } from '@/shared/ui';
 
 export const HomePage = () => {
