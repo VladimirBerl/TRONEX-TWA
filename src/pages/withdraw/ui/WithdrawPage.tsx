@@ -1,8 +1,10 @@
+import { Page } from "@/shared/ui";
+
 export const WithdrawPage = () => {
   return (
-    <div>
+    <Page>
       Withdraw page
-    </div>
+    </Page>
   );
 };
 

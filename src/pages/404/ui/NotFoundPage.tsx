@@ -1,3 +1,5 @@
+import { Page } from "@/shared/ui";
+
 export const NotFoundPage = () => {
-  return <div>oopsy, there is nothing here :*</div>;
+  return <Page>oopsy, there is nothing here :*</Page>;
 }
