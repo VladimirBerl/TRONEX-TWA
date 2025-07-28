@@ -1,2 +1,2 @@
 export * from './page.tsx';
-export * from './button';
+export * from './page';
