@@ -1,7 +1,9 @@
+import { Page } from "@/shared/ui";
+
 export const DepositPage = () => {
   return (
-    <div>
+    <Page>
       Deposit page
-    </div>
+    </Page>
   );
 };

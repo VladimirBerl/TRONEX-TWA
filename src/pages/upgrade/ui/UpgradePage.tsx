@@ -1,8 +1,10 @@
+import { Page } from '@/shared/ui';
+
 export const UpgradePage = () => {
   return (
-    <div>
+    <Page>
       Upgrade page
-    </div>
+    </Page>
   );
 };
 

@@ -1,7 +1,9 @@
+import { Page } from "@/shared/ui";
+
 export const BonusPage = () => {
   return (
-    <div>
+    <Page>
       Bonus page
-    </div>
+    </Page>
   );
 };

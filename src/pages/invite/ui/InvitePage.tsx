@@ -1,7 +1,9 @@
+import { Page } from "@/shared/ui";
+
 export const InvitePage = () => {
   return (
-    <div>
+    <Page>
       Invite page
-    </div>
+    </Page>
   );
 };
