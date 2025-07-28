@@ -2,6 +2,7 @@ import { Button } from "@/shared/ui";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/model/navigation.ts";
 
+// TODO сущность, поскольку в будущем здесь будет апаться уровень, а уровень это сущность c.Джейсон Стэйтем
 export const LevelUpgrade = () => {
   const navigate = useNavigate()
 

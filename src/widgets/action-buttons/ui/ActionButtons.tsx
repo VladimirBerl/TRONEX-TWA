@@ -2,6 +2,7 @@ import { Button } from '@/shared/ui';
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/model/navigation.ts";
 
+// TODO Положил в Widgets, поскольку это просто каркас перенаправляющих кнопок не влияющих на бизнес логику
 export const ActionButtons = () => {
   const navigate = useNavigate()
 

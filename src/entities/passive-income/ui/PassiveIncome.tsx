@@ -1,3 +1,4 @@
+// TODO Положил в сущности, поскольку это доход, как товар или карточка (в пример привёл)
 export const PassiveIncome = () => {
   return (
     <section className="my-[26px]">
