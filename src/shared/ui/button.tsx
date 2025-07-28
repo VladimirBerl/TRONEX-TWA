@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { hapticFeedback } from '@telegram-apps/sdk-react';
 
 import { cn } from '@/shared/lib/utils';
 
@@ -33,18 +34,33 @@ const buttonVariants = cva(
 );
 
 function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ...props
-}: React.ComponentProps<'button'> &
+                  className,
+                  variant,
+                  size,
+                  onClick,
+                  asChild = false,
+                  vibrate = true,
+                  ...props
+                }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
+  asChild?: boolean;
+  vibrate?: boolean;
+}) {
   const Comp = asChild ? Slot : 'button';
 
-  return <Comp data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />;
+  return (
+    <Comp
+      data-slot="button"
+      onClick={ (event) => {
+        if (vibrate && hapticFeedback.isSupported()) {
+          hapticFeedback.impactOccurred('light');
+        }
+        onClick?.(event);
+      } }
+      className={ cn(buttonVariants({ variant, size, className })) }
+      { ...props }
+    />
+  );
 }
 
 export { Button, buttonVariants };
