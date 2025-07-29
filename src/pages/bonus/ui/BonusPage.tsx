@@ -5,7 +5,7 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 
 export const BonusPage = () => {
   return (
-    <Page back={ false } className="flex flex-col items-center gap-y-6">
+    <Page className="flex flex-col items-center gap-y-6">
       <h1 className="text-5xl text-[#5c8afa] uppercase font-semibold text-center mb-[20px]">Bonus</h1>
 
       <section className="w-full">
