@@ -4,9 +4,9 @@ import { ChevronsDownUp } from "lucide-react";
 export const WithdrawForm = () => {
   // TODO Пока ваниальная форма и без декомпозиции, нужно уточнить по валидации
   return (
-    <form>
+    <form className='w-full'>
       <section className="mb-6">
-        <h2 className="uppercase text-[18px] font-semibold mb-2">You withdraw:</h2>
+        <h2 className="text-[18px] font-semibold mb-2">You withdraw:</h2>
 
         <div className="relative">
           <Input
