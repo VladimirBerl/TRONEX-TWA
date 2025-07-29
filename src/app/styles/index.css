@@ -128,135 +128,21 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 } */
 
-@layer components {
-  .text-title {
-    font-size: 3rem;
-    color: #5c8afa;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .text-subtitle {
-    font-size: 24px;
-    color: #18A7FB;
-    font-weight: 600;
-  }
-
-  .text-heading {
-    font-size: 18px;
-    color: #535A64;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .text-heading-light {
-    color: #535A64;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .text-body {
-    font-size: 14px;
-    color: #535A64;
-  }
-
-  .text-body-strong {
-    color: #535A64;
-    font-weight: 600;
-  }
-
-  .text-label {
-    text-transform: uppercase;
-    color: #FFFFFF;
-    font-weight: 500;
-  }
-
-  .text-center-heading {
-    text-align: center;
-    color: #FFFFFF;
-    font-size: 28px;
-  }
-
-  .text-link {
-    color: #18A7FB;
-  }
-
-  .text-link-strong {
-    color: #18A7FB;
-    font-weight: 600;
-  }
-
-  .text-large {
-    font-size: 28px;
-    color: #18A7FB;
-  }
-
-  .text-medium {
-    font-size: 18px;
-    color: #18A7FB;
-  }
-
-  .text-medium-strong {
-    font-size: 18px;
-    color: #47bfe8;
-    font-weight: 600;
-  }
-
-  .text-hero {
-    font-size: 48px;
-    color: #151c26;
-    -webkit-text-stroke: 1px #151c26; /* optional stroke */
-  }
-
-  .text-label-bold {
-    text-transform: uppercase;
-    font-size: 3rem; /* Tailwind's text-5xl */
-    color: #5d8cf0;
-    font-weight: 700;
-  }
-}
 
 /*
-uppercase text-[#FFFFFF] font-medium
-text-[#18A7FB] bg-[#1B1D29] text-[#18A7FB] text-[18px]
-text-[#18A7FB] text-[28px]
-uppercase text-[#535A64] font-medium
-text-[#18A7FB]
-uppercase text-[#535A64] text-lg font-medium
-text-center text-[#FFFFFF] text-[28px]
-bg-[#161d27
+TODO Временно
+bg-[#1B1D29]
+bg-[#161d27]
 bg-[#2180d4]
-bg-[#1f2533] uppercase font-semibold text-[18px]
-text-[#18A7FB] font-semibold
+bg-[#1f2533]
 bg-[#1b1b27]
 border-[#2c2c3b]
-focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20
-stroke-[#18A7FB]
-text-[#18A7FB] font-semibold text-[24px]
-text-[#535A64] text-[14px] border-[#262c3a]
-bg-[#1b1b27]
-border-[#2a2f40] placeholder:text-[#5d8cf0]
-focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20
-uppercase text-[#535A64] text-[18px]
-text-[#47bfe8] font-semibold text-[18px]
-text-[24px] text-[#18A7FB] uppercase font-semibold
+border-[#262c3a]
+border-[#2a2f40]
 border-[#2D2F33]
 border-[#47bfe8]
-text-[16px]
-focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20
-stroke-[#18A7FB]
-text-[#18A7FB] font-semibold text-[24px]
-text-[#535A64] font-semibold
-text-[#535A64] text-[14px] ext-[18px] font-semibold
-text-5xl text-[#5c8afa] uppercase font-semibold text-center
-text-[#535A64] uppercase font-semibold
-text-[48px] text-[#151c26] stroke-[#151c26]
-text-5xl text-[#5c8afa] uppercase font-semibold
-uppercase text-[#5d8cf0] text-5xl font-bold
-text-5xl text-[#5c8afa] uppercase font-semibold
-text-5xl text-[#5c8afa] uppercase font-semibold
-uppercase text-[#535A64] font-semibold
-text-[#535A64] uppercase
-text-[18px] bg-[#18A7FB]
-uppercase text-[18px] font-semibold
+focus:outline-none
+focus:border-[#5d8cf0]/40
+focus:ring-1
+focus:ring-[#5d8cf0]/20
 */

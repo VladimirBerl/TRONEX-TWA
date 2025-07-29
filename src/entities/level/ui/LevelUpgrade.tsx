@@ -8,8 +8,9 @@ export const LevelUpgrade = () => {
 
   return (
     <div className="w-full flex justify-between items-center mx-[30px]">
-      <h2 className="uppercase text-[#FFFFFF] font-medium">Level 1</h2>
-      <Button onClick={ () => navigate(PATHS.UPGRADE) } className="btn-main px-5 text-[#18A7FB] bg-[#1B1D29]">
+      <h2 className="text-label">Level 1</h2>
+
+      <Button onClick={() => navigate(PATHS.UPGRADE)} className="btn-main px-5 text-button-small bg-[#1B1D29]">
         Upgrade
       </Button>
     </div>

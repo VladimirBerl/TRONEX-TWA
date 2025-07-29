@@ -9,6 +9,7 @@ import { init, EnvUnsupported } from '@/shared/config/twa';
 import '@/shared/config/twa/mockEnv';
 
 import '@/app/styles/index.css';
+import '@/app/styles/typography.css';
 
 // Mock the environment in case, we are outside Telegram.
 

@@ -15,12 +15,12 @@ export const TransactionFooter = ({ btnText }: TransactionFooterProps) => {
           </div>
 
           <div className="flex flex-col justify-center">
-            <h3 className="text-small">Payment Method</h3>
+            <h3 className="text-body-strong">Payment Method</h3>
             <p className="font-semibold">Crypto Wallet</p>
           </div>
         </div>
 
-        <Button className="uppercase text-[18px] font-semibold px-3.5">{ btnText }</Button>
+        <Button className="text-button-strong px-3.5">{ btnText }</Button>
       </div>
     </footer>
   );
