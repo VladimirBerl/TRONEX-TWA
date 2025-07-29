@@ -13,8 +13,9 @@ export const TransactionFooter = ({ btnText }: TransactionFooterProps) => {
           <div className="w-[50px] h-[50px] rounded-full bg-[#18A7FB] flex items-center justify-center">
             <Ton/>
           </div>
+
           <div className="flex flex-col justify-center">
-            <h3 className="text-[#535A64] font-semibold text-[12px]">Payment Method</h3>
+            <h3 className="text-small">Payment Method</h3>
             <p className="font-semibold">Crypto Wallet</p>
           </div>
         </div>
