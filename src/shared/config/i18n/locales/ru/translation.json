@@ -1,0 +1,61 @@
+{
+  "home": {
+    "balance": "Баланс Ton",
+    "passive_income": "Пассивный доход",
+    "ton_per_hour": "TON/ч",
+    "level_1": "Уровень 1",
+    "upgrade": "Улучшить",
+    "deposit": "Депозит",
+    "withdraw": "Вывод",
+    "invite": "Пригласить",
+    "bonus": "Бонус"
+  },
+
+  "invite": {
+    "title": "Пригласить",
+    "referral_link": "Реферальная ссылка",
+    "copy_link": "Скопировать ссылку",
+    "referral_statistics": "Статистика по рефералам",
+    "all_time_referrals": "Всего рефералов",
+    "referred_deposits": "Депозиты от рефералов",
+    "your_ton_deposited": "Ваш TON депозит"
+  },
+
+  "upgrade": {
+    "title": "Улучшение",
+    "level_1": "Уровень 1",
+    "upgrade": "Улучшить",
+    "upgrade_cost": "Стоимость улучшения",
+    "income": "Доход"
+  },
+
+  "withdraw": {
+    "title": "Вывод",
+    "btn_text": "Вывести 0 USDT",
+    "you_withdraw": "Вы выводите:",
+    "fee": "Комиссия: 3% (мин. 1 USDT)",
+    "wallet_address": "Адрес кошелька",
+    "network": "Сеть",
+    "note": "Пожалуйста, убедитесь, что вы ввели информацию правильно."
+  },
+
+  "bonus": {
+    "title": "Бонус",
+    "opportunities": "Возможности",
+    "subscribe_bot": "Подпишитесь на бота",
+    "subscribe_channel": "Подпишитесь на канал",
+    "get": "Получить"
+  },
+
+  "deposit": {
+    "title": "Депозит",
+    "btn_text": "Внести 0 USDT",
+    "your_deposit": "Ваш депозит:",
+    "fee_notice": "Платёжные сервисы могут взимать дополнительную комиссию за пополнение."
+  },
+
+  "transaction_footer": {
+    "payment_method": "Способ оплаты",
+    "crypto_wallet": "Крипто-кошелек"
+  }
+}

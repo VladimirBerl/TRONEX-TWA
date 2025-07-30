@@ -1,0 +1,61 @@
+{
+  "home": {
+    "balance": "Ton balance",
+    "passive_income": "Passive income",
+    "ton_per_hour": "TON/hr",
+    "level_1": "Level 1",
+    "upgrade": "Upgrade",
+    "deposit": "Deposit",
+    "withdraw": "Withdraw",
+    "invite": "Invite",
+    "bonus": "Bonus"
+  },
+
+  "invite": {
+    "title": "Invite",
+    "referral_link": "Referral link",
+    "copy_link": "Copy Link",
+    "referral_statistics": "Referral statistics",
+    "all_time_referrals": "All-time referrals",
+    "referred_deposits": "Referred deposits",
+    "your_ton_deposited": "Your TON deposited"
+  },
+
+  "upgrade": {
+    "title": "Upgrade",
+    "level_1": "Level 1",
+    "upgrade": "Upgrade",
+    "upgrade_cost": "Upgrade cost",
+    "income": "Income"
+  },
+
+  "withdraw": {
+    "title": "Withdraw",
+    "btn_text": "Withdraw 0 USDT",
+    "you_withdraw": "You withdraw:",
+    "fee": "Fee: 3% (Min. 1 USDT)",
+    "wallet_address": "Wallet Address",
+    "network": "Network",
+    "note": "Make sure you have entered the required information correctly."
+  },
+
+  "bonus": {
+    "title": "Bonus",
+    "opportunities": "Opportunities",
+    "subscribe_bot": "Subscribe to the bot",
+    "subscribe_channel": "Subscribe to the channel",
+    "get": "Get"
+  },
+
+  "deposit": {
+    "title": "Deposit",
+    "btn_text": "Deposit 0 USDT",
+    "your_deposit": "Your deposit:",
+    "fee_notice": "Payment services may charge an additional fee for top-ups."
+  },
+
+  "transaction_footer": {
+    "payment_method": "Payment Method",
+    "crypto_wallet": "Crypto Wallet"
+  }
+}

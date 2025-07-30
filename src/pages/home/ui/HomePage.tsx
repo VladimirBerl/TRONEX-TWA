@@ -5,7 +5,7 @@
 // } from '@telegram-apps/sdk-react';
 import { ActionButtons } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
-import { SpinningFan } from "@/features";
+import { SpinningFan, LanguageSelector } from "@/features";
 import { Page } from '@/shared/ui';
 
 export const HomePage = () => {
@@ -14,6 +14,8 @@ export const HomePage = () => {
 
   return (
     <Page back={ false } className="flex flex-col items-center gap-y-6">
+      <LanguageSelector/>
+
       <TonBalance/>
       <SpinningFan/>
       <PassiveIncome/>

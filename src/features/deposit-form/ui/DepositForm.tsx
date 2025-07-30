@@ -1,18 +1,21 @@
 import { Input } from "@/shared/ui";
 import { ChevronsDownUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const DepositForm = () => {
+  const { t } = useTranslation()
+
   return (
     <form className="mb-6 w-full">
-      <h2 className="text-white-heading mb-2">Your deposite:</h2>
+      <h2 className="text-white-heading mb-2">{t("deposit.your_deposit")}</h2>
 
       <div className="relative">
         <Input
           className="bg-[#1b1b27] h-[50px] pr-[95px] pl-[16px] py-[12px]
-        text-input-large border border-[#2c2c3b] rounded-lg
-        focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20
-        transition-all duration-200
-        placeholder:text-input-large"
+          text-input-large border border-[#2c2c3b] rounded-lg
+          focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20
+          transition-all duration-200
+          placeholder:text-input-large"
           placeholder="0"
         />
 
@@ -22,10 +25,7 @@ export const DepositForm = () => {
         </div>
       </div>
 
-      <p className="text-body pt-1">
-        Payment services may charge an additional fee for top-ups.
-      </p>
+      <p className="text-body pt-1">{t("deposit.fee_notice")}</p>
     </form>
-
   );
 };
