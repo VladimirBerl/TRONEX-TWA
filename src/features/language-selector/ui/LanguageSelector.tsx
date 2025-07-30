@@ -1,4 +1,4 @@
-import { SelectTrigger, Select, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select.tsx";
+import { SelectTrigger, Select, SelectValue, SelectContent, SelectItem } from "@/shared/ui/select";
 import i18n from "@/shared/config/i18n/i18n.ts";
 
 export const LanguageSelector = () => {
