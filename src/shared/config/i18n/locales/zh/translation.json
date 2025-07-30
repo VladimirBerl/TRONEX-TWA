@@ -1,0 +1,61 @@
+{
+  "home": {
+    "balance": "Ton 余额",
+    "passive_income": "被动收入",
+    "ton_per_hour": "TON/小时",
+    "level_1": "等级 1",
+    "upgrade": "升级",
+    "deposit": "充值",
+    "withdraw": "提现",
+    "invite": "邀请",
+    "bonus": "奖励"
+  },
+
+  "invite": {
+    "title": "邀请",
+    "referral_link": "推荐链接",
+    "copy_link": "复制链接",
+    "referral_statistics": "推荐统计",
+    "all_time_referrals": "总推荐人数",
+    "referred_deposits": "推荐充值",
+    "your_ton_deposited": "你充值的 TON"
+  },
+
+  "upgrade": {
+    "title": "升级",
+    "level_1": "等级 1",
+    "upgrade": "升级",
+    "upgrade_cost": "升级费用",
+    "income": "收益"
+  },
+
+  "withdraw": {
+    "title": "提现",
+    "btn_text": "提现 0 USDT",
+    "you_withdraw": "您提取：",
+    "fee": "手续费：3%（最低1 USDT）",
+    "wallet_address": "钱包地址",
+    "network": "网络",
+    "note": "请确保您已正确输入所需信息。"
+  },
+
+  "bonus": {
+    "title": "奖励",
+    "opportunities": "机会",
+    "subscribe_bot": "订阅机器人",
+    "subscribe_channel": "订阅频道",
+    "get": "领取"
+  },
+
+  "deposit": {
+    "title": "存款",
+    "btn_text": "存入 0 USDT",
+    "your_deposit": "您的存款：",
+    "fee_notice": "支付服务可能会对充值收取额外费用。"
+  },
+
+  "transaction_footer": {
+    "payment_method": "付款方式",
+    "crypto_wallet": "加密钱包"
+  }
+}
