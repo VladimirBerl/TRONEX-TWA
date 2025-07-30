@@ -1,4 +1,3 @@
-// TODO Положил в фичу, поскольку по ТЗ это фарм валюты, тапать по вентилятору
 export const SpinningFan = () => {
   return (
     <div className="relative w-[263px] h-[263px] border-[6px] border-solid border-foreground rounded-full">

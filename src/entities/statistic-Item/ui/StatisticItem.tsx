@@ -7,7 +7,7 @@ export const StatisticItem = ({ label, value }: StatisticItemProps) => {
   return (
     <div className="flex justify-between">
       <dt>{ label }</dt>
-      <dd className="text-[#18A7FB]">{ value }</dd>
+      <dd className="text-link">{ value }</dd>
     </div>
   );
 };

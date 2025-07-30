@@ -13,16 +13,16 @@ export const BenefitCard = ({ description, benefit, icon }: BenefitCardProps) =>
       <div className="flex items-center justify-between">
         <div className="flex gap-5 items-center">
           <div className="bg-[#2180d4] p-1.5 w-[60px] h-[60px] rounded-[12px]">
-            { icon }
+            {icon}
           </div>
 
-          <p className="max-w-[100px]">{ description }</p>
+          <p className="max-w-[100px]">{description}</p>
         </div>
 
-        <Button className="bg-[#1f2533] uppercase font-semibold text-[18px]">Get</Button>
+        <Button className="bg-[#1f2533] text-button-strong">Get</Button>
       </div>
 
-      <p className="flex justify-end text-[#18A7FB] font-semibold">{ benefit }</p>
+      <p className="flex justify-end text-link-strong">{benefit}</p>
     </div>
   );
 };

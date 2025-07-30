@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+@layer components {
+  .text-title {
+    font-size: 3rem;
+    color: #5c8afa;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .text-subtitle {
+    font-size: 24px;
+    color: #18A7FB;
+    font-weight: 600;
+  }
+
+  .text-subtitle-up {
+    font-size: 24px;
+    color: #18A7FB;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .text-heading {
+    font-size: 18px;
+    color: #535A64;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .text-white-heading {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .text-heading-light {
+    font-size: 16px;
+    color: #535A64;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .text-body {
+    font-size: 14px;
+    color: #535A64;
+  }
+
+  .text-body-strong {
+    font-size: 16px;
+    color: #535A64;
+    font-weight: 600;
+  }
+
+  .text-label {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: 500;
+  }
+
+  .text-center-heading {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 28px;
+  }
+
+  .text-link {
+    font-size: 16px;
+    color: #18A7FB;
+  }
+
+  .text-link-strong {
+    font-size: 16px;
+    color: #18A7FB;
+    font-weight: 600;
+  }
+
+  .text-link-strong-up {
+    font-size: 16px;
+    color: #18A7FB;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .text-large {
+    font-size: 28px;
+    color: #18A7FB;
+  }
+
+  .text-medium {
+    font-size: 18px;
+    color: #18A7FB;
+  }
+
+  .text-medium-strong {
+    font-size: 18px;
+    color: #47bfe8;
+    font-weight: 600;
+  }
+
+  .text-hero {
+    font-size: 48px;
+    color: #151c26;
+    -webkit-text-stroke: 1px #151c26;
+  }
+
+  .text-label-bold {
+    text-transform: uppercase;
+    font-size: 3rem;
+    color: #5d8cf0;
+    font-weight: 700;
+  }
+
+  .text-button-strong {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #18a7fb;
+    text-transform: uppercase;
+  }
+
+  .text-button-small {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #18a7fb;
+    text-transform: uppercase;
+  }
+
+  .text-white-strong-16 {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 16px;
+  }
+}

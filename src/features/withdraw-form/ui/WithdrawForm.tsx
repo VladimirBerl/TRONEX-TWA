@@ -6,7 +6,7 @@ export const WithdrawForm = () => {
   return (
     <form className='w-full'>
       <section className="mb-6">
-        <h2 className="text-[18px] font-semibold mb-2">You withdraw:</h2>
+        <h2 className="text-white-heading mb-2">You withdraw:</h2>
 
         <div className="relative">
           <Input
@@ -20,10 +20,10 @@ export const WithdrawForm = () => {
 
           <div className="absolute top-[8px] right-[10px] flex items-center gap-0.5">
             <ChevronsDownUp className="stroke-[#18A7FB] w-[14px] h-[14px]"/>
-            <p className="text-[#18A7FB] font-semibold text-[24px]">USDT</p>
+            <p className="text-subtitle">USDT</p>
           </div>
         </div>
-        <p className="text-[#535A64] text-[14px] pt-1">Fee: 3% (Min. 1 USDT)</p>
+        <p className="text-body pt-1">Fee: 3% (Min. 1 USDT)</p>
       </section>
 
       <section className="mb-6">
@@ -47,7 +47,7 @@ export const WithdrawForm = () => {
         />
       </section>
 
-      <p className="text-[#535A64] font-semibold pt-3">Make sure you have entered the required information
+      <p className="text-body-strong pt-3">Make sure you have entered the required information
         correctly.</p>
     </form>
   );
