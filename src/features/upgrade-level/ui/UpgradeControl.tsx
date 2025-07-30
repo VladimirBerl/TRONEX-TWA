@@ -8,7 +8,7 @@ export const UpgradeControl = () => {
         <div className="p-3 border-[#47bfe8] border-solid rounded-[12px] border-[2px] mr-2.5">
           <Dna className="rotate-135 w-[58px] h-[58px] stroke-[#47bfe8]"/>
         </div>
-        <h2 className="text-subtitle-up">Level 1</h2>
+        <h2 className="text-link-strong-up sm:text-[24px]">Level 1</h2>
       </div>
 
       <Button
