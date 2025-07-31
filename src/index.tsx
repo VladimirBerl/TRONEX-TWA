@@ -11,8 +11,6 @@ import '@/shared/config/twa/mockEnv';
 import '@/app/styles/index.css';
 import '@/app/styles/typography.css';
 
-// Mock the environment in case, we are outside Telegram.
-
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 // TODO Временно отключил логирование ошибки ton connect
@@ -27,13 +25,14 @@ window.addEventListener('unhandledrejection', (event) => {
   }
 });
 
-
 try {
   const launchParams = retrieveLaunchParams();
-  const { tgWebAppPlatform: platform } = launchParams;
+  /**
+   * retrieveLaunchParams - извлекает данные из initData при запуске приложения через телеграм-бота
+   */
+  const { tgWebAppPlatform: platform } = launchParams; // Извлекает данные платформы ios android desk...
   const debug = (launchParams.tgWebAppStartParam || '').includes('platformer_debug') || import.meta.env.DEV;
 
-  // Configure all application dependencies.
   await init({
     debug,
     eruda: debug && ['ios', 'android'].includes(platform),
@@ -45,7 +44,6 @@ try {
       </StrictMode>
     );
   });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 } catch (_e) {
   root.render(<EnvUnsupported />);
 }
