@@ -12,7 +12,7 @@ export const UpgradeControl = () => {
           <Dna className="rotate-135 w-[38px] h-[38px] stroke-[#47bfe8]"/>
         </div>
 
-        <h2 className="text-link-strong-up">{ t("upgrade.level_1") }</h2>
+        <h2 className="text-link-strong-up">{ t("upgrade.level") } 0</h2>
       </div>
 
       <Button variant="upgrade">

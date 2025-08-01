@@ -3,7 +3,7 @@
     "balance": "Ton 余额",
     "passive_income": "被动收入",
     "ton_per_hour": "TON/小时",
-    "level_1": "等级 1",
+    "level": "等级",
     "upgrade": "升级",
     "deposit": "充值",
     "withdraw": "提现",
@@ -23,7 +23,7 @@
 
   "upgrade": {
     "title": "升级",
-    "level_1": "等级 1",
+    "level": "等级",
     "upgrade": "升级",
     "upgrade_cost": "升级费用",
     "income": "收益"

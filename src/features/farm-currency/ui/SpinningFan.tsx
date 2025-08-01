@@ -61,7 +61,7 @@ export const SpinningFan = () => {
           className="p-0 w-[200px] h-[200px] rounded-full bg-transparent hover:bg-transparent cursor-pointer"
         >
           <img
-            className="w-full h-full object-cover animate-spin"
+            className="w-full h-full object-cover animate-spin select-none pointer-events-none"
             src="/images/Fan.png"
             alt="Spinning fan"
           />
