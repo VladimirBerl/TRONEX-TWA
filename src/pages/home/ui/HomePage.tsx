@@ -19,6 +19,9 @@ export const HomePage = () => {
   const initDataState = useSignal(_initDataState); // Объект с пользователем
   const API_URL: string = import.meta.env.VITE_API_BASE_URL;
 
+  // TODO заглушка, чтобы не триггерить запрос
+  localStorage.setItem('isAuth', 'true');
+
   const sendAuth = async (first_name: string, id: string): Promise<void> => {
     try {
       const response = await axios.post(`${ API_URL }/api/auth`, {
@@ -32,6 +35,9 @@ export const HomePage = () => {
   }
 
   useEffect(() => {
+    const isAuth: string | null = localStorage.getItem("isAuth");
+    if (isAuth === "true") return;
+
     const { first_name, id } = initDataState?.user ?? {};
 
     if (!first_name || !id) return;

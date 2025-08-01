@@ -10,19 +10,19 @@ export const ActionButtons = () => {
 
   return (
     <div className="mobile-toolbar">
-      <Button onClick={ () => navigate(PATHS.DEPOSIT) } className="text-button-small grow p-2">
+      <Button onClick={ () => navigate(PATHS.DEPOSIT) } variant="action">
         { t("home.deposit") }
       </Button>
 
-      <Button onClick={ () => navigate(PATHS.WITHDRAW) } className="text-button-small grow p-2">
+      <Button onClick={ () => navigate(PATHS.WITHDRAW) } variant="action">
         { t("home.withdraw") }
       </Button>
 
-      <Button onClick={ () => navigate(PATHS.INVITE) } className="text-button-small grow p-2">
+      <Button onClick={ () => navigate(PATHS.INVITE) } variant="action">
         { t("home.invite") }
       </Button>
 
-      <Button onClick={ () => navigate(PATHS.BONUS) } className="text-button-small grow p-2">
+      <Button onClick={ () => navigate(PATHS.BONUS) } variant="action">
         { t("home.bonus") }
       </Button>
     </div>

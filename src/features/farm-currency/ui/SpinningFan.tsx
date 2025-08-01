@@ -1,6 +1,12 @@
 // import axios from "axios";
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import { Button } from "@/shared/ui";
+import { useState } from "react";
+import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
 
 export const SpinningFan = () => {
+  const [ currentProgress, setCurrentProgress ] = useState<number>(0);
+  const [ isMaxReached, setIsMaxReached ] = useState<boolean>(false);
   // const API_URL: string = import.meta.env.VITE_API_BASE_URL;
 
   // const updateBalance = () => {
@@ -16,22 +22,48 @@ export const SpinningFan = () => {
   //     });
   // };
 
-  const updateBalance = () => {
-
+  const handleProgressUpdate = () => {
+    if (currentProgress >= 100) {
+      setIsMaxReached(true);
+      return;
+    }
+    setCurrentProgress(prev => prev + 10);
   }
 
   return (
-    <div onClick={ () => updateBalance() }
-         className="relative w-[263px] h-[263px] border-[6px] border-solid border-[#808080] rounded-full cursor-pointer">
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-             flex items-center justify-center border-[8px] border-solid border-[#262c3a]
-             rounded-full w-[150px] h-[150px]">
-        <img
-          className="w-[100px] h-[100px] object-cover animate-spin"
-          src="/images/Fan.png"
-          alt="Spinning fan"
-        />
+    <div
+      className="relative w-[263px] h-[263px]"
+      style={{
+        boxShadow: isMaxReached ? "0 0 15px 5px rgba(0, 178, 255, 0.7)" : "none",
+        borderRadius: "50%",
+      }}
+    >
+      <CircularProgressbar
+        value={currentProgress}
+        strokeWidth={2}
+        className="w-full h-full"
+        styles={buildStyles({
+          pathColor: isMaxReached ? "#00B2FF" : "#18A7FB",
+          trailColor: isMaxReached ? "#535A64" : "#535A64",
+          strokeLinecap: "round",
+        })}
+      />
+
+      <div className="absolute inset-0 flex items-center justify-center">
+        <Button
+          onClick={ handleProgressUpdate }
+          className="p-0 w-[200px] h-[200px] rounded-full bg-transparent hover:bg-transparent cursor-pointer"
+        >
+          <img
+            className="w-full h-full object-cover animate-spin"
+            src="/images/Fan.png"
+            alt="Spinning fan"
+          />
+
+          <div className="absolute w-[50px] h-[50px] rounded-full bg-[#18A7FB] flex items-center justify-center">
+            <Ton className="!w-[60px] !h-[60px] "/>
+          </div>
+        </Button>
       </div>
     </div>
   );

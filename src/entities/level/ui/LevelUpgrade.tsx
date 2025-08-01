@@ -11,7 +11,7 @@ export const LevelUpgrade = () => {
     <div className="w-full flex justify-between items-center mx-[30px]">
       <h2 className="text-label">{t("home.level_1")}</h2>
 
-      <Button onClick={() => navigate(PATHS.UPGRADE)} className="btn-main px-5 text-button-small bg-[#1B1D29]">
+      <Button onClick={() => navigate(PATHS.UPGRADE)} variant="action" size="medium">
         {t("home.upgrade")}
       </Button>
     </div>

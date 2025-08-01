@@ -30,15 +30,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: 6px;
 
     padding: 1rem;
   }
 
-  @media (max-width: 390px) {
-    .mobile-toolbar button {
-      flex: 1 1 35%;
+  @media (max-width: 490px) {
+    .mobile-toolbar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      flex: 1 1;
     }
   }
 }

@@ -6,8 +6,8 @@ interface StatisticItemProps {
 export const StatisticItem = ({ label, value }: StatisticItemProps) => {
   return (
     <div className="flex justify-between">
-      <dt>{ label }</dt>
-      <dd className="text-link">{ value }</dd>
+      <dt className="pr-2">{ label }</dt>
+      <dd className="text-link text-end">{ value }</dd>
     </div>
   );
 };
