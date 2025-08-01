@@ -1,33 +1,39 @@
-// import axios from "axios";
+import axios from "axios";
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import { Button } from "@/shared/ui";
-import { useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
 
 export const SpinningFan = () => {
   const [ currentProgress, setCurrentProgress ] = useState<number>(0);
   const [ isMaxReached, setIsMaxReached ] = useState<boolean>(false);
-  // const API_URL: string = import.meta.env.VITE_API_BASE_URL;
+  const timerRef: MutableRefObject<boolean> = useRef<boolean>(false);
 
-  // const updateBalance = () => {
-  //   axios.patch(`${ API_URL }/api/click`, {
-  //     id_tg: "10",
-  //     clicks: 1,
-  //   })
-  //     .then(response => {
-  //       console.log(response);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error:', error);
-  //     });
-  // };
+  const API_URL: string = import.meta.env.VITE_API_BASE_URL;
 
-  const handleProgressUpdate = () => {
+  const handleProgressUpdate = async (): Promise<void> => {
+    if (timerRef.current) return;
+    timerRef.current = true;
+
+    setTimeout((): boolean => timerRef.current = false, 500);
+
     if (currentProgress >= 100) {
       setIsMaxReached(true);
       return;
     }
-    setCurrentProgress(prev => prev + 10);
+
+    setCurrentProgress((prev:number) => prev + 10);
+
+    try {
+      const response = await axios.patch(`${ API_URL }/api/click`, {
+        id_tg: "10",
+        clicks: 1,
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
