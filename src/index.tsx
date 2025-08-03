@@ -6,6 +6,8 @@ import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 
 import { Root } from '@/app/provider/root';
 import { init, EnvUnsupported } from '@/shared/config/twa';
+import { Provider } from 'react-redux';
+import { store } from '@/app/store/store.ts';
 import '@/shared/config/twa/mockEnv';
 
 import '@/app/styles/index.css';
@@ -35,15 +37,17 @@ try {
 
   await init({
     debug,
-    eruda: debug && ['ios', 'android'].includes(platform),
+    eruda: debug && [ 'ios', 'android' ].includes(platform),
     mockForMacOS: platform === 'macos',
   }).then(() => {
     root.render(
-      <StrictMode>
-        <Root />
-      </StrictMode>
+      <Provider store={ store }>
+        <StrictMode>
+          <Root/>
+        </StrictMode>
+      </Provider>
     );
   });
 } catch (_e) {
-  root.render(<EnvUnsupported />);
+  root.render(<EnvUnsupported/>);
 }

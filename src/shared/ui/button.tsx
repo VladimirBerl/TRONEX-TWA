@@ -18,7 +18,7 @@ const buttonVariants = cva(
       variant: {
         default: 'shadow-xs bg-[#1B1D29] hover:bg-[#1B1D29]/80',
         action: "grow !h-[40px] px-2 text-button-md bg-[#1B1D29]",
-        upgrade: "border-solid border-[#47bfe8] border-[1px] text-button-sm !px-[8px]",
+        upgrade: "border-solid border-[#47bfe8] border-[1px] text-button-sm !px-[8px] max-w-fit",
         get: "text-button-sm px-2 bg-[#1B1D29]",
         buyLevel: "bg-transparent border-none !p-0 mb-2 rounded-[12px]"
       },

@@ -1,13 +1,21 @@
 import axios from "axios";
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import { Button } from "@/shared/ui";
-import { MutableRefObject, useRef, useState } from "react";
+import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react";
 import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store.ts";
 
-export const SpinningFan = () => {
-  const [ currentProgress, setCurrentProgress ] = useState<number>(0);
+interface SpinningFanProps {
+  setBalance: Dispatch<SetStateAction<number | string>>;
+  clickLimit: number | null;
+  setClickLimit: Dispatch<SetStateAction<number | null>>
+}
+
+export const SpinningFan = ({ setBalance, clickLimit, setClickLimit }: SpinningFanProps) => {
   const [ isMaxReached, setIsMaxReached ] = useState<boolean>(false);
   const timerRef: MutableRefObject<boolean> = useRef<boolean>(false);
+  const id_tg: string | null = useSelector((state: RootState): string | null => state.user.id_tg);
 
   const API_URL: string = import.meta.env.VITE_API_BASE_URL;
 
@@ -15,22 +23,24 @@ export const SpinningFan = () => {
     if (timerRef.current) return;
     timerRef.current = true;
 
-    setTimeout((): boolean => timerRef.current = false, 500);
+    setTimeout((): boolean => timerRef.current = false, 200);
 
-    if (currentProgress >= 100) {
+    if (clickLimit !== null && clickLimit >= 1000) {
       setIsMaxReached(true);
       return;
     }
 
-    setCurrentProgress((prev:number) => prev + 10);
-
     try {
       const response = await axios.patch(`${ API_URL }/api/click`, {
-        id_tg: "10",
+        id_tg,
         clicks: 1,
       });
+      const { farm_balance, clicks_today } = response.data;
+      // console.log(farm_balance)
+      console.log(clicks_today)
+      setBalance(parseFloat(farm_balance).toFixed(6));
+      setClickLimit(clicks_today);
 
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -39,20 +49,20 @@ export const SpinningFan = () => {
   return (
     <div
       className="relative w-[263px] h-[263px]"
-      style={{
+      style={ {
         boxShadow: isMaxReached ? "0 0 15px 5px rgba(0, 178, 255, 0.7)" : "none",
         borderRadius: "50%",
-      }}
+      } }
     >
       <CircularProgressbar
-        value={currentProgress}
-        strokeWidth={2}
+        value={ ((clickLimit ?? 0) / 1000) * 100 }
+        strokeWidth={ 2 }
         className="w-full h-full"
-        styles={buildStyles({
+        styles={ buildStyles({
           pathColor: isMaxReached ? "#00B2FF" : "#18A7FB",
           trailColor: isMaxReached ? "#535A64" : "#535A64",
           strokeLinecap: "round",
-        })}
+        }) }
       />
 
       <div className="absolute inset-0 flex items-center justify-center">

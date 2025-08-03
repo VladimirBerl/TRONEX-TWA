@@ -7,8 +7,10 @@ import { ActionButtons } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
 import { SpinningFan, LanguageSelector } from "@/features";
 import { Page } from '@/shared/ui';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setIdTg } from "@/features/auth/model/slice/userSlice.ts";
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);
@@ -17,10 +19,11 @@ export const HomePage = () => {
    * Используется, для валидации подлинности пользователя на сервере.
    */
   const initDataState = useSignal(_initDataState); // Объект с пользователем
-  const API_URL: string = import.meta.env.VITE_API_BASE_URL;
+  const dispatch = useDispatch();
+  const [ balance, setBalance ] = useState<number | string>("0.000000");
+  const [ clickLimit, setClickLimit ] = useState<number | null>(null);
 
-  // TODO заглушка, чтобы не триггерить запрос
-  localStorage.setItem('isAuth', 'true');
+  const API_URL: string = import.meta.env.VITE_API_BASE_URL;
 
   const sendAuth = async (first_name: string, id: string): Promise<void> => {
     try {
@@ -28,16 +31,18 @@ export const HomePage = () => {
         username: first_name,
         id_tg: id,
       });
-      console.log(response)
+
+      const { farm_balance, clicks_today } = response.data;
+      setBalance(parseFloat(farm_balance).toFixed(6));
+      setClickLimit(clicks_today);
+      dispatch(setIdTg(id));
+
     } catch (error) {
       console.error(error);
     }
   }
 
-  useEffect(() => {
-    const isAuth: string | null = localStorage.getItem("isAuth");
-    if (isAuth === "true") return;
-
+  useEffect((): void => {
     const { first_name, id } = initDataState?.user ?? {};
 
     if (!first_name || !id) return;
@@ -49,8 +54,8 @@ export const HomePage = () => {
     <Page back={ false } className="flex flex-col items-center gap-y-6">
       <LanguageSelector/>
 
-      <TonBalance/>
-      <SpinningFan/>
+      <TonBalance balance={ balance }/>
+      <SpinningFan setBalance={ setBalance } clickLimit={ clickLimit } setClickLimit={ setClickLimit }/>
       <PassiveIncome/>
 
       <LevelUpgrade/>
