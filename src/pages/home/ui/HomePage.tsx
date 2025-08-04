@@ -17,6 +17,8 @@ import {
   setLevel,
   setInvestmentBalance,
 } from "@/features/auth/model/slice/userSlice.ts";
+import { setLevels } from "@/features/levels/model/slice/levelsSlice.ts";
+import { Level } from "@/shared/api/upgrade/types.ts";
 
 interface AuthResponse {
   farm_balance: number | string;
@@ -56,12 +58,22 @@ export const HomePage = () => {
     }
   };
 
+  const handleGetLevels = async (): Promise<void> => {
+    try {
+      const response = await axios.get<Level[]>(`${API_URL}/api/levels`);
+      dispatch(setLevels(response.data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect((): void => {
     const { first_name, id } = initDataState?.user ?? {};
 
     if (!first_name || !id) return;
 
     void sendAuth(first_name, id.toString());
+    void handleGetLevels();
   }, []);
 
   return (

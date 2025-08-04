@@ -2,30 +2,23 @@ import { Page } from "@/shared/ui";
 import { UpgradeControl, UpgradeTier } from "@/features";
 import { HeaderUpgradeTier } from "@/widgets";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Level } from "@/shared/api/upgrade/types.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { setLevel, setFarmBalance } from "@/features/auth/model/slice/userSlice.ts";
+import { setLevels } from "@/features/levels/model/slice/levelsSlice.ts";
 
 export const UpgradePage = () => {
   const { t } = useTranslation();
-  const [levels, setLevels] = useState<Level[] | null>(null);
+  // const [levels, setLevels] = useState<Level[] | null>(null);
   const [isBalanceInsufficient, setIsBalanceInsufficient] = useState<boolean>(false);
   const { level, id_tg, investment_balance } = useSelector((state: RootState) => state.user);
+  const { levels } = useSelector((state: RootState) => state.levels);
   const dispatch = useDispatch();
 
   const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-
-  const handleGetLevels = async (): Promise<void> => {
-    try {
-      const response = await axios.get<Level[]>(`${API_URL}/api/levels`);
-      setLevels(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleUpgradeLevel = async (): Promise<void> => {
     const price: number = Math.round(parseFloat(levels?.[0].price ?? "0"));
@@ -37,9 +30,14 @@ export const UpgradePage = () => {
         });
         console.log("Успешный ответ:", response.data);
 
-        setLevels((prev: Level[] | null): Level[] =>
-          prev ? prev.filter(({ price }: Level): boolean => price !== levels?.[0].price) : [],
-        );
+        if (levels) {
+          const updatedLevels: Level[] = levels.filter(
+            ({ price }: Level): boolean => price !== levels[0].price,
+          );
+
+          dispatch(setLevels(updatedLevels));
+        }
+
         setIsBalanceInsufficient(false);
 
         dispatch(setLevel(level + 1));
@@ -56,10 +54,6 @@ export const UpgradePage = () => {
       }
     }
   };
-
-  useEffect((): void => {
-    void handleGetLevels();
-  }, []);
 
   return (
     <Page className="flex flex-col items-center gap-y-6">
