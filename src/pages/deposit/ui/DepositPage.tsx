@@ -7,10 +7,13 @@ export const DepositPage = () => {
   const { t } = useTranslation()
 
   return (
-    <Page className="flex flex-col items-center gap-y-6">
-      <h1 className="text-title leading-none text-center">{ t("deposit.title") }</h1>
+    <Page className="flex flex-col h-[100vh]">
+      <h1 className="text-title leading-none text-center mb-[26px]">{ t("deposit.title") }</h1>
       <DepositForm/>
-      <TransactionFooter btnText={ t("deposit.btn_text") }/>
+
+      <div className="flex items-end h-full w-full pb-8 pt-2">
+        <TransactionFooter btnText={ t("deposit.btn_text") }/>
+      </div>
     </Page>
   );
 };

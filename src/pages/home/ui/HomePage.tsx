@@ -60,7 +60,7 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <Page back={ false } className="flex flex-col items-center gap-y-6">
+    <Page back={ false } className="flex flex-col items-center gap-y-2">
       <LanguageSelector/>
 
       <TonBalance/>

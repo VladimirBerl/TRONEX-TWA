@@ -2,15 +2,15 @@ import { SelectTrigger, Select, SelectValue, SelectContent, SelectItem } from "@
 import i18n from "@/shared/config/i18n/i18n.ts";
 
 export const LanguageSelector = () => {
-  const changeLanguage = (lng: string)  => {
+  const changeLanguage = (lng: string): void => {
     void i18n.changeLanguage(lng);
   }
 
   return (
-    <Select onValueChange={ (lng) => changeLanguage(lng) }>
+    <Select onValueChange={ (lng: string): void => changeLanguage(lng) }>
       <SelectTrigger
-        className="absolute top-[5px] right-[5px] w-[65px] p-2 bg-[#1B1D29] border-none cursor-pointer text-link-strong">
-        <SelectValue placeholder="lng"/>
+        className="[&>svg]:hidden bg-transparent absolute top-[5px] right-[5px] flex justify-center min-w-[38px] p-2 border-[#535A64] cursor-pointer text-link-strong">
+        <SelectValue className="text-link-strong" placeholder="EN"/>
       </SelectTrigger>
 
       <SelectContent className="bg-[#1B1D29] text-link-strong">
