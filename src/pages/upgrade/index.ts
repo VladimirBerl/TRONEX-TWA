@@ -1,1 +1,1 @@
-export { UpgradePage } from "./ui/UpgradePage.tsx"
+export { UpgradePage } from "./ui/UpgradePage.tsx";

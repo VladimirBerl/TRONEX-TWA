@@ -3,11 +3,11 @@ import { ChevronsDownUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const DepositForm = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <form className="mb-6 w-full">
-      <h2 className="text-white-heading mb-2">{ t("deposit.your_deposit") }</h2>
+      <h2 className="text-white-heading mb-2">{t("deposit.your_deposit")}</h2>
 
       <div className="relative">
         <Input
@@ -20,12 +20,12 @@ export const DepositForm = () => {
         />
 
         <div className="absolute top-[8px] right-[10px] flex items-center gap-0.5">
-          <ChevronsDownUp className="stroke-[#18A7FB] w-[14px] h-[14px]"/>
+          <ChevronsDownUp className="stroke-[#18A7FB] w-[14px] h-[14px]" />
           <p className="text-subtitle">USDT</p>
         </div>
       </div>
 
-      <p className="text-body pt-1">{ t("deposit.fee_notice") }</p>
+      <p className="text-body pt-1">{t("deposit.fee_notice")}</p>
     </form>
   );
 };

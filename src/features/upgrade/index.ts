@@ -1,1 +1,1 @@
-export { UpgradeTier } from "./ui/UpgradeTier.tsx"
+export { UpgradeTier } from "./ui/UpgradeTier.tsx";

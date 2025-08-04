@@ -1,8 +1,8 @@
-export { SpinningFan } from "./farm-currency/ui/SpinningFan.tsx"
-export { ReferralSection } from "./referral-copy/ui/ReferralSection.tsx"
-export { UpgradeControl } from "./upgrade-level/ui/UpgradeControl.tsx"
-export { UpgradeTier } from "./upgrade/ui/UpgradeTier.tsx"
-export { BenefitCard } from "./bonus/ui/BenefitCard.tsx"
-export { WithdrawForm } from "./withdraw-form/ui/WithdrawForm.tsx"
-export { DepositForm } from "./deposit-form/ui/DepositForm.tsx"
-export { LanguageSelector } from "./language-selector/ui/LanguageSelector.tsx"
+export { SpinningFan } from "./farm-currency/ui/SpinningFan.tsx";
+export { ReferralSection } from "./referral-copy/ui/ReferralSection.tsx";
+export { UpgradeControl } from "./upgrade-level/ui/UpgradeControl.tsx";
+export { UpgradeTier } from "./upgrade/ui/UpgradeTier.tsx";
+export { BenefitCard } from "./bonus/ui/BenefitCard.tsx";
+export { WithdrawForm } from "./withdraw-form/ui/WithdrawForm.tsx";
+export { DepositForm } from "./deposit-form/ui/DepositForm.tsx";
+export { LanguageSelector } from "./language-selector/ui/LanguageSelector.tsx";

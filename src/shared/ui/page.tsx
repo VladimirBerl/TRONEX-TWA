@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { backButton, hapticFeedback } from '@telegram-apps/sdk-react';
-import { PropsWithChildren, useEffect } from 'react';
-import { cn } from '../lib/utils';
-import { useNavigate } from 'react-router-dom';
+import { backButton, hapticFeedback } from "@telegram-apps/sdk-react";
+import { PropsWithChildren, useEffect } from "react";
+import { cn } from "../lib/utils";
+import { useNavigate } from "react-router-dom";
 
 interface PageProps extends PropsWithChildren {
   className?: string;
@@ -23,18 +23,18 @@ export const Page = (props: PageProps) => {
         backButton.hide();
       }
     }
-  }, [ back ]);
+  }, [back]);
 
   useEffect((): void => {
     if (backButton.isSupported()) {
       void backButton.onClick((): void => {
         if (hapticFeedback.isSupported()) {
-          void hapticFeedback.impactOccurred('light');
+          void hapticFeedback.impactOccurred("light");
         }
         void router(-1);
       });
     }
   }, [router]);
 
-  return <section className={ cn('min-h-full', className) }>{ children }</section>;
+  return <section className={cn("min-h-full", className)}>{children}</section>;
 };

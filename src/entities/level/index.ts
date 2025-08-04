@@ -1,1 +1,1 @@
-export { LevelUpgrade } from "./ui/LevelUpgrade.tsx"
+export { LevelUpgrade } from "./ui/LevelUpgrade.tsx";

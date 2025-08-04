@@ -3,13 +3,13 @@ import { ChevronsDownUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const WithdrawForm = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   // TODO Пока ваниальная форма и без декомпозиции, нужно уточнить по валидации
   return (
-    <form className='w-full'>
+    <form className="w-full">
       <section className="mb-6">
-        <h2 className="text-white-heading mb-2">{ t("withdraw.you_withdraw") }</h2>
+        <h2 className="text-white-heading mb-2">{t("withdraw.you_withdraw")}</h2>
 
         <div className="relative">
           <Input
@@ -22,15 +22,15 @@ export const WithdrawForm = () => {
           />
 
           <div className="absolute top-[8px] right-[10px] flex items-center gap-0.5">
-            <ChevronsDownUp className="stroke-[#18A7FB] w-[14px] h-[14px]"/>
+            <ChevronsDownUp className="stroke-[#18A7FB] w-[14px] h-[14px]" />
             <p className="text-subtitle">USDT</p>
           </div>
         </div>
-        <p className="text-body pt-1">{ t("withdraw.fee") }</p>
+        <p className="text-body pt-1">{t("withdraw.fee")}</p>
       </section>
 
       <section className="mb-6">
-        <h2 className="font-semibold mb-1">{ t("withdraw.wallet_address") }</h2>
+        <h2 className="font-semibold mb-1">{t("withdraw.wallet_address")}</h2>
         <Input
           className="bg-[#1b1b27] pr-[80px] border border-[#2c2c3b] rounded-lg
         focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20
@@ -40,7 +40,7 @@ export const WithdrawForm = () => {
       </section>
 
       <section>
-        <h2 className="font-semibold mb-1">{ t("withdraw.network") }</h2>
+        <h2 className="font-semibold mb-1">{t("withdraw.network")}</h2>
         <Input
           className="bg-[#1b1b27] pr-[80px] border border-[#2c2c3b] rounded-lg
           focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20
@@ -50,7 +50,7 @@ export const WithdrawForm = () => {
         />
       </section>
 
-      <p className="text-body-strong pt-3">{ t("withdraw.note") }</p>
+      <p className="text-body-strong pt-3">{t("withdraw.note")}</p>
     </form>
   );
 };

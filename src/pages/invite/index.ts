@@ -1,1 +1,1 @@
-export { InvitePage } from "./ui/InvitePage.tsx"
+export { InvitePage } from "./ui/InvitePage.tsx";

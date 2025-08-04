@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 @import "tailwindcss/theme";
 
 /* TODO: пока уберем там тем вроде нет */
@@ -156,7 +156,6 @@ body {
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 } */
-
 
 /*
 TODO Временно

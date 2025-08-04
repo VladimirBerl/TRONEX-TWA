@@ -1,1 +1,1 @@
-export { DepositPage } from './ui/DepositPage.tsx';
+export { DepositPage } from "./ui/DepositPage.tsx";

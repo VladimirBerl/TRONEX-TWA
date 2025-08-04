@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @layer components {
   .text-title {
@@ -7,33 +7,33 @@
     text-transform: uppercase;
     font-weight: 600;
 
-    @media (max-width: 375px)  {
+    @media (max-width: 375px) {
       font-size: 38px;
     }
   }
 
   .text-subtitle {
     font-size: 24px;
-    color: #18A7FB;
+    color: #18a7fb;
     font-weight: 600;
   }
 
   .text-subtitle-up {
     font-size: 24px;
-    color: #18A7FB;
+    color: #18a7fb;
     font-weight: 600;
     text-transform: uppercase;
   }
 
   .text-heading {
     font-size: 18px;
-    color: #535A64;
+    color: #535a64;
     text-transform: uppercase;
     font-weight: 600;
   }
 
   .text-heading-balance {
-    color: #535A64;
+    color: #535a64;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 16px;
@@ -41,7 +41,7 @@
 
   .text-small-dark {
     font-size: 14px;
-    color: #535A64;
+    color: #535a64;
     text-transform: uppercase;
     font-weight: 600;
   }
@@ -54,62 +54,62 @@
 
   .text-heading-light {
     font-size: 16px;
-    color: #535A64;
+    color: #535a64;
     text-transform: uppercase;
     font-weight: 500;
   }
 
   .text-body {
     font-size: 14px;
-    color: #535A64;
+    color: #535a64;
   }
 
   .text-body-strong {
     font-size: 16px;
-    color: #535A64;
+    color: #535a64;
     font-weight: 600;
   }
 
   .text-label {
     font-size: 16px;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: #ffffff;
     font-weight: 500;
   }
 
   .text-balance {
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 16px;
     font-weight: 600;
   }
 
   .text-link {
     font-size: 16px;
-    color: #18A7FB;
+    color: #18a7fb;
   }
 
   .text-link-strong {
     font-size: 16px;
-    color: #18A7FB;
+    color: #18a7fb;
     font-weight: 600;
   }
 
   .text-link-strong-up {
     font-size: 16px;
-    color: #18A7FB;
+    color: #18a7fb;
     font-weight: 600;
     text-transform: uppercase;
   }
 
   .text-large {
     font-size: 28px;
-    color: #18A7FB;
+    color: #18a7fb;
   }
 
   .text-medium {
     font-size: 18px;
-    color: #18A7FB;
+    color: #18a7fb;
   }
 
   .text-medium-strong {
@@ -164,6 +164,6 @@
 
   .text-error {
     font-size: 12px;
-    color: #FF0000FF;
+    color: #ff0000ff;
   }
 }

@@ -1,1 +1,1 @@
-export { PassiveIncome } from "./ui/PassiveIncome.tsx"
+export { PassiveIncome } from "./ui/PassiveIncome.tsx";

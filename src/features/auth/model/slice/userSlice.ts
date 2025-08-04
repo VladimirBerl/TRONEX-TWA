@@ -14,7 +14,7 @@ const initialState: UserState = {
   farm_balance: 0,
   clicks_today: 0,
   investment_balance: 1,
-}
+};
 
 export const userSlice = createSlice({
   name: "user",
@@ -36,7 +36,8 @@ export const userSlice = createSlice({
       state.investment_balance = action.payload;
     },
   },
-})
+});
 
-export const { setIdTg, setLevel, setFarmBalance, setClicksToday, setInvestmentBalance } = userSlice.actions;
+export const { setIdTg, setLevel, setFarmBalance, setClicksToday, setInvestmentBalance } =
+  userSlice.actions;
 export default userSlice.reducer;
