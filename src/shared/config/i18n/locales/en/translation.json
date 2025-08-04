@@ -3,7 +3,7 @@
     "balance": "Ton balance",
     "passive_income": "Passive income",
     "ton_per_hour": "TON/hr",
-    "level_1": "Level 1",
+    "level": "Level",
     "upgrade": "Upgrade",
     "deposit": "Deposit",
     "withdraw": "Withdraw",
@@ -23,7 +23,7 @@
 
   "upgrade": {
     "title": "Upgrade",
-    "level_1": "Level 1",
+    "level": "Level",
     "upgrade": "Upgrade",
     "upgrade_cost": "Upgrade cost",
     "income": "Income"

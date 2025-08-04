@@ -3,7 +3,7 @@
     "balance": "Баланс Ton",
     "passive_income": "Пассивный доход",
     "ton_per_hour": "TON/ч",
-    "level_1": "Уровень 1",
+    "level": "Уровень",
     "upgrade": "Улучшить",
     "deposit": "Депозит",
     "withdraw": "Вывод",
@@ -23,7 +23,7 @@
 
   "upgrade": {
     "title": "Улучшение",
-    "level_1": "Уровень 1",
+    "level": "Уровень",
     "upgrade": "Улучшить",
     "upgrade_cost": "Стоимость улучшения",
     "income": "Доход"

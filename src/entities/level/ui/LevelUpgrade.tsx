@@ -2,17 +2,20 @@ import { Button } from "@/shared/ui";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/model/navigation.ts";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store.ts";
 
 export const LevelUpgrade = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const { level } = useSelector((state: RootState) => state.user);
 
   return (
     <div className="w-full flex justify-between items-center mx-[30px]">
-      <h2 className="text-label">{t("home.level_1")}</h2>
+      <h2 className="text-label">{ t("home.level") } { level }</h2>
 
-      <Button onClick={() => navigate(PATHS.UPGRADE)} className="btn-main px-5 text-button-small bg-[#1B1D29]">
-        {t("home.upgrade")}
+      <Button onClick={ () => { void navigate(PATHS.UPGRADE) }} variant="action" size="medium">
+        { t("home.upgrade") }
       </Button>
     </div>
   );

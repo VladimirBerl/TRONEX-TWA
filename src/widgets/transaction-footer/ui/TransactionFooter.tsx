@@ -23,7 +23,7 @@ export const TransactionFooter = ({ btnText }: TransactionFooterProps) => {
           </div>
         </div>
 
-        <Button className="text-button-strong px-3.5">{ btnText }</Button>
+        <Button variant="action">{ btnText }</Button>
       </div>
     </footer>
   );

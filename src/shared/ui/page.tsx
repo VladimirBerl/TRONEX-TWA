@@ -23,18 +23,18 @@ export const Page = (props: PageProps) => {
         backButton.hide();
       }
     }
-  }, [back]);
+  }, [ back ]);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (backButton.isSupported()) {
-      return backButton.onClick(() => {
+      void backButton.onClick((): void => {
         if (hapticFeedback.isSupported()) {
-          hapticFeedback.impactOccurred('light');
+          void hapticFeedback.impactOccurred('light');
         }
-        router(-1);
+        void router(-1);
       });
     }
   }, [router]);
 
-  return <section className={cn('min-h-full', className)}>{children}</section>;
+  return <section className={ cn('min-h-full', className) }>{ children }</section>;
 };

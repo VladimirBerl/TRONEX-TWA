@@ -16,7 +16,7 @@ export const ReferralSection = () => {
         placeholder="https://t.me/bot_name/app?start=userId"
       />
 
-      <Button className="text-button-strong min-w-[120px] w-full">
+      <Button variant="action" className="w-full">
         { t("invite.copy_link") }
       </Button>
     </section>
