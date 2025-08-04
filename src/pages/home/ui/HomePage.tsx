@@ -33,7 +33,7 @@ export const HomePage = () => {
    */
   const initDataState = useSignal(_initDataState); // Объект с пользователем
   const dispatch = useDispatch();
-
+  console.log(124)
   const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
   const sendAuth = async (first_name: string, id: string): Promise<void> => {
