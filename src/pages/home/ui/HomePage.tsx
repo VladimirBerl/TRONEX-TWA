@@ -7,10 +7,17 @@ import { ActionButtons } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
 import { SpinningFan, LanguageSelector } from "@/features";
 import { Page } from '@/shared/ui';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setIdTg } from "@/features/auth/model/slice/userSlice.ts";
+import { setIdTg, setFarmBalance, setClicksToday, setLevel, setInvestmentBalance } from "@/features/auth/model/slice/userSlice.ts";
+
+interface AuthResponse {
+  farm_balance: number | string;
+  clicks_today: number;
+  level: number;
+  investment_balance: number | string;
+}
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);
@@ -20,22 +27,24 @@ export const HomePage = () => {
    */
   const initDataState = useSignal(_initDataState); // Объект с пользователем
   const dispatch = useDispatch();
-  const [ balance, setBalance ] = useState<number | string>("0.000000");
-  const [ clickLimit, setClickLimit ] = useState<number | null>(null);
 
-  const API_URL: string = import.meta.env.VITE_API_BASE_URL;
+  const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
   const sendAuth = async (first_name: string, id: string): Promise<void> => {
     try {
-      const response = await axios.post(`${ API_URL }/api/auth`, {
+      const response = await axios.post<AuthResponse>(`${ API_URL }/api/auth`, {
         username: first_name,
         id_tg: id,
       });
+      const { farm_balance, clicks_today, level, investment_balance } = response.data;
 
-      const { farm_balance, clicks_today } = response.data;
-      setBalance(parseFloat(farm_balance).toFixed(6));
-      setClickLimit(clicks_today);
+      const round6 = (num: number | string): number => parseFloat(Number(num).toFixed(6));
+
       dispatch(setIdTg(id));
+      dispatch(setFarmBalance(round6(farm_balance)));
+      dispatch(setClicksToday(clicks_today));
+      dispatch(setLevel(level));
+      dispatch(setInvestmentBalance(round6(investment_balance)));
 
     } catch (error) {
       console.error(error);
@@ -54,8 +63,8 @@ export const HomePage = () => {
     <Page back={ false } className="flex flex-col items-center gap-y-6">
       <LanguageSelector/>
 
-      <TonBalance balance={ balance }/>
-      <SpinningFan setBalance={ setBalance } clickLimit={ clickLimit } setClickLimit={ setClickLimit }/>
+      <TonBalance/>
+      <SpinningFan/>
       <PassiveIncome/>
 
       <LevelUpgrade/>

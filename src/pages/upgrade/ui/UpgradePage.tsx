@@ -5,48 +5,54 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Level } from "@/shared/api/upgrade/types.ts";
-import { LevelContext } from "@/app/provider/level-provider/LevelProvider.tsx";
-import { useRequiredContext } from "@/shared/hooks/useRequiredContext.ts";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
+import { setLevel, setFarmBalance } from "@/features/auth/model/slice/userSlice.ts"
 
 export const UpgradePage = () => {
   const { t } = useTranslation()
   const [ levels, setLevels ] = useState<Level[] | null>(null);
-  const { setLevel } = useRequiredContext(LevelContext, "LevelContext");
+  const [ isBalanceInsufficient, setIsBalanceInsufficient ] = useState<boolean>(false);
+  const { level, id_tg, investment_balance } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
-  const API_URL: string = import.meta.env.VITE_API_BASE_URL;
-  const id_tg: string | null = useSelector((state: RootState): string | null => state.user.id_tg);
-
-  const balance = 20; // Заглушка
+  const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
   const handleGetLevels = async (): Promise<void> => {
     try {
-      const response = await axios.get(`${ API_URL }/api/levels`);
+      const response = await axios.get<Level[]>(`${ API_URL }/api/levels`);
       setLevels(response.data);
+
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleUpgradeLevel = async (): Promise<void> => {
-    if (balance >= Math.round(parseFloat(levels?.[0].price ?? "0"))) {
-      setLevels((prev: Level[] | null): Level[] => prev ? prev.filter(({ price }: Level): boolean => price !== levels?.[0].price) : []);
-      setLevel((prev: number): number => ++prev);
+    const price: number = Math.round(parseFloat(levels?.[0].price ?? "0"));
 
+    if (investment_balance >= price) {
       try {
-        const response = await axios.post(`${ API_URL }/api/upgrade-level`, {
+        const response = await axios.patch<Level[]>(`${ API_URL }/api/upgrade-level`, {
           id_tg,
         });
-        console.log(response);
+        console.log("Успешный ответ:", response.data);
+
+        setLevels((prev: Level[] | null): Level[] => prev ? prev.filter(({ price }: Level): boolean => price !== levels?.[0].price) : []);
+        setIsBalanceInsufficient(false);
+
+        dispatch(setLevel(level + 1));
+        dispatch(setFarmBalance(investment_balance - price));
 
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
-          if (error.response?.data?.detail === "string") {
-            console.error(error.response.data);
-          }
+          setIsBalanceInsufficient(true);
+
+          console.error("Status code:", error.response?.status);
+          console.error("Response:", error.response?.data);
+
         } else {
-          console.error("Unknown error", error);
+          console.error("Unknown error:", error);
         }
       }
     }
@@ -60,9 +66,8 @@ export const UpgradePage = () => {
     <Page className="flex flex-col items-center gap-y-6">
       <h1 className="text-title leading-none text-center">{ t("upgrade.title") }</h1>
       <UpgradeControl
-        handleUpgradeLevel={ handleUpgradeLevel }
-        balance={ balance }
-        requiredAmount={ Math.round(parseFloat(levels?.[0].price ?? "0")) }
+        handleUpgradeLevel={ () => void handleUpgradeLevel() }
+        isBalanceInsufficient={ isBalanceInsufficient }
       />
 
       <section className="w-full">

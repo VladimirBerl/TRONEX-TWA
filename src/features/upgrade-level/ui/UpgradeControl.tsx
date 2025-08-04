@@ -1,18 +1,17 @@
 import { Dna } from "lucide-react";
 import { Button, FormItem } from "@/shared/ui";
 import { useTranslation } from "react-i18next";
-import { LevelContext } from "@/app/provider/level-provider/LevelProvider.tsx";
-import { useRequiredContext } from "@/shared/hooks/useRequiredContext.ts";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store.ts";
 
 interface UpgradeControlProps {
   handleUpgradeLevel: () => void;
-  balance: number;
-  requiredAmount: number
+  isBalanceInsufficient: boolean;
 }
 
-export const UpgradeControl = ({ handleUpgradeLevel, balance, requiredAmount }: UpgradeControlProps) => {
+export const UpgradeControl = ({ handleUpgradeLevel, isBalanceInsufficient }: UpgradeControlProps) => {
   const { t } = useTranslation()
-  const { level } = useRequiredContext(LevelContext, "LevelContext");
+  const { level } = useSelector((state: RootState) => state.user);
 
   return (
     <div className="flex justify-between items-center w-full relative">
@@ -28,13 +27,13 @@ export const UpgradeControl = ({ handleUpgradeLevel, balance, requiredAmount }: 
         <Button
           variant="upgrade"
           onClick={ handleUpgradeLevel }
-          disabled={ balance < requiredAmount }
+          disabled={ isBalanceInsufficient }
         >
           { t("upgrade.upgrade") }
         </Button>
       </FormItem>
 
-      { balance < requiredAmount && (
+      { isBalanceInsufficient && (
         <span className="text-error absolute right-0 bottom-[-10px]">Недостаточно средств</span>
       ) }
     </div>

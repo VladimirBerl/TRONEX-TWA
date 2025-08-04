@@ -48,6 +48,6 @@ try {
       </Provider>
     );
   });
-} catch (_e) {
+} catch {
   root.render(<EnvUnsupported/>);
 }

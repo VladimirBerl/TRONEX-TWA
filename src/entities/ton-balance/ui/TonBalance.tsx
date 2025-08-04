@@ -1,16 +1,20 @@
-import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store.ts";
 
-interface TonBalanceProps {
-  balance: number | string;
-}
-
-export const TonBalance = ({ balance }: TonBalanceProps) => {
-  const { t } = useTranslation()
+export const TonBalance = () => {
+  const { farm_balance, investment_balance } = useSelector((state: RootState) => state.user);
 
   return (
-    <section>
-      <h1 className="text-heading">{ t("home.balance") }</h1>
-      <p className="text-center-heading block leading-none">{ balance }</p>
+    <section className="flex gap-10">
+      <div>
+        <h1 className="text-heading text-center">Investment balance</h1>
+        <p className="text-center-heading block leading-none">{ investment_balance.toFixed(6) }</p>
+      </div>
+
+      <div>
+        <h1 className="text-heading text-center">Farm balance</h1>
+        <p className="text-center-heading block leading-none">{ farm_balance.toFixed(6) }</p>
+      </div>
     </section>
   );
 };
