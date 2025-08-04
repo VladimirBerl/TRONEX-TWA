@@ -1,6 +1,14 @@
-import type { ComponentType } from 'react';
+import type { ComponentType } from "react";
 
-import { HomePage, DepositPage, WithdrawPage, NotFoundPage, InvitePage, BonusPage, UpgradePage } from "@/pages";
+import {
+  HomePage,
+  DepositPage,
+  WithdrawPage,
+  NotFoundPage,
+  InvitePage,
+  BonusPage,
+  UpgradePage,
+} from "@/pages";
 import { PATHS } from "@/shared/model/navigation.ts";
 
 interface Route {

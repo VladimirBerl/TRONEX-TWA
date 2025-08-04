@@ -1,1 +1,1 @@
-export { BenefitCard } from "./ui/BenefitCard.tsx"
+export { BenefitCard } from "./ui/BenefitCard.tsx";

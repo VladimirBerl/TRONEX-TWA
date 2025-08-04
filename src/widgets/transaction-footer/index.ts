@@ -1,1 +1,1 @@
-export { TransactionFooter } from "./ui/TransactionFooter.tsx"
+export { TransactionFooter } from "./ui/TransactionFooter.tsx";

@@ -1,1 +1,1 @@
-export { ReferralSection } from "./ui/ReferralSection.tsx"
+export { ReferralSection } from "./ui/ReferralSection.tsx";

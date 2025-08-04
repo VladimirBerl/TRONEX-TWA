@@ -4,7 +4,7 @@ import { ReferralStatistics } from "@/widgets/referral-statistics/index.ts";
 import { useTranslation } from "react-i18next";
 
 export const InvitePage = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <Page className="flex flex-col items-center gap-y-6 w-full">

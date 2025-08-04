@@ -1,1 +1,1 @@
-export { DepositForm } from "./ui/DepositForm.tsx"
+export { DepositForm } from "./ui/DepositForm.tsx";

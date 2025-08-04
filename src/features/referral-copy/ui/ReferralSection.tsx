@@ -2,11 +2,11 @@ import { Button, Input } from "@/shared/ui";
 import { useTranslation } from "react-i18next";
 
 export const ReferralSection = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <section className="flex flex-col items-center w-full gap-2.5">
-      <h2 className="text-heading leading-none">{ t("invite.referral_link") }</h2>
+      <h2 className="text-heading leading-none">{t("invite.referral_link")}</h2>
 
       <Input
         className="min-w-[120px] w-full bg-[#1b1b27] border border-[#2a2f40]
@@ -17,7 +17,7 @@ export const ReferralSection = () => {
       />
 
       <Button variant="action" className="w-full">
-        { t("invite.copy_link") }
+        {t("invite.copy_link")}
       </Button>
     </section>
   );

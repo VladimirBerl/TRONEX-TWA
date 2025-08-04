@@ -1,1 +1,1 @@
-export { SpinningFan } from "./ui/SpinningFan.tsx"
+export { SpinningFan } from "./ui/SpinningFan.tsx";

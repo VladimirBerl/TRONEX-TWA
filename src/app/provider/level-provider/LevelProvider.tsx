@@ -13,11 +13,7 @@ interface LevelProviderProps {
 export const LevelContext = React.createContext<LevelContextType | undefined>(undefined);
 
 export const LevelProvider: React.FC<LevelProviderProps> = ({ children }) => {
-  const [ level, setLevel ] = useState<number>(0);
+  const [level, setLevel] = useState<number>(0);
 
-  return (
-    <LevelContext.Provider value={ { level, setLevel } }>
-      { children }
-    </LevelContext.Provider>
-  );
+  return <LevelContext.Provider value={{ level, setLevel }}>{children}</LevelContext.Provider>;
 };

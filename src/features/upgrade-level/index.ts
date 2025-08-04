@@ -1,1 +1,1 @@
-export { UpgradeControl } from "./ui/UpgradeControl.tsx"
+export { UpgradeControl } from "./ui/UpgradeControl.tsx";

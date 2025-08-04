@@ -1,28 +1,25 @@
-import '@telegram-apps/telegram-ui/dist/styles.css';
+import "@telegram-apps/telegram-ui/dist/styles.css";
 
-import ReactDOM from 'react-dom/client';
-import { StrictMode } from 'react';
-import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
+import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
+import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 
-import { Root } from '@/app/provider/root';
-import { init, EnvUnsupported } from '@/shared/config/twa';
-import { Provider } from 'react-redux';
-import { store } from '@/app/store/store.ts';
-import '@/shared/config/twa/mockEnv';
+import { Root } from "@/app/provider/root";
+import { init, EnvUnsupported } from "@/shared/config/twa";
+import { Provider } from "react-redux";
+import { store } from "@/app/store/store.ts";
+import "@/shared/config/twa/mockEnv";
 
-import '@/app/styles/index.css';
-import '@/app/styles/typography.css';
+import "@/app/styles/index.css";
+import "@/app/styles/typography.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root')!);
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 // TODO Временно отключил логирование ошибки ton connect
-window.addEventListener('unhandledrejection', (event) => {
+window.addEventListener("unhandledrejection", (event) => {
   const reason = event.reason as unknown;
 
-  if (
-    reason instanceof Error &&
-    reason.message.includes('Operation aborted')
-  ) {
+  if (reason instanceof Error && reason.message.includes("Operation aborted")) {
     event.preventDefault();
   }
 });
@@ -33,21 +30,22 @@ try {
    * retrieveLaunchParams - извлекает данные из initData при запуске приложения через телеграм-бота
    */
   const { tgWebAppPlatform: platform } = launchParams; // Извлекает данные платформы ios android desk...
-  const debug = (launchParams.tgWebAppStartParam || '').includes('platformer_debug') || import.meta.env.DEV;
+  const debug =
+    (launchParams.tgWebAppStartParam || "").includes("platformer_debug") || import.meta.env.DEV;
 
   await init({
     debug,
-    eruda: debug && [ 'ios', 'android' ].includes(platform),
-    mockForMacOS: platform === 'macos',
+    eruda: debug && ["ios", "android"].includes(platform),
+    mockForMacOS: platform === "macos",
   }).then(() => {
     root.render(
-      <Provider store={ store }>
+      <Provider store={store}>
         <StrictMode>
-          <Root/>
+          <Root />
         </StrictMode>
-      </Provider>
+      </Provider>,
     );
   });
 } catch {
-  root.render(<EnvUnsupported/>);
+  root.render(<EnvUnsupported />);
 }

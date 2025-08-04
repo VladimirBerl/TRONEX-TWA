@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 
-import { cn } from '@/shared/lib/utils';
+import { cn } from "@/shared/lib/utils";
 import { forwardRef } from "react";
 
-interface ButtonProps extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
+interface ButtonProps extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   vibrate?: boolean;
 }
@@ -16,59 +16,51 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'shadow-xs bg-[#1B1D29] hover:bg-[#1B1D29]/80',
+        default: "shadow-xs bg-[#1B1D29] hover:bg-[#1B1D29]/80",
         action: "grow !h-[40px] px-2 text-button-md bg-[#1B1D29]",
         upgrade: "border-solid border-[#47bfe8] border-[1px] text-button-sm !px-[8px] max-w-fit",
         get: "text-button-sm px-2 bg-[#1B1D29]",
-        buyLevel: "bg-transparent border-none !p-0 mb-2 rounded-[12px]"
+        buyLevel: "bg-transparent border-none !p-0 mb-2 rounded-[12px]",
       },
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-        medium: "max-w-[120px]"
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        medium: "max-w-[120px]",
       },
       hover: {
         default: "hover:bg-[#1B1D29]/80",
-        buyLevel: "hover:bg-[#1B1D29]/80 h-fit"
-      }
+        buyLevel: "hover:bg-[#1B1D29]/80 h-fit",
+      },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: "default",
+      size: "default",
       hover: "default",
     },
-  }
+  },
 );
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  {
-    className,
-    variant,
-    size,
-    onClick,
-    asChild = false,
-    vibrate = true,
-    ...props
-  },
-  ref
+  { className, variant, size, onClick, asChild = false, vibrate = true, ...props },
+  ref,
 ) {
-  const Comp = asChild ? Slot : 'button';
+  const Comp = asChild ? Slot : "button";
 
   return (
     <Comp
-      ref={ ref }
+      ref={ref}
       data-slot="button"
-      onClick={ (event: React.MouseEvent<HTMLButtonElement>) => {
+      onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
         if (vibrate && hapticFeedback.isSupported()) {
-          hapticFeedback.impactOccurred('light');
+          hapticFeedback.impactOccurred("light");
         }
         onClick?.(event);
-      } }
-      className={ cn(buttonVariants({ variant, size, className })) }
-      { ...props }
+      }}
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
     />
   );
 });
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 export { Button, buttonVariants };

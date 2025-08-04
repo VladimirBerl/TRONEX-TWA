@@ -1,1 +1,1 @@
-export { TonBalance } from "./ui/TonBalance.tsx"
+export { TonBalance } from "./ui/TonBalance.tsx";

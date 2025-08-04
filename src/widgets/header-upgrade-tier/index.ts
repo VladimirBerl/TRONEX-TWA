@@ -1,1 +1,1 @@
-export { HeaderUpgradeTier } from "./ui/HeaderUpgradeTier.tsx"
+export { HeaderUpgradeTier } from "./ui/HeaderUpgradeTier.tsx";

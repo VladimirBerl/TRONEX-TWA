@@ -1,1 +1,1 @@
-export { LanguageSelector } from "./ui/LanguageSelector.tsx"
+export { LanguageSelector } from "./ui/LanguageSelector.tsx";

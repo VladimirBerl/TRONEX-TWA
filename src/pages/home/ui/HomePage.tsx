@@ -2,15 +2,21 @@ import {
   // initDataRaw as _initDataRaw,
   initDataState as _initDataState,
   useSignal,
-} from '@telegram-apps/sdk-react';
+} from "@telegram-apps/sdk-react";
 import { ActionButtons } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
 import { SpinningFan, LanguageSelector } from "@/features";
-import { Page } from '@/shared/ui';
+import { Page } from "@/shared/ui";
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setIdTg, setFarmBalance, setClicksToday, setLevel, setInvestmentBalance } from "@/features/auth/model/slice/userSlice.ts";
+import {
+  setIdTg,
+  setFarmBalance,
+  setClicksToday,
+  setLevel,
+  setInvestmentBalance,
+} from "@/features/auth/model/slice/userSlice.ts";
 
 interface AuthResponse {
   farm_balance: number | string;
@@ -32,7 +38,7 @@ export const HomePage = () => {
 
   const sendAuth = async (first_name: string, id: string): Promise<void> => {
     try {
-      const response = await axios.post<AuthResponse>(`${ API_URL }/api/auth`, {
+      const response = await axios.post<AuthResponse>(`${API_URL}/api/auth`, {
         username: first_name,
         id_tg: id,
       });
@@ -45,11 +51,10 @@ export const HomePage = () => {
       dispatch(setClicksToday(clicks_today));
       dispatch(setLevel(level));
       dispatch(setInvestmentBalance(round6(investment_balance)));
-
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect((): void => {
     const { first_name, id } = initDataState?.user ?? {};
@@ -60,15 +65,15 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <Page back={ false } className="flex flex-col items-center gap-y-2">
-      <LanguageSelector/>
+    <Page back={false} className="flex flex-col items-center gap-y-2">
+      <LanguageSelector />
 
-      <TonBalance/>
-      <SpinningFan/>
-      <PassiveIncome/>
+      <TonBalance />
+      <SpinningFan />
+      <PassiveIncome />
 
-      <LevelUpgrade/>
-      <ActionButtons/>
+      <LevelUpgrade />
+      <ActionButtons />
     </Page>
   );
 };
