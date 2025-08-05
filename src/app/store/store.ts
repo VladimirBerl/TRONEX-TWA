@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "@/features/auth/model/slice/userSlice.ts";
-import levelsReducer from "@/features/levels/model/slice/levelsSlice.ts";
+import userReducer from "@/entities/user/model/userSlice.ts";
+import levelsReducer from "@/entities/level/model/levelsSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -11,3 +11,4 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppThunk = typeof store.dispatch;
