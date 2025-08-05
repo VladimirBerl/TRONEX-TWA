@@ -1,52 +1,17 @@
-import axios from "axios";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { Button } from "@/shared/ui";
 import { MutableRefObject, useRef, useState } from "react";
 import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
-import { setFarmBalance, setClicksToday } from "@/features/auth/model/slice/userSlice.ts";
-
-interface ClickResponse {
-  farm_balance: number;
-  clicks_today: number;
-}
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
+import { handleProgressUpdate } from "@/features/farm-currency/model/services.ts";
 
 export const SpinningFan = () => {
   const [isMaxReached, setIsMaxReached] = useState<boolean>(false);
   const timerRef: MutableRefObject<boolean> = useRef<boolean>(false);
   const { id_tg, clicks_today } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-
-  const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-
-  const handleProgressUpdate = async (): Promise<void> => {
-    if (timerRef.current) return;
-    timerRef.current = true;
-
-    setTimeout((): boolean => (timerRef.current = false), 200);
-
-    if (clicks_today !== null && clicks_today >= 1000) {
-      setIsMaxReached(true);
-      return;
-    }
-
-    try {
-      const response = await axios.patch<ClickResponse>(`${API_URL}/api/click`, {
-        id_tg,
-        clicks: 1,
-      });
-
-      const { farm_balance, clicks_today } = response.data;
-
-      const round6 = (n: number): number => parseFloat(n.toFixed(6));
-
-      dispatch(setFarmBalance(round6(farm_balance)));
-      dispatch(setClicksToday(clicks_today));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -69,7 +34,15 @@ export const SpinningFan = () => {
 
       <div className="absolute inset-0 flex items-center justify-center">
         <Button
-          onClick={() => void handleProgressUpdate()}
+          onClick={() =>
+            void handleProgressUpdate({
+              setIsMaxReached,
+              timerRef,
+              clicks_today,
+              id_tg,
+              dispatch,
+            })
+          }
           className="p-0 w-[200px] h-[200px] rounded-full bg-transparent hover:bg-transparent cursor-pointer"
         >
           <img

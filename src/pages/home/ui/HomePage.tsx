@@ -8,24 +8,9 @@ import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
 import { SpinningFan, LanguageSelector } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import {
-  setIdTg,
-  setFarmBalance,
-  setClicksToday,
-  setLevel,
-  setInvestmentBalance,
-} from "@/features/auth/model/slice/userSlice.ts";
-import { setLevels } from "@/features/levels/model/slice/levelsSlice.ts";
-import { Level } from "@/shared/api/upgrade/types.ts";
-
-interface AuthResponse {
-  farm_balance: number | string;
-  clicks_today: number;
-  level: number;
-  investment_balance: number | string;
-}
+import { sendAuth } from "@/features/auth/model/authThunk.ts";
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
+import { getLevels } from "@/features/levels/model/levelsThunk.ts";
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);
@@ -34,46 +19,15 @@ export const HomePage = () => {
    * Используется, для валидации подлинности пользователя на сервере.
    */
   const initDataState = useSignal(_initDataState); // Объект с пользователем
-  const dispatch = useDispatch();
-
-  const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-
-  const sendAuth = async (first_name: string, id: string): Promise<void> => {
-    try {
-      const response = await axios.post<AuthResponse>(`${API_URL}/api/auth`, {
-        username: first_name,
-        id_tg: id,
-      });
-      const { farm_balance, clicks_today, level, investment_balance } = response.data;
-
-      const round6 = (num: number | string): number => parseFloat(Number(num).toFixed(6));
-
-      dispatch(setIdTg(id));
-      dispatch(setFarmBalance(round6(farm_balance)));
-      dispatch(setClicksToday(clicks_today));
-      dispatch(setLevel(level));
-      dispatch(setInvestmentBalance(round6(investment_balance)));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleGetLevels = async (): Promise<void> => {
-    try {
-      const response = await axios.get<Level[]>(`${API_URL}/api/levels`);
-      dispatch(setLevels(response.data));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const dispatch = useAppDispatch();
 
   useEffect((): void => {
     const { first_name, id } = initDataState?.user ?? {};
 
     if (!first_name || !id) return;
 
-    void sendAuth(first_name, id.toString());
-    void handleGetLevels();
+    void dispatch(sendAuth({ first_name, id_tg: id.toString() }));
+    void dispatch(getLevels());
   }, []);
 
   return (

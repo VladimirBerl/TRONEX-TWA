@@ -1,4 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { sendAuth } from "@/features/auth/model/authThunk.ts";
+import { sendClick } from "@/features/farm-currency/model/clickThunk.ts";
+import { upgradeLevel } from "@/features/upgrade-level/model/upgradeLevelThunk.ts";
 
 export interface UserState {
   id_tg: string | null;
@@ -35,6 +38,33 @@ export const userSlice = createSlice({
     setInvestmentBalance: (state, action: PayloadAction<number>): void => {
       state.investment_balance = action.payload;
     },
+  },
+
+  extraReducers: (builder): void => {
+    builder
+      .addCase(sendAuth.fulfilled, (state, action): void => {
+        const { id_tg, farm_balance, clicks_today, level, investment_balance } = action.payload;
+
+        state.id_tg = id_tg;
+        state.farm_balance = farm_balance;
+        state.clicks_today = clicks_today;
+        state.level = level;
+        state.investment_balance = investment_balance;
+      })
+
+      .addCase(sendClick.fulfilled, (state, action) => {
+        const { farm_balance, clicks_today } = action.payload;
+
+        state.farm_balance = farm_balance;
+        state.clicks_today = clicks_today;
+      })
+
+      .addCase(upgradeLevel.fulfilled, (state, action) => {
+        const { newLevel, newBalance } = action.payload;
+
+        state.level = newLevel;
+        state.investment_balance = newBalance;
+      });
   },
 });
 
