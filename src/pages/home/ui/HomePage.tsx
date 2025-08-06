@@ -27,7 +27,7 @@ export const HomePage = () => {
     if (!first_name || !id) return;
 
     void dispatch(sendAuth({ first_name, id_tg: id.toString() }));
-    void dispatch(getLevels());
+    void dispatch(getLevels({ id_tg: id.toString() }));
   }, []);
 
   return (

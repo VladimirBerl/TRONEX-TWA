@@ -4,3 +4,9 @@ declare module "*.svg" {
   const src: string;
   export default src;
 }
+
+declare module "redux-persist/lib/storage" {
+  import { WebStorage } from "redux-persist";
+  const storage: WebStorage;
+  export default storage;
+}
