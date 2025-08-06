@@ -26,7 +26,7 @@ export const upgradeLevel = createAsyncThunk<UpgradeLevelResult, UpgradeLevelPar
         id_tg,
       });
 
-      const updatedLevels: Level[] = level === 0 ? levels.slice(2) : levels.slice(1);
+      const updatedLevels: Level[] = levels.slice(1);
 
       return {
         updatedLevels,

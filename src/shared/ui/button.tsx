@@ -21,6 +21,7 @@ const buttonVariants = cva(
         upgrade: "border-solid border-[#47bfe8] border-[1px] text-button-sm !px-[8px] max-w-fit",
         get: "text-button-sm px-2 bg-[#1B1D29]",
         buyLevel: "bg-transparent border-none !p-0 mb-2 rounded-[12px]",
+        positiveDisabled: "bg-[#228b22]/40 text-button-sm",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
