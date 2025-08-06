@@ -2,12 +2,13 @@ import { Page } from "@/shared/ui";
 import { UpgradeControl, UpgradeTier } from "@/features";
 import { HeaderUpgradeTier } from "@/widgets";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Level } from "@/shared/api/upgrade/types.ts";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
 import { upgradeLevel } from "@/features/upgrade-level/model/upgradeLevelThunk.ts";
+import { getLevels } from "@/features/levels/model/levelsThunk.ts";
 
 export const UpgradePage = () => {
   const { t } = useTranslation();
@@ -17,18 +18,31 @@ export const UpgradePage = () => {
   const dispatch = useAppDispatch();
 
   const handleUpgradeLevel = async (): Promise<void> => {
-    // TODO Тут баг
     const price: number = Math.round(parseFloat(levels?.[0].price ?? "0"));
 
     if (investment_balance >= price) {
       if (id_tg != null && levels != null) {
-        await dispatch(upgradeLevel({ id_tg, levels, level, price, investment_balance }));
+        const resultAction = await dispatch(
+          upgradeLevel({ id_tg, levels, level, price, investment_balance }),
+        );
+        // TODO БАГ: рассинхрон уровней с бекендом
+        // console.log(upgradeLevel.rejected.match(resultAction));
+        // console.log("investment_balance", investment_balance);
+        // console.log("level", level);
+        if (upgradeLevel.rejected.match(resultAction)) {
+          setIsBalanceInsufficient(true);
+          // console.log("setIsBalanceInsufficient", true);
+          return;
+        }
+        // console.log("setIsBalanceInsufficient", false);
+        setIsBalanceInsufficient(false);
       }
-      setIsBalanceInsufficient(false);
-    } else {
-      setIsBalanceInsufficient(true);
     }
   };
+
+  useEffect((): void => {
+    if (id_tg != null) void dispatch(getLevels({ id_tg }));
+  }, [id_tg]);
 
   return (
     <Page className="flex flex-col items-center gap-y-6">

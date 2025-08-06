@@ -26,11 +26,8 @@ export const upgradeLevel = createAsyncThunk<UpgradeLevelResult, UpgradeLevelPar
         id_tg,
       });
 
-      const updatedLevels = levels.filter(
-        // TODO Тут баг
-        ({ price: levelPrice }) => levelPrice !== levels[0].price,
-      );
-      console.log(updatedLevels);
+      const updatedLevels: Level[] = level === 0 ? levels.slice(2) : levels.slice(1);
+
       return {
         updatedLevels,
         newLevel: level + 1,
@@ -38,13 +35,12 @@ export const upgradeLevel = createAsyncThunk<UpgradeLevelResult, UpgradeLevelPar
       };
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error("Status code:", error.response?.status);
         console.error("Response:", error.response?.data);
       } else {
         console.error("Unknown error:", error);
       }
 
-      return thunkAPI.rejectWithValue("Upgrade level error");
+      return thunkAPI.rejectWithValue("INSUFFICIENT_FUNDS");
     }
   },
 );

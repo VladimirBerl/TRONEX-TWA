@@ -7,7 +7,9 @@ import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import { Root } from "@/app/provider/root";
 import { init, EnvUnsupported } from "@/shared/config/twa";
 import { Provider } from "react-redux";
-import { store } from "@/app/store/store.ts";
+import { persistor, store } from "@/app/store/store.ts";
+import { PersistGate } from "redux-persist/integration/react";
+
 import "@/shared/config/twa/mockEnv";
 
 import "@/app/styles/index.css";
@@ -40,9 +42,11 @@ try {
   }).then(() => {
     root.render(
       <Provider store={store}>
-        <StrictMode>
-          <Root />
-        </StrictMode>
+        <PersistGate loading={null} persistor={persistor}>
+          <StrictMode>
+            <Root />
+          </StrictMode>
+        </PersistGate>
       </Provider>,
     );
   });
