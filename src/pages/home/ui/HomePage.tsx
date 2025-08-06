@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { sendAuth } from "@/features/auth/model/authThunk.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
 import { getLevels } from "@/features/levels/model/levelsThunk.ts";
+import { getTasks } from "@/features/bonus/model/tasksThunk.ts";
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);
@@ -26,8 +27,11 @@ export const HomePage = () => {
 
     if (!first_name || !id) return;
 
-    void dispatch(sendAuth({ first_name, id_tg: id.toString() }));
-    void dispatch(getLevels({ id_tg: id.toString() }));
+    const id_tg: string = id.toString();
+
+    void dispatch(sendAuth({ first_name, id_tg }));
+    void dispatch(getLevels({ id_tg }));
+    void dispatch(getTasks(id_tg));
   }, []);
 
   return (

@@ -40,7 +40,7 @@ export const UpgradePage = () => {
     <Page className="flex flex-col items-center gap-y-6">
       <h1 className="text-title leading-none text-center">{t("upgrade.title")}</h1>
       <UpgradeControl
-        handleUpgradeLevel={() => void handleUpgradeLevel()}
+        handleUpgradeLevel={(): undefined => void handleUpgradeLevel()}
         isBalanceInsufficient={isBalanceInsufficient}
       />
 
