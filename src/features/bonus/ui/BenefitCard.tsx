@@ -1,16 +1,23 @@
 import { Button } from "@/shared/ui";
 // import { useTranslation } from "react-i18next";
-import { Tasks } from "@/features/bonus/lib/types.ts";
 import { useState } from "react";
+import { Task } from "@/features/bonus/model/tasksSlice.ts";
+import axios from "axios";
 
 type ActionState = "get" | "checking" | "completed";
 
-export const BenefitCard = ({ title, reward, reward_issued, status, url, id, imageUrl }: Tasks) => {
+export const BenefitCard = ({ title, reward, reward_issued, status, url, id, imageUrl }: Task) => {
   // const { t } = useTranslation();
   const [actionState, setActionState] = useState<ActionState>("get");
 
-  const handleTaskExecution = (task: Tasks, actionLabel: string): void => {
+  const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
+
+  const handleTaskExecution = async (
+    task: Pick<Task, "id" | "status" | "url">,
+    actionLabel: string,
+  ): Promise<void> => {
     const { status, url, id } = task;
+
     console.log("status", status);
     console.log("id", id);
     console.log("actionLabel", actionLabel);
@@ -19,7 +26,10 @@ export const BenefitCard = ({ title, reward, reward_issued, status, url, id, ima
       case "get":
         window.open(url, "_blank");
         try {
-          // TODO Запрос к API для получения checking состояния
+          const response = await axios.patch(`${API_URL}/api/tasks/${id}/check`);
+
+          console.log(response.data);
+
           setActionState("checking");
         } catch (error) {
           console.error(error);
@@ -27,7 +37,10 @@ export const BenefitCard = ({ title, reward, reward_issued, status, url, id, ima
         break;
       case "checking":
         try {
-          // TODO Запрос к API для получения completed состояния
+          const response = await axios.patch(`${API_URL}/api/tasks/${id}/check`);
+
+          console.log(response.data);
+
           setActionState("completed");
         } catch (error) {
           console.error(error);

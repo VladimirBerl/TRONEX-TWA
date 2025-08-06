@@ -3,16 +3,18 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "@/entities/user/model/userSlice";
 import levelsReducer from "@/entities/level/model/levelsSlice";
+import tasksReducer from "@/features/bonus/model/tasksSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
   levels: levelsReducer,
+  tasks: tasksReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"],
+  whitelist: ["user", "tasks"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
