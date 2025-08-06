@@ -20,17 +20,15 @@ export const UpgradePage = () => {
   const handleUpgradeLevel = async (): Promise<void> => {
     const price: number = Math.round(parseFloat(levels?.[0].price ?? "0"));
 
-    if (investment_balance >= price) {
-      if (id_tg != null && levels != null) {
-        const resultAction = await dispatch(
-          upgradeLevel({ id_tg, levels, level, price, investment_balance }),
-        );
-        if (upgradeLevel.rejected.match(resultAction)) {
-          setIsBalanceInsufficient(true);
-          return;
-        }
-        setIsBalanceInsufficient(false);
+    if (id_tg != null && levels != null) {
+      const resultAction = await dispatch(
+        upgradeLevel({ id_tg, levels, level, price, investment_balance }),
+      );
+      if (upgradeLevel.rejected.match(resultAction)) {
+        setIsBalanceInsufficient(true);
+        return;
       }
+      setIsBalanceInsufficient(false);
     }
   };
 
