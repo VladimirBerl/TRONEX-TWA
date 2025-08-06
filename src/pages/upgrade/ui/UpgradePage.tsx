@@ -25,16 +25,10 @@ export const UpgradePage = () => {
         const resultAction = await dispatch(
           upgradeLevel({ id_tg, levels, level, price, investment_balance }),
         );
-        // TODO БАГ: рассинхрон уровней с бекендом
-        // console.log(upgradeLevel.rejected.match(resultAction));
-        // console.log("investment_balance", investment_balance);
-        // console.log("level", level);
         if (upgradeLevel.rejected.match(resultAction)) {
           setIsBalanceInsufficient(true);
-          // console.log("setIsBalanceInsufficient", true);
           return;
         }
-        // console.log("setIsBalanceInsufficient", false);
         setIsBalanceInsufficient(false);
       }
     }
