@@ -44,12 +44,14 @@ export const UpgradePage = () => {
         isBalanceInsufficient={isBalanceInsufficient}
       />
 
-      <section className="w-full">
+      <section className="w-full min-h-[200px]">
         <HeaderUpgradeTier />
 
-        {levels?.map(({ level, price, percent }: Level, index: number) => (
-          <UpgradeTier key={level} level={level} price={price} percent={percent} index={index} />
-        ))}
+        <div className="h-full max-h-[800px] overflow-y-auto">
+          {levels?.map(({ level, price, percent }: Level, index: number) => (
+            <UpgradeTier key={level} level={level} price={price} percent={percent} index={index} />
+          ))}
+        </div>
       </section>
     </Page>
   );

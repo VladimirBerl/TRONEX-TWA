@@ -35,7 +35,7 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <Page back={false} className="flex flex-col items-center gap-y-2">
+    <Page back={false} className="flex flex-col items-center gap-y-2 h-[100vh]">
       <LanguageSelector />
 
       <TonBalance />
@@ -43,7 +43,10 @@ export const HomePage = () => {
       <PassiveIncome />
 
       <LevelUpgrade />
-      <ActionButtons />
+
+      <div className="h-full w-full pb-8">
+        <ActionButtons />
+      </div>
     </Page>
   );
 };

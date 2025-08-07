@@ -21,7 +21,7 @@ export default defineConfig({
   },
   publicDir: './public',
   server: {
-    allowedHosts: ['delightedly-original-shrike.cloudpub.ru'],
+    allowedHosts: ['delightedly-original-shrike.cloudpub.ru', 'luckily-renewing-kookaburra.cloudpub.ru'],
     host: true,
   },
 });
