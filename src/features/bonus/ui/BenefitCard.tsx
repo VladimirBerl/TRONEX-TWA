@@ -1,50 +1,33 @@
 import { Button } from "@/shared/ui";
-// import { useTranslation } from "react-i18next";
-import { useState } from "react";
 import { Task } from "@/features/bonus/model/tasksSlice.ts";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store.ts";
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
+import { checkTask } from "@/features/bonus/model/checkThunk.ts";
 
-type ActionState = "get" | "checking" | "completed";
+const statusToLabelMap: Record<string, string> = {
+  pending: "get",
+  checking: "checking",
+  completed: "completed",
+};
 
 export const BenefitCard = ({ title, reward, reward_issued, status, url, id, imageUrl }: Task) => {
-  // const { t } = useTranslation();
-  const [actionState, setActionState] = useState<ActionState>("get");
+  const { id_tg } = useSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
 
-  const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
+  const handleTaskExecution = (task: Pick<Task, "id" | "status" | "url">): void => {
+    const { url, status, id } = task;
 
-  const handleTaskExecution = async (
-    task: Pick<Task, "id" | "status" | "url">,
-    actionLabel: string,
-  ): Promise<void> => {
-    const { status, url, id } = task;
-
-    console.log("status", status);
-    console.log("id", id);
-    console.log("actionLabel", actionLabel);
-
-    switch (actionState) {
-      case "get":
+    switch (status) {
+      case "pending":
         window.open(url, "_blank");
-        try {
-          const response = await axios.patch(`${API_URL}/api/tasks/${id}/check`);
 
-          console.log(response.data);
-
-          setActionState("checking");
-        } catch (error) {
-          console.error(error);
-        }
+        if (id_tg != null && id != null) void dispatch(checkTask({ id_tg, id }));
         break;
       case "checking":
-        try {
-          const response = await axios.patch(`${API_URL}/api/tasks/${id}/check`);
-
-          console.log(response.data);
-
-          setActionState("completed");
-        } catch (error) {
-          console.error(error);
-        }
+        if (id_tg != null && id != null) void dispatch(checkTask({ id_tg, id }));
+        break;
+      case "completed":
         break;
     }
   };
@@ -63,10 +46,9 @@ export const BenefitCard = ({ title, reward, reward_issued, status, url, id, ima
         <Button
           variant={reward_issued ? "positiveDisabled" : "get"}
           disabled={reward_issued}
-          onClick={(): void => void handleTaskExecution({ id, url, status }, actionState)}
+          onClick={(): void => void handleTaskExecution({ id, status, url })}
         >
-          {/*{t("bonus.get") as string | undefined}*/}
-          {actionState}
+          {statusToLabelMap[status] ?? "get"}
         </Button>
       </div>
 
