@@ -31,7 +31,7 @@
 
   "withdraw": {
     "title": "Вывод",
-    "btn_text": "Вывести 0 USDT",
+    "btn_text": "Вывести",
     "you_withdraw": "Вы выводите:",
     "fee": "Комиссия: 3% (мин. 1 USDT)",
     "wallet_address": "Адрес кошелька",

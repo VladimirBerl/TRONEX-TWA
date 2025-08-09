@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next";
 
 interface TransactionFooterProps {
   btnText: string;
+  buttonValue: string;
 }
 
-export const TransactionFooter = ({ btnText }: TransactionFooterProps) => {
+export const TransactionFooter = ({ btnText, buttonValue }: TransactionFooterProps) => {
   const { t } = useTranslation();
 
   return (
@@ -23,7 +24,9 @@ export const TransactionFooter = ({ btnText }: TransactionFooterProps) => {
           </div>
         </div>
 
-        <Button variant="action">{btnText}</Button>
+        <Button variant="action" type="submit">
+          {`${btnText} ${buttonValue} USDT`}
+        </Button>
       </div>
     </footer>
   );

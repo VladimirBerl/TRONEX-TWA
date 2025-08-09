@@ -31,7 +31,7 @@
 
   "withdraw": {
     "title": "Withdraw",
-    "btn_text": "Withdraw 0 USDT",
+    "btn_text": "Withdraw",
     "you_withdraw": "You withdraw:",
     "fee": "Fee: 3% (Min. 1 USDT)",
     "wallet_address": "Wallet Address",
@@ -49,7 +49,7 @@
 
   "deposit": {
     "title": "Deposit",
-    "btn_text": "Deposit 0 USDT",
+    "btn_text": "Deposit",
     "your_deposit": "Your deposit:",
     "fee_notice": "Payment services may charge an additional fee for top-ups."
   },
