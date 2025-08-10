@@ -5,13 +5,10 @@ import {
 } from "@telegram-apps/sdk-react";
 import { ActionButtons } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
-import { SpinningFan, LanguageSelector } from "@/features";
+import { SpinningFan, LanguageSelector, getLevels, getTasks, sendAuth } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
-import { sendAuth } from "@/features/auth/model/authThunk.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
-import { getLevels } from "@/features/levels/model/levelsThunk.ts";
-import { getTasks } from "@/features/bonus/model/tasksThunk.ts";
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);

@@ -1,5 +1,8 @@
 {
-  "url": "https://ton.vote",
-  "name": "TON Vote",
-  "iconUrl": "https://ton.vote/logo.png"
+  "url": "https://luckily-renewing-kookaburra.cloudpub.ru",
+  "name": "Your dApp name",
+  "iconUrl": "https://luckily-renewing-kookaburra.cloudpub.ru/icon.png",
+  "termsOfUseUrl": "https://luckily-renewing-kookaburra.cloudpub.ru/terms",
+  "privacyPolicyUrl": "https://luckily-renewing-kookaburra.cloudpub.ru/privacy",
+  "redirectUrl": "https://luckily-renewing-kookaburra.cloudpub.ru/"
 }

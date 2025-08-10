@@ -1,5 +1,5 @@
 import { Page } from "@/shared/ui";
-import { UpgradeControl, UpgradeTier } from "@/features";
+import { UpgradeControl, UpgradeTier, upgradeLevel, getLevels } from "@/features";
 import { HeaderUpgradeTier } from "@/widgets";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
@@ -7,8 +7,6 @@ import { Level } from "@/shared/api/upgrade/types.ts";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
-import { upgradeLevel } from "@/features/upgrade-level/model/upgradeLevelThunk.ts";
-import { getLevels } from "@/features/levels/model/levelsThunk.ts";
 
 export const UpgradePage = () => {
   const { t } = useTranslation();

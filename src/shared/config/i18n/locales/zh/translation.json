@@ -31,7 +31,7 @@
 
   "withdraw": {
     "title": "提现",
-    "btn_text": "提现 0 USDT",
+    "btn_text": "提现",
     "you_withdraw": "您提取：",
     "fee": "手续费：3%（最低1 USDT）",
     "wallet_address": "钱包地址",
@@ -49,7 +49,7 @@
 
   "deposit": {
     "title": "存款",
-    "btn_text": "存入 0 USDT",
+    "btn_text": "存入",
     "your_deposit": "您的存款：",
     "fee_notice": "支付服务可能会对充值收取额外费用。"
   },
