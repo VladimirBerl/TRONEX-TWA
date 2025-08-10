@@ -81,7 +81,7 @@ export const WithdrawForm = ({ form }: WithdrawFormProps) => {
               <FormControl>
                 <Input
                   className="bg-[#1b1b27] pr-[80px] border border-[#2c2c3b] rounded-lg focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20 transition-all duration-200"
-                  placeholder="0xc304sjfujewhiuh3ih2"
+                  placeholder="0QCARUdldrijELKSQRI1zkaAJtQgi7tD8A9fK-GwT5vASPkt"
                   {...field}
                 />
               </FormControl>

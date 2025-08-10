@@ -60,7 +60,7 @@ export const DepositPage = () => {
 
     const amount: string = data.depositAmount.toString();
     if (id_tg != null) void dispatch(deposit({ id_tg, amount }));
-    data.depositAmount = "";
+    form.reset({ depositAmount: "" });
     void navigate("/deposit", { replace: true });
   };
 

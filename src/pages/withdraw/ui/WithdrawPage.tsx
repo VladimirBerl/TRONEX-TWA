@@ -5,9 +5,13 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormEvent } from "react";
+import axios from "axios";
+import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
+import { RootState } from "@/app/store/store.ts";
 
 export const WithdrawPage = () => {
   const { t } = useTranslation();
+  const { id_tg } = useAppSelector((state: RootState) => state.user);
 
   const form = useForm<WithdrawFormValues>({
     defaultValues: {
@@ -18,8 +22,24 @@ export const WithdrawPage = () => {
     resolver: zodResolver(withdrawSchema),
   });
 
-  const handleWithdrawTransaction = (data: WithdrawFormValues) => {
-    console.log(data);
+  const handleWithdrawTransaction = async (data: WithdrawFormValues): Promise<void> => {
+    const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
+    // "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt";
+    const { withdrawAmount, walletAddress, network } = data;
+
+    try {
+      await axios.post(`${API_URL}/api/withdraw/create`, {
+        id_tg: id_tg,
+        network: network,
+        wallet_address: walletAddress,
+        amount: withdrawAmount,
+      });
+
+      console.log("Выведено:", withdrawAmount);
+      form.reset({ withdrawAmount: "" });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

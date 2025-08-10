@@ -10,7 +10,7 @@ export const deposit = createAsyncThunk<string, DepositPayload>(
   "deposit/deposit",
   async ({ id_tg, amount }, thunkAPI) => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-    console.log(amount);
+
     try {
       await axios.patch(`${API_URL}/api/deposit`, {
         id_tg: id_tg,
