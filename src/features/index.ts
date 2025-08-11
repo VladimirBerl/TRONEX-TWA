@@ -16,6 +16,7 @@ export { sendClick } from "./farm-currency/model/clickThunk.ts";
 export { getLevels } from "./levels/model/levelsThunk.ts";
 export { upgradeLevel } from "./upgrade-level/model/upgradeLevelThunk.ts";
 export { deposit } from "./deposit-form/model/depositThunk.ts";
+export { getReferrals } from "./referrals/model/referralThunk.ts";
 
 export { handleProgressUpdate } from "./farm-currency/model/services.ts";
 

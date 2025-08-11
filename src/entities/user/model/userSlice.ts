@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { sendAuth } from "@/features/auth/model/authThunk.ts";
-import { sendClick } from "@/features/farm-currency/model/clickThunk.ts";
-import { upgradeLevel } from "@/features/upgrade-level/model/upgradeLevelThunk.ts";
+import { getReferrals, sendAuth, sendClick, upgradeLevel } from "@/features";
+import { ReferralsInfo } from "@/features/referrals/model/referralThunk.ts";
 
 export interface UserState {
   id_tg: string | null;
@@ -9,6 +8,7 @@ export interface UserState {
   farm_balance: number;
   clicks_today: number;
   investment_balance: number;
+  referrals: ReferralsInfo | null;
 }
 
 const initialState: UserState = {
@@ -17,6 +17,7 @@ const initialState: UserState = {
   farm_balance: 0,
   clicks_today: 0,
   investment_balance: 1,
+  referrals: null,
 };
 
 export const userSlice = createSlice({
@@ -48,6 +49,10 @@ export const userSlice = createSlice({
 
         state.level = newLevel;
         state.investment_balance = newBalance;
+      })
+
+      .addCase(getReferrals.fulfilled, (state, action) => {
+        state.referrals = action.payload;
       });
   },
 });

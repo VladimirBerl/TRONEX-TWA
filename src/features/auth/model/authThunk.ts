@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-interface AuthResponse {
-  farm_balance: number | string;
+export interface AuthResponse {
+  id_tg: string | null;
+  farm_balance: number;
   clicks_today: number;
   level: number;
   investment_balance: number | string;

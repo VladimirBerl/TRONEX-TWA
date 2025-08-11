@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-interface ClickResponse {
+export interface ClickResponse {
   farm_balance: number;
   clicks_today: number;
 }
