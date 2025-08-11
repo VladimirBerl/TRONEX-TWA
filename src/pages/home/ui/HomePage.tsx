@@ -12,6 +12,7 @@ import {
   getTasks,
   sendAuth,
   TonConnection,
+  getReferrals,
 } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
@@ -36,6 +37,7 @@ export const HomePage = () => {
     void dispatch(sendAuth({ first_name, id_tg }));
     void dispatch(getLevels({ id_tg }));
     void dispatch(getTasks(id_tg));
+    void dispatch(getReferrals(id_tg));
   }, []);
 
   return (
