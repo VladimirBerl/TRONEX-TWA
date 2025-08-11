@@ -10,7 +10,7 @@ export const BonusPage = () => {
   const { tasks } = useSelector((state: RootState) => state.tasks);
 
   return (
-    <Page className="flex flex-col items-center gap-y-6">
+    <Page className="grid grid-rows-[auto_auto] gap-y-6">
       <h1 className="text-title leading-none text-center mb-[20px]">{t("bonus.title")}</h1>
 
       <section className="w-full">

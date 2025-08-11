@@ -35,7 +35,7 @@ export const UpgradePage = () => {
   }, [id_tg]);
 
   return (
-    <Page className="flex flex-col items-center gap-y-6">
+    <Page className="grid grid-rows-[auto_auto_1fr] gap-y-6 h-screen">
       <h1 className="text-title leading-none text-center">{t("upgrade.title")}</h1>
       <UpgradeControl
         handleUpgradeLevel={(): undefined => void handleUpgradeLevel()}
@@ -45,7 +45,7 @@ export const UpgradePage = () => {
       <section className="w-full min-h-[200px]">
         <HeaderUpgradeTier />
 
-        <div className="h-full max-h-[800px] overflow-y-auto">
+        <div className="h-full py-3 overflow-y-auto">
           {levels?.map(({ level, price, percent }: Level, index: number) => (
             <UpgradeTier key={level} level={level} price={price} percent={percent} index={index} />
           ))}

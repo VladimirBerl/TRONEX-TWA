@@ -11,8 +11,8 @@ export const LevelUpgrade = () => {
   const { level } = useSelector((state: RootState) => state.user);
 
   return (
-    <div className="w-full flex justify-between items-center mx-[30px]">
-      <h2 className="text-label">
+    <div className="w-full flex justify-between items-center ">
+      <h2 className="text-link-strong-up">
         {t("home.level")} {level}
       </h2>
 

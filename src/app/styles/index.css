@@ -23,7 +23,6 @@ body {
 @layer components {
   .mobile-toolbar {
     display: flex;
-    align-items: flex-end;
     gap: 6px;
     width: 100%;
     height: 100%;
