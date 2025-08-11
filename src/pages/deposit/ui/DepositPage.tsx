@@ -43,15 +43,15 @@ export const DepositPage = () => {
       messages: [
         {
           // TODO Сюда надо вставить адрес кошелька юзера, получаемый с бекенда
-          address: "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt", // твой депозитный адрес
-          amount: (amountTON * 1_000_000_000).toString(), // переводим TON в нанотоны
+          address: "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt", // депозитный адрес
+          amount: (amountTON * 1_000_000_000).toString(),
         },
       ],
     };
 
     try {
       await tonConnectUI.sendTransaction(transaction);
-      alert("Transaction sent! Please confirm in your wallet.");
+      alert("Transaction sent! Please confirm in your wallet");
     } catch (e) {
       console.error(e);
       alert("Failed to send transaction");
@@ -65,7 +65,7 @@ export const DepositPage = () => {
   };
 
   return (
-    <Page className="flex flex-col h-[100vh]">
+    <Page className="grid grid-rows-[auto_1fr] h-screen">
       <h1 className="text-title leading-none text-center mb-[26px]">{t("deposit.title")}</h1>
 
       <Form {...form}>
@@ -78,7 +78,7 @@ export const DepositPage = () => {
         >
           <DepositForm form={form} />
 
-          <div className="flex items-end h-full w-full pb-8 pt-2">
+          <div className="flex items-end h-full w-full pb-4 pt-2">
             <TransactionFooter
               btnText={t("deposit.btn_text")}
               buttonValue={form.watch("depositAmount") || "0"}

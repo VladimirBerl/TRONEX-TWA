@@ -7,8 +7,8 @@ export const InvitePage = () => {
   const { t } = useTranslation();
 
   return (
-    <Page className="flex flex-col items-center gap-y-6 w-full">
-      <h1 className="text-title leading-none mb-5">{t("invite.title")}</h1>
+    <Page className="grid grid-rows-[auto_auto_auto] gap-y-6">
+      <h1 className="text-title leading-none text-center">{t("invite.title")}</h1>
       <ReferralSection />
       <ReferralStatistics />
     </Page>

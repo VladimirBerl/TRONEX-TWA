@@ -43,7 +43,7 @@ export const WithdrawPage = () => {
   };
 
   return (
-    <Page className="flex flex-col h-[100vh]">
+    <Page className="grid grid-rows-[auto_1fr] h-screen">
       <h1 className="text-title leading-none text-center mb-[26px]">{t("withdraw.title")}</h1>
 
       <Form {...form}>
@@ -56,7 +56,7 @@ export const WithdrawPage = () => {
         >
           <WithdrawForm form={form} />
 
-          <div className="flex items-end h-full w-full pb-8 pt-2">
+          <div className="flex items-end h-full w-full pb-4 pt-2">
             <TransactionFooter
               btnText={t("withdraw.btn_text")}
               buttonValue={form.watch("withdrawAmount") || "0"}

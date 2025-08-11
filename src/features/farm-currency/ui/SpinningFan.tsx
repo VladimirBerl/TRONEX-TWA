@@ -23,11 +23,11 @@ export const SpinningFan = () => {
     >
       <CircularProgressbar
         value={((clicks_today ?? 0) / 1000) * 100}
-        strokeWidth={2}
+        strokeWidth={3}
         className="w-full h-full"
         styles={buildStyles({
           pathColor: isMaxReached ? "#00B2FF" : "#18A7FB",
-          trailColor: isMaxReached ? "#535A64" : "#535A64",
+          trailColor: isMaxReached ? "#444444" : "#444444",
           strokeLinecap: "round",
         })}
       />

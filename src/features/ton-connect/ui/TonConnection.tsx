@@ -11,8 +11,15 @@ export const TonConnection = () => {
   }, [address]);
 
   return (
-    <div className="absolute left-[80px]">
-      <TonConnectButton />
+    <div className="w-full mb-3">
+      <TonConnectButton
+        style={{
+          width: "100%",
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      />
     </div>
   );
 };

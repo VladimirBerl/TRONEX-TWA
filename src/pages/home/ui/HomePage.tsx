@@ -5,7 +5,14 @@ import {
 } from "@telegram-apps/sdk-react";
 import { ActionButtons } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
-import { SpinningFan, LanguageSelector, getLevels, getTasks, sendAuth } from "@/features";
+import {
+  SpinningFan,
+  LanguageSelector,
+  getLevels,
+  getTasks,
+  sendAuth,
+  TonConnection,
+} from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
@@ -32,16 +39,19 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <Page back={false} className="flex flex-col items-center gap-y-2 h-[100vh]">
+    <Page back={false} className="grid grid-rows-[auto_auto_auto_1fr_auto_auto] h-screen">
       <LanguageSelector />
-
+      <TonConnection />
       <TonBalance />
-      <SpinningFan />
-      <PassiveIncome />
+
+      <div className="flex flex-col items-center">
+        <SpinningFan />
+        <PassiveIncome />
+      </div>
 
       <LevelUpgrade />
 
-      <div className="h-full w-full pb-8">
+      <div className="h-full w-full pb-4">
         <ActionButtons />
       </div>
     </Page>
