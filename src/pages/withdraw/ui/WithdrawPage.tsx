@@ -12,30 +12,37 @@ import { RootState } from "@/app/store/store.ts";
 export const WithdrawPage = () => {
   const { t } = useTranslation();
   const { id_tg } = useAppSelector((state: RootState) => state.user);
+  const { wallet_address, investment_balance } = useAppSelector((state: RootState) => state.user);
 
   const form = useForm<WithdrawFormValues>({
     defaultValues: {
       withdrawAmount: "",
-      walletAddress: "",
-      network: "",
+      walletAddress: wallet_address || "",
     },
     resolver: zodResolver(withdrawSchema),
   });
 
   const handleWithdrawTransaction = async (data: WithdrawFormValues): Promise<void> => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-    // "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt";
-    const { withdrawAmount, walletAddress, network } = data;
+    const { withdrawAmount, walletAddress } = data;
+
+    if (Number(withdrawAmount) > investment_balance) {
+      form.setError("withdrawAmount", {
+        type: "manual",
+        message: "Недостаточно средств на балансе",
+      });
+      return;
+    }
 
     try {
       await axios.post(`${API_URL}/api/withdraw/create`, {
         id_tg: id_tg,
-        network: network,
+        network: "TON",
         wallet_address: walletAddress,
         amount: withdrawAmount,
       });
 
-      console.log("Выведено:", withdrawAmount);
+      alert(`Выведено: ${withdrawAmount}`);
       form.reset({ withdrawAmount: "" });
     } catch (error) {
       console.error(error);

@@ -15,7 +15,7 @@ export const DepositPage = () => {
   const { t } = useTranslation();
   const [tonConnectUI] = useTonConnectUI();
   const address: string = useTonAddress();
-  const { id_tg } = useSelector((state: RootState) => state.user);
+  const { id_tg, wallet_address } = useSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -32,6 +32,11 @@ export const DepositPage = () => {
       return;
     }
 
+    if (!wallet_address) {
+      alert("Deposit address is missing");
+      return;
+    }
+
     const amountTON = parseFloat(data.depositAmount);
     if (isNaN(amountTON) || amountTON <= 0) {
       alert("Invalid deposit amount");
@@ -43,7 +48,8 @@ export const DepositPage = () => {
       messages: [
         {
           // TODO Сюда надо вставить адрес кошелька юзера, получаемый с бекенда
-          address: "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt", // депозитный адрес
+          // address: "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt", // депозитный адрес
+          address: wallet_address,
           amount: (amountTON * 1_000_000_000).toString(),
         },
       ],

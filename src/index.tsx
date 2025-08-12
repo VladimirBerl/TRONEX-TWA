@@ -28,10 +28,7 @@ window.addEventListener("unhandledrejection", (event) => {
 
 try {
   const launchParams = retrieveLaunchParams();
-  /**
-   * retrieveLaunchParams - извлекает данные из initData при запуске приложения через телеграм-бота
-   */
-  const { tgWebAppPlatform: platform } = launchParams; // Извлекает данные платформы ios android desk...
+  const { tgWebAppPlatform: platform } = launchParams;
   const debug =
     (launchParams.tgWebAppStartParam || "").includes("platformer_debug") || import.meta.env.DEV;
 
