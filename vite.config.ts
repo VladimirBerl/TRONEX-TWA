@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react-swc";
 import mkcert from "vite-plugin-mkcert";
 import tailwindcss from "@tailwindcss/vite";
 import svgr from "@svgr/rollup";
+import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,15 +17,26 @@ export default defineConfig({
     },
   },
   plugins: [react(), svgr(), tailwindcss(), tsconfigPaths(), process.env.HTTPS && mkcert()],
-  build: {
-    target: "esnext",
+  optimizeDeps: {
+    esbuildOptions: {
+      define: {
+        global: 'globalThis'
+      },
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          buffer: true
+        })
+      ]
+    }
   },
-  publicDir: "./public",
+  build: {
+    target: 'esnext'
+  },
   server: {
     allowedHosts: [
-      "delightedly-original-shrike.cloudpub.ru",
-      "luckily-renewing-kookaburra.cloudpub.ru",
+      'delightedly-original-shrike.cloudpub.ru',
+      'luckily-renewing-kookaburra.cloudpub.ru'
     ],
-    host: true,
-  },
+    host: true
+  }
 });

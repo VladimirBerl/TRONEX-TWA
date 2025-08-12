@@ -8,6 +8,7 @@ export interface UserState {
   farm_balance: number;
   clicks_today: number;
   investment_balance: number;
+  wallet_address: string | null;
   referrals: ReferralsInfo | null;
 }
 
@@ -17,6 +18,7 @@ const initialState: UserState = {
   farm_balance: 0,
   clicks_today: 0,
   investment_balance: 1,
+  wallet_address: null,
   referrals: null,
 };
 
@@ -28,13 +30,15 @@ export const userSlice = createSlice({
   extraReducers: (builder): void => {
     builder
       .addCase(sendAuth.fulfilled, (state, action): void => {
-        const { id_tg, farm_balance, clicks_today, level, investment_balance } = action.payload;
+        const { id_tg, farm_balance, clicks_today, level, investment_balance, wallet_address } =
+          action.payload;
 
         state.id_tg = id_tg;
         state.farm_balance = farm_balance;
         state.clicks_today = clicks_today;
         state.level = level;
         state.investment_balance = investment_balance;
+        state.wallet_address = wallet_address;
       })
 
       .addCase(sendClick.fulfilled, (state, action) => {
