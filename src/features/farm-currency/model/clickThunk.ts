@@ -4,6 +4,7 @@ import axios from "axios";
 export interface ClickResponse {
   farm_balance: number;
   clicks_today: number;
+  reward_added: number;
 }
 
 export const sendClick = createAsyncThunk("user/sendClick", async (id_tg: string, thunkAPI) => {
@@ -15,12 +16,13 @@ export const sendClick = createAsyncThunk("user/sendClick", async (id_tg: string
       clicks: 1,
     });
 
-    const { farm_balance, clicks_today } = response.data;
+    const { farm_balance, clicks_today, reward_added } = response.data;
     const round6 = (n: number) => parseFloat(n.toFixed(6));
 
     return {
       farm_balance: round6(farm_balance),
       clicks_today,
+      reward_added,
     };
   } catch (error) {
     console.error(error);

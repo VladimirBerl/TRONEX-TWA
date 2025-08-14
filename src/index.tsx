@@ -4,11 +4,11 @@ import ReactDOM from "react-dom/client";
 import { StrictMode } from "react";
 import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 
-import { Root } from "@/app/provider/root";
 import { init, EnvUnsupported } from "@/shared/config/twa";
 import { Provider } from "react-redux";
 import { persistor, store } from "@/app/store/store.ts";
 import { PersistGate } from "redux-persist/integration/react";
+import { Root } from "@/app/provider/root";
 
 import "@/shared/config/twa/mockEnv";
 

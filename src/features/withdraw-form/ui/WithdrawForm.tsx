@@ -6,12 +6,15 @@ import {
   FormLabel,
   FormMessage,
   FormItem,
+  Button,
 } from "@/shared/ui";
 import { ChevronsDownUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { WithdrawFormValues } from "@/features";
 import { UseFormReturn } from "react-hook-form";
 import { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { PATHS } from "@/shared/model/navigation.ts";
 
 interface WithdrawFormProps {
   form: UseFormReturn<WithdrawFormValues>;
@@ -19,6 +22,7 @@ interface WithdrawFormProps {
 
 export const WithdrawForm = ({ form }: WithdrawFormProps) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const {
     formState: { errors },
@@ -51,7 +55,7 @@ export const WithdrawForm = ({ form }: WithdrawFormProps) => {
 
                 <div className="absolute top-[8px] right-[10px] flex items-center gap-0.5">
                   <ChevronsDownUp className="stroke-[#18A7FB] w-[14px] h-[14px]" />
-                  <p className="text-subtitle">USDT</p>
+                  <p className="text-subtitle">TON</p>
                 </div>
               </div>
 
@@ -95,6 +99,16 @@ export const WithdrawForm = ({ form }: WithdrawFormProps) => {
       </section>
 
       <p className="text-body-strong pt-2">{t("withdraw.note")}</p>
+
+      <div className="pt-2 w-full">
+        <Button
+          className="text-button-md w-full"
+          type="button"
+          onClick={() => void navigate(PATHS.WITHDRAW_HISTORY)}
+        >
+          История транзакций
+        </Button>
+      </div>
     </>
   );
 };

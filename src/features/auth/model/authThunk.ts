@@ -8,6 +8,8 @@ export interface AuthResponse {
   level: number;
   investment_balance: number | string;
   wallet_address: string | null;
+  status: string;
+  username: string | null;
 }
 
 export const sendAuth = createAsyncThunk(
@@ -20,10 +22,16 @@ export const sendAuth = createAsyncThunk(
         username: first_name,
         id_tg: id_tg,
       });
+      const {
+        farm_balance,
+        clicks_today,
+        level,
+        investment_balance,
+        wallet_address,
+        status,
+        username,
+      } = response.data;
 
-      const { farm_balance, clicks_today, level, investment_balance, wallet_address } =
-        response.data;
-      console.log(response.data);
       const round6 = (num: number | string): number => parseFloat(Number(num).toFixed(6));
 
       return {
@@ -33,6 +41,8 @@ export const sendAuth = createAsyncThunk(
         level,
         investment_balance: round6(investment_balance),
         wallet_address,
+        status,
+        username,
       };
     } catch (error) {
       console.error(error);

@@ -47,8 +47,6 @@ export const DepositPage = () => {
       validUntil: Math.floor(Date.now() / 1000) + 600,
       messages: [
         {
-          // TODO Сюда надо вставить адрес кошелька юзера, получаемый с бекенда
-          // address: "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt", // депозитный адрес
           address: wallet_address,
           amount: (amountTON * 1_000_000_000).toString(),
         },

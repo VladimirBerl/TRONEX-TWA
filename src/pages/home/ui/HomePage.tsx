@@ -13,10 +13,13 @@ import {
   sendAuth,
   TonConnection,
   getReferrals,
+  getWithdrawHistory,
 } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
-import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
+import { RootState } from "@/app/store/store.ts";
+import { BannedPage, SplashScreen } from "@/pages";
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);
@@ -26,6 +29,7 @@ export const HomePage = () => {
    */
   const initDataState = useSignal(_initDataState); // Объект с пользователем
   const dispatch = useAppDispatch();
+  const { status, loading } = useAppSelector((state: RootState) => state.user);
 
   useEffect((): void => {
     const { first_name, id } = initDataState?.user ?? {};
@@ -38,7 +42,11 @@ export const HomePage = () => {
     void dispatch(getLevels({ id_tg }));
     void dispatch(getTasks(id_tg));
     void dispatch(getReferrals(id_tg));
+    void dispatch(getWithdrawHistory(id_tg));
   }, []);
+
+  if (loading) return <SplashScreen />;
+  if (status === "banned") return <BannedPage />;
 
   return (
     <Page back={false} className="grid grid-rows-[auto_auto_auto_1fr_auto_auto] h-screen">

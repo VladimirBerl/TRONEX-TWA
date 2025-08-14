@@ -7,7 +7,7 @@ import { Address } from "ton";
 
 export const TonConnection = () => {
   const [tonConnectUI] = useTonConnectUI();
-  const { id_tg } = useAppSelector((state: RootState) => state.user);
+  const { id_tg, username } = useAppSelector((state: RootState) => state.user);
 
   const updateWalletOnServer = async (walletAddress: string | null): Promise<void> => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
@@ -51,7 +51,9 @@ export const TonConnection = () => {
   }, [tonConnectUI]);
 
   return (
-    <div className="w-full mb-3">
+    <div className="w-full mb-3 relative">
+      <p className="text-label absolute">{username ?? ""}</p>
+
       <TonConnectButton
         style={{ width: "100%", textAlign: "center", display: "flex", justifyContent: "center" }}
       />

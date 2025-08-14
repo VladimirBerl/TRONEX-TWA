@@ -33,7 +33,7 @@
     "title": "Withdraw",
     "btn_text": "Withdraw",
     "you_withdraw": "You withdraw:",
-    "fee": "Fee: 3% (Min. 1 USDT)",
+    "fee": "Fee: 3% (Min. 0.5 TON)",
     "wallet_address": "Wallet Address",
     "network": "Network",
     "note": "Make sure you have entered the required information correctly."
