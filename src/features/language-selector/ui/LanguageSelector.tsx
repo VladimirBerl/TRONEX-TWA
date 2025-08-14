@@ -8,7 +8,7 @@ export const LanguageSelector = () => {
 
   return (
     <Select onValueChange={(lng: string): void => changeLanguage(lng)}>
-      <SelectTrigger className="[&>svg]:hidden bg-[#1B1D29] absolute top-[5px] right-[5px] flex justify-center min-w-[40px] p-2 border-[#535A64] cursor-pointer text-link-strong">
+      <SelectTrigger className="[&>svg]:hidden bg-[#1B1D29] absolute top-[5px] right-[5px] z-50 flex justify-center min-w-[40px] p-2 border-[#535A64] cursor-pointer text-link-strong">
         <SelectValue className="text-link-strong" placeholder="EN" />
       </SelectTrigger>
 

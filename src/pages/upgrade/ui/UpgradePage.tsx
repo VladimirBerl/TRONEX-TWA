@@ -45,7 +45,7 @@ export const UpgradePage = () => {
       <section className="w-full min-h-[200px]">
         <HeaderUpgradeTier />
 
-        <div className="h-full py-3 overflow-y-auto">
+        <div className="py-3">
           {levels?.map(({ level, price, percent }: Level, index: number) => (
             <UpgradeTier key={level} level={level} price={price} percent={percent} index={index} />
           ))}

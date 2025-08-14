@@ -36,11 +36,11 @@ export const BenefitCard = ({ title, reward, reward_issued, status, url, id, ima
     <div className="bg-[#161d27] p-3 rounded-[12px] mb-4">
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center">
-          <div className="bg-[#2180d4] p-1.5 w-[60px] h-[60px] min-w-[60px] rounded-[12px]">
-            <img src={imageUrl} alt="image" />
+          <div className="border-[#18a7fb] border-dashed border-[1px] p-1 w-[60px] h-[60px] min-w-[60px] rounded-[12px]">
+            <img className="w-full h-full object-cover" src={imageUrl} alt="image" />
           </div>
 
-          <p className="max-w-[100px] mr-1.5 sm:text-[16px] text-[14px]">{title}</p>
+          <p className="max-w-[100px] mr-1.5 sm:text-[16px] text-[14px] wrap-break-word">{title}</p>
         </div>
 
         <Button
