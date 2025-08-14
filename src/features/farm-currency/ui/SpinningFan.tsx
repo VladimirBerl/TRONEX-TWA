@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
 import { handleProgressUpdate } from "@/features/farm-currency/model/services.ts";
+import * as React from "react";
 
 export const SpinningFan = () => {
   const [isMaxReached, setIsMaxReached] = useState<boolean>(false);
@@ -34,8 +35,9 @@ export const SpinningFan = () => {
 
       <div className="absolute inset-0 flex items-center justify-center">
         <Button
-          onClick={() =>
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
             void handleProgressUpdate({
+              e,
               setIsMaxReached,
               timerRef,
               clicks_today,

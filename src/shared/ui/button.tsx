@@ -12,16 +12,18 @@ interface ButtonProps extends React.ComponentProps<"button">, VariantProps<typeo
 }
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "flex justify-center gap-2 cursor-pointer whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
-        default: "shadow-xs bg-[#1B1D29] hover:bg-[#1B1D29]/80",
-        action: "grow !h-[40px] px-2 text-button-md bg-[#1B1D29]",
-        upgrade: "border-solid border-[#47bfe8] border-[1px] text-button-sm !px-[8px] max-w-fit",
-        get: "text-button-sm px-2 bg-[#1B1D29]",
-        buyLevel: "bg-transparent border-none !p-0 mb-2 rounded-[12px]",
-        positiveDisabled: "bg-[#228b22]/40 text-button-sm",
+        default: "shadow-xs bg-[#1B1D29] flex items-center ",
+        action: "grow !h-[40px] px-2 text-button-md bg-[#1B1D29] flex items-center",
+        upgrade:
+          "border-solid border-[#47bfe8] border-[1px] text-button-sm !px-[8px] max-w-fit flex items-center",
+        get: "text-button-sm px-2 bg-[#1B1D29] flex items-center",
+        buyLevel: "bg-transparent border-none !p-0 mb-2 rounded-[12px] flex items-center",
+        positiveDisabled: "bg-[#228b22]/40 text-button-sm flex items-center",
+        transparent: "bg-transparent border-none !p-0",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

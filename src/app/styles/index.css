@@ -40,8 +40,8 @@ body {
   }
 }
 
-@theme {
-  --breakpoint-sm: 375px;
+.no-hover:hover {
+  background-color: transparent !important;
 }
 
 @theme inline {

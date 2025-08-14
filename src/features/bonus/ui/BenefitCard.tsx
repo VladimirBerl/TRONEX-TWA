@@ -33,7 +33,7 @@ export const BenefitCard = ({ title, reward, reward_issued, status, url, id, ima
   };
 
   return (
-    <div className="bg-[#161d27] p-3  rounded-[12px] mb-4">
+    <div className="bg-[#161d27] p-3 rounded-[12px] mb-4">
       <div className="flex items-center justify-between">
         <div className="flex gap-2 items-center">
           <div className="bg-[#2180d4] p-1.5 w-[60px] h-[60px] min-w-[60px] rounded-[12px]">

@@ -1,5 +1,3 @@
-import type { ComponentType } from "react";
-
 import {
   HomePage,
   DepositPage,
@@ -8,47 +6,20 @@ import {
   InvitePage,
   BonusPage,
   UpgradePage,
+  BannedPage,
+  WithdrawHistoryPage,
 } from "@/pages";
 import { PATHS } from "@/shared/model/navigation.ts";
+import { RouteObject } from "react-router-dom";
 
-interface Route {
-  path: string;
-  Component: ComponentType;
-}
-
-export const routes: Route[] = [
-  {
-    path: PATHS.HOME,
-    Component: HomePage,
-  },
-
-  {
-    path: PATHS.DEPOSIT,
-    Component: DepositPage,
-  },
-
-  {
-    path: PATHS.WITHDRAW,
-    Component: WithdrawPage,
-  },
-
-  {
-    path: PATHS.INVITE,
-    Component: InvitePage,
-  },
-
-  {
-    path: PATHS.BONUS,
-    Component: BonusPage,
-  },
-
-  {
-    path: PATHS.UPGRADE,
-    Component: UpgradePage,
-  },
-
-  {
-    path: PATHS.NOT_FOUND,
-    Component: NotFoundPage,
-  },
+export const routes: RouteObject[] = [
+  { path: PATHS.HOME, element: <HomePage /> },
+  { path: PATHS.DEPOSIT, element: <DepositPage /> },
+  { path: PATHS.WITHDRAW, element: <WithdrawPage /> },
+  { path: PATHS.INVITE, element: <InvitePage /> },
+  { path: PATHS.BONUS, element: <BonusPage /> },
+  { path: PATHS.UPGRADE, element: <UpgradePage /> },
+  { path: PATHS.BANNED, element: <BannedPage /> },
+  { path: PATHS.WITHDRAW_HISTORY, element: <WithdrawHistoryPage /> },
+  { path: PATHS.NOT_FOUND, element: <NotFoundPage /> },
 ];

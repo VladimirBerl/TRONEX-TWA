@@ -1,8 +1,8 @@
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
-import { App } from "@/app/App";
 import { ErrorBoundary } from "@/app/provider/error";
 import { publicUrl } from "@/shared/lib/publicUrl";
+import { App } from "@/app/App.tsx";
 
 function ErrorBoundaryError({ error }: { error: unknown }) {
   return (

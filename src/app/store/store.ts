@@ -4,17 +4,19 @@ import storage from "redux-persist/lib/storage";
 import userReducer from "@/entities/user/model/userSlice";
 import levelsReducer from "@/entities/level/model/levelsSlice";
 import tasksReducer from "@/features/bonus/model/tasksSlice";
+import withdrawReducer from "@/features/withdraw-history/model/withdrawSlice.ts";
 
 const rootReducer = combineReducers({
   user: userReducer,
   levels: levelsReducer,
   tasks: tasksReducer,
+  withdraw_history: withdrawReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "tasks"],
+  whitelist: ["user", "tasks", "withdraw_history"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
