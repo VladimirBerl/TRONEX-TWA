@@ -4,20 +4,20 @@ import axios from "axios";
 interface DepositPayload {
   id_tg: string;
   amount: string;
+  wallet_address: string;
 }
 
 export const deposit = createAsyncThunk<string, DepositPayload>(
   "deposit/deposit",
-  async ({ id_tg, amount }, thunkAPI) => {
+  async ({ id_tg, amount, wallet_address }, thunkAPI) => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
     try {
-      await axios.patch(`${API_URL}/api/deposit`, {
-        id_tg: id_tg,
+      await axios.post(`${API_URL}/api/deposit/${id_tg}/create`, {
+        network: "TON",
         amount: amount,
+        wallet_address: wallet_address,
       });
-      // TODO Доработать
-      console.log("Деньги внесены на счёт");
 
       return "Deposit successful";
     } catch (error) {

@@ -146,8 +146,8 @@
   }
 
   .text-button-md {
-    font-size: 16px !important;
-    font-weight: 600 !important;
+    font-size: 16px;
+    font-weight: 600;
     color: #18a7fb;
     text-transform: uppercase;
   }

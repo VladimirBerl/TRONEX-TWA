@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Task } from "./tasksSlice";
+import { Task } from "../../../entities/bonus/model/tasksSlice.ts";
 
 export const getTasks = createAsyncThunk<Task[], string, { rejectValue: string }>(
   "tasks/getTasks",

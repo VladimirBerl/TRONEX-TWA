@@ -1,7 +1,6 @@
 import "@telegram-apps/telegram-ui/dist/styles.css";
 
 import ReactDOM from "react-dom/client";
-import { StrictMode } from "react";
 import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 
 import { init, EnvUnsupported } from "@/shared/config/twa";
@@ -40,9 +39,7 @@ try {
     root.render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <StrictMode>
-            <Root />
-          </StrictMode>
+          <Root />
         </PersistGate>
       </Provider>,
     );

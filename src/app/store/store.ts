@@ -3,20 +3,22 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "@/entities/user/model/userSlice";
 import levelsReducer from "@/entities/level/model/levelsSlice";
-import tasksReducer from "@/features/bonus/model/tasksSlice";
-import withdrawReducer from "@/features/withdraw-history/model/withdrawSlice.ts";
+import tasksReducer from "@/entities/bonus/model/tasksSlice.ts";
+import withdrawReducer from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
+import depositReducer from "@/entities/deposit-history/model/depositHistorySlice";
 
 const rootReducer = combineReducers({
   user: userReducer,
   levels: levelsReducer,
   tasks: tasksReducer,
-  withdraw_history: withdrawReducer,
+  withdrawals: withdrawReducer,
+  deposits: depositReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "tasks", "withdraw_history"],
+  whitelist: ["user", "tasks", "withdrawals", "deposits"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
