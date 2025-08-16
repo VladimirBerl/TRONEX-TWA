@@ -1,6 +1,12 @@
 import { Page, Form } from "@/shared/ui";
 import { TransactionFooter } from "@/widgets";
-import { DepositForm, DepositFormValues, depositSchema, deposit } from "@/features";
+import {
+  DepositForm,
+  DepositFormValues,
+  depositSchema,
+  deposit,
+  getDepositHistory,
+} from "@/features";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
@@ -63,7 +69,10 @@ export const DepositPage = () => {
     }
 
     const amount: string = data.depositAmount.toString();
-    if (id_tg != null) void dispatch(deposit({ id_tg, amount }));
+    if (id_tg != null) {
+      void dispatch(deposit({ id_tg, amount, wallet_address }));
+      void dispatch(getDepositHistory(id_tg));
+    }
     form.reset({ depositAmount: "" });
     void navigate("/deposit", { replace: true });
   };

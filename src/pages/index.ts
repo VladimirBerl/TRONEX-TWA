@@ -8,3 +8,4 @@ export { NotFoundPage } from "@/pages/404/ui/NotFoundPage.tsx";
 export { BannedPage } from "@/pages/banned/ui/BannedPage.tsx";
 export { SplashScreen } from "@/pages/splash-screen/ui/SplashScreen.tsx";
 export { WithdrawHistoryPage } from "@/pages/withdraw-history/ui/WithdrawHistoryPage.tsx";
+export { DepositHistoryPage } from "@/pages/deposit-history/ui/DepositHistoryPage.tsx";

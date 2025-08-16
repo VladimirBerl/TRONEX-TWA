@@ -1,2 +1,2 @@
-export { getWithdrawHistory } from "./model/withdrawThunk.ts";
-export { withdrawSlice } from "./model/withdrawSlice.ts";
+export { getWithdrawHistory } from "./model/withdrawalsThunk.ts";
+export { withdrawalsSlice } from "../../entities/withdraw-history/model/withdrawalsSlice.ts";

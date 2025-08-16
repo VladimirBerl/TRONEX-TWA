@@ -10,15 +10,15 @@ export { TonConnection } from "./ton-connect/ui/TonConnection.tsx";
 
 export { sendAuth } from "./auth/model/authThunk.ts";
 export { checkTask } from "./bonus/model/checkThunk.ts";
-export { tasksSlice } from "./bonus/model/tasksSlice.ts";
 export { getTasks } from "./bonus/model/tasksThunk.ts";
 export { sendClick } from "./farm-currency/model/clickThunk.ts";
 export { getLevels } from "./levels/model/levelsThunk.ts";
 export { upgradeLevel } from "./upgrade-level/model/upgradeLevelThunk.ts";
 export { deposit } from "./deposit-form/model/depositThunk.ts";
 export { getReferrals } from "./referrals/model/referralThunk.ts";
-export { getWithdrawHistory } from "@/features/withdraw-history/model/withdrawThunk.ts";
-export { withdrawSlice } from "@/features/withdraw-history/model/withdrawSlice.ts";
+export { getWithdrawHistory } from "@/features/withdraw-history/model/withdrawalsThunk.ts";
+export { withdrawalsSlice } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
+export { getDepositHistory } from "@/features/deposit-history/model/depositHistoryThunk.ts";
 
 export { handleProgressUpdate } from "./farm-currency/model/services.ts";
 

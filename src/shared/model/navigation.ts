@@ -7,5 +7,6 @@ export const PATHS = {
   UPGRADE: "/upgrade",
   BANNED: "/banned",
   WITHDRAW_HISTORY: "/withdraw-history",
+  DEPOSIT_HISTORY: "/deposit-history",
   NOT_FOUND: "*",
 };

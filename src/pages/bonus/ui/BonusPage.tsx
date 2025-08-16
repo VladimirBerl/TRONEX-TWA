@@ -3,7 +3,7 @@ import { BenefitCard } from "@/features";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
-import { Task } from "@/features/bonus/model/tasksSlice.ts";
+import { Task } from "@/entities/bonus/model/tasksSlice.ts";
 
 export const BonusPage = () => {
   const { t } = useTranslation();
@@ -16,22 +16,27 @@ export const BonusPage = () => {
       <section className="w-full">
         <h2 className="text-heading mb-2">{t("bonus.opportunities")}</h2>
 
-        {tasks?.map((task: Task) => {
-          const { id, title, reward, url, imageUrl, reward_issued, status } = task;
-          return (
-            <div key={id}>
-              <BenefitCard
-                id={id}
-                status={status}
-                title={title}
-                reward={reward}
-                url={url}
-                imageUrl={imageUrl}
-                reward_issued={reward_issued}
-              />
-            </div>
-          );
-        })}
+        {tasks.length === 0 ?
+          <h2 className="text-white-heading text-center mt-[100px]">
+            В данный момент задачи отсутствуют.
+          </h2>
+        : tasks?.map((task: Task) => {
+            const { id, title, reward, url, imageUrl, reward_issued, status } = task;
+            return (
+              <div key={id}>
+                <BenefitCard
+                  id={id}
+                  status={status}
+                  title={title}
+                  reward={reward}
+                  url={url}
+                  imageUrl={imageUrl}
+                  reward_issued={reward_issued}
+                />
+              </div>
+            );
+          })
+        }
       </section>
     </Page>
   );

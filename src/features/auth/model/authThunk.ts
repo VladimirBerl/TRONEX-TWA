@@ -22,6 +22,7 @@ export const sendAuth = createAsyncThunk(
         username: first_name,
         id_tg: id_tg,
       });
+
       const {
         farm_balance,
         clicks_today,

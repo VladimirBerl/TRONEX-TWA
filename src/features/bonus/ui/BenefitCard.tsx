@@ -1,5 +1,5 @@
 import { Button } from "@/shared/ui";
-import { Task } from "@/features/bonus/model/tasksSlice.ts";
+import { Task } from "@/entities/bonus/model/tasksSlice.ts";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
