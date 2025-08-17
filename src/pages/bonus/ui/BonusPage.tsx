@@ -19,57 +19,53 @@ export const BonusPage = () => {
     if (id_tg != null) void dispatch(getTasks({ id_tg }));
   }, []);
 
-  const loadMore = (): void => {
-    setPage((prevPage: number): number => {
-      const newPage: number = prevPage + 1;
-      if (id_tg) void dispatch(getTasks({ id_tg, page: newPage }));
-      return newPage;
-    });
-  };
-
-  const targetRef = useIntersectionObserver<HTMLLIElement>({
+  const targetRef = useIntersectionObserver<HTMLLIElement, Task>({
     root: null,
     rootMargin: "0px",
     threshold: 0.5,
     enabled: tasks.length < total,
-
-    onIntersect: (): void => {
-      loadMore();
+    items: tasks,
+    total: total,
+    handleGetItems: ({ id_tg, page }) => {
+      void dispatch(getTasks({ id_tg, page }));
     },
+    setPage: setPage,
   });
 
   return (
-    <Page className="grid grid-rows-[auto_auto] gap-y-6">
+    <Page className="grid grid-rows-[auto_1fr] gap-y-6 h-screen">
       <h1 className="text-title leading-none text-center mb-[20px]">{t("bonus.title")}</h1>
 
-      <ul className="w-full">
+      <section className="w-full">
         <h2 className="text-heading mb-2">{t("bonus.opportunities")}</h2>
 
-        {tasks.length === 0 ?
-          <h2 className="text-white-heading text-center mt-[100px]">
-            В данный момент задачи отсутствуют.
-          </h2>
-        : tasks?.map((task: Task, index) => {
-            const { id, title, reward, url, imageUrl, reward_issued, status } = task;
+        <ul>
+          {tasks.length === 0 ?
+            <h2 className="text-white-heading text-center mt-[100px]">
+              В данный момент задачи отсутствуют.
+            </h2>
+          : tasks?.map((task: Task, index, arr) => {
+              const { id, title, reward, url, imageUrl, reward_issued, status } = task;
 
-            const isLast: boolean = index === tasks.length - 1;
+              const isLast: boolean = index === arr.length - 1;
 
-            return (
-              <li key={id} ref={isLast ? targetRef : null}>
-                <BenefitCard
-                  id={id}
-                  status={status}
-                  title={title}
-                  reward={reward}
-                  url={url}
-                  imageUrl={imageUrl}
-                  reward_issued={reward_issued}
-                />
-              </li>
-            );
-          })
-        }
-      </ul>
+              return (
+                <li key={id} ref={isLast ? targetRef : null}>
+                  <BenefitCard
+                    id={id}
+                    status={status}
+                    title={title}
+                    reward={reward}
+                    url={url}
+                    imageUrl={imageUrl}
+                    reward_issued={reward_issued}
+                  />
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
     </Page>
   );
 };

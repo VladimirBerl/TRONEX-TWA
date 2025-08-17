@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getTasks } from "@/features/bonus/model/tasksThunk.ts";
+import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
+import { RootState } from "@/app/store/store.ts";
 
 export const checkTask = createAsyncThunk<
   string,
@@ -8,14 +10,15 @@ export const checkTask = createAsyncThunk<
   { rejectValue: string }
 >("tasks/checkTask", async ({ id_tg, id }, thunkAPI) => {
   const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
+  const { page } = useAppSelector((state: RootState) => state.tasks);
   const { dispatch } = thunkAPI;
-
+  console.log(142124);
   try {
     await axios.patch(`${API_URL}/api/tasks/${id}/check`, {
       id_tg: id_tg,
     });
     // TODO ЗДЕСЬ БАГ
-    if (id_tg != null) void dispatch(getTasks({ id_tg }));
+    if (id_tg != null) void dispatch(getTasks({ id_tg, page }));
 
     return "Task checked successfully";
   } catch (error: unknown) {
