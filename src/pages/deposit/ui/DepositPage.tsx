@@ -1,12 +1,6 @@
 import { Page, Form } from "@/shared/ui";
 import { TransactionFooter } from "@/widgets";
-import {
-  DepositForm,
-  DepositFormValues,
-  depositSchema,
-  deposit,
-  getDepositHistory,
-} from "@/features";
+import { DepositForm, DepositFormValues, depositSchema, deposit } from "@/features";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
@@ -16,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
 import { useNavigate } from "react-router-dom";
 import { FormEvent } from "react";
+import { Buffer } from "buffer";
+import { Cell } from "@ton/core";
 
 export const DepositPage = () => {
   const { t } = useTranslation();
@@ -60,21 +56,25 @@ export const DepositPage = () => {
     };
 
     try {
-      await tonConnectUI.sendTransaction(transaction);
+      const result = await tonConnectUI.sendTransaction(transaction);
+
+      const bocCell = Cell.fromBoc(Buffer.from(result.boc, "base64"))[0];
+      const hash = bocCell.hash().toString("hex");
+
+      const amount: string = data.depositAmount.toString();
+
+      if (id_tg != null) {
+        void dispatch(deposit({ id_tg, amount, wallet_address, hash }));
+      }
+      form.reset({ depositAmount: "" });
+      void navigate("/deposit", { replace: true });
+
       alert("Transaction sent! Please confirm in your wallet");
     } catch (e) {
       console.error(e);
       alert("Failed to send transaction");
       return;
     }
-
-    const amount: string = data.depositAmount.toString();
-    if (id_tg != null) {
-      void dispatch(deposit({ id_tg, amount, wallet_address }));
-      void dispatch(getDepositHistory(id_tg));
-    }
-    form.reset({ depositAmount: "" });
-    void navigate("/deposit", { replace: true });
   };
 
   return (

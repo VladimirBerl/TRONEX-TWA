@@ -1,15 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-interface DepositPayload {
+interface depositArgs {
   id_tg: string;
   amount: string;
   wallet_address: string;
+  hash: string;
 }
 
-export const deposit = createAsyncThunk<string, DepositPayload>(
+export const deposit = createAsyncThunk<string, depositArgs>(
   "deposit/deposit",
-  async ({ id_tg, amount, wallet_address }, thunkAPI) => {
+  async ({ id_tg, amount, wallet_address, hash }, thunkAPI) => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
     try {
@@ -17,6 +18,7 @@ export const deposit = createAsyncThunk<string, DepositPayload>(
         network: "TON",
         amount: amount,
         wallet_address: wallet_address,
+        hash: hash,
       });
 
       return "Deposit successful";

@@ -9,20 +9,20 @@ export interface Deposit {
   createdAt: string;
 }
 
-export interface DepositHistoryInfo {
+export interface DepositHistory {
   page: number;
   total: number;
   deposits: Deposit[];
 }
 
-const initialState: DepositHistoryInfo = {
-  page: 0,
+const initialState: DepositHistory = {
+  page: 1,
   total: 0,
   deposits: [],
 };
 
 export const depositHistorySlice = createSlice({
-  name: "withdrawals",
+  name: "deposits",
   initialState,
   reducers: {},
 
@@ -32,7 +32,7 @@ export const depositHistorySlice = createSlice({
 
       state.page = page;
       state.total = total;
-      state.deposits = deposits;
+      state.deposits = page === 1 ? deposits : [...state.deposits, ...deposits];
     });
   },
 });
