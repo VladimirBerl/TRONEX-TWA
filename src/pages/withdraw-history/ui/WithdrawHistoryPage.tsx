@@ -31,27 +31,21 @@ export const WithdrawHistoryPage = () => {
     }
   };
 
-  const loadMore = (): void => {
-    setPage((prevPage: number): number => {
-      const newPage: number = prevPage + 1;
-      if (id_tg) void dispatch(getWithdrawHistory({ id_tg, page: newPage }));
-      return newPage;
-    });
-  };
-
   useEffect((): void => {
     if (id_tg) void dispatch(getWithdrawHistory({ id_tg }));
   }, []);
 
-  const targetRef = useIntersectionObserver<HTMLLIElement>({
+  const targetRef = useIntersectionObserver<HTMLLIElement, Withdrawals>({
     root: null,
     rootMargin: "0px",
     threshold: 0.5,
     enabled: withdrawals.length < total,
-
-    onIntersect: (): void => {
-      loadMore();
+    items: withdrawals,
+    total: total,
+    handleGetItems: ({ id_tg, page }) => {
+      void dispatch(getWithdrawHistory({ id_tg, page }));
     },
+    setPage: setPage,
   });
 
   return (

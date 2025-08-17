@@ -35,6 +35,7 @@ export const TransactionFooter = ({ btnText, buttonValue }: TransactionFooterPro
 
         <Button
           variant="transparent"
+          type="button"
           className="h-fit text-transaction text-center w-full no-hover"
           onClick={() => void navigate(PATHS.WITHDRAW_HISTORY)}
         >
