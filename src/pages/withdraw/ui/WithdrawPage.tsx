@@ -1,17 +1,16 @@
 import { Page, Form } from "@/shared/ui";
-import { WithdrawForm, withdrawSchema, WithdrawFormValues, getWithdrawHistory } from "@/features";
+import { WithdrawForm, withdrawSchema, WithdrawFormValues } from "@/features";
 import { TransactionFooter } from "@/widgets";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormEvent } from "react";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
+import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
 
 export const WithdrawPage = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const { id_tg } = useAppSelector((state: RootState) => state.user);
   const { wallet_address, investment_balance } = useAppSelector((state: RootState) => state.user);
 
@@ -43,8 +42,6 @@ export const WithdrawPage = () => {
       });
 
       alert(`Выведено: ${withdrawAmount}`);
-
-      if (id_tg != null) void dispatch(getWithdrawHistory({ id_tg, page: 1 }));
 
       form.reset({ withdrawAmount: "" });
     } catch (error) {

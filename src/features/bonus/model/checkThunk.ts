@@ -14,8 +14,8 @@ export const checkTask = createAsyncThunk<
     await axios.patch(`${API_URL}/api/tasks/${id}/check`, {
       id_tg: id_tg,
     });
-
-    if (id_tg != null) void dispatch(getTasks(id_tg));
+    // TODO ЗДЕСЬ БАГ
+    if (id_tg != null) void dispatch(getTasks({ id_tg }));
 
     return "Task checked successfully";
   } catch (error: unknown) {

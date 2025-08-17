@@ -2,8 +2,9 @@ import { Page } from "@/shared/ui";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
 import { Withdrawals } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getWithdrawHistory } from "@/features";
+import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
 
 interface WithdrawStatus {
   status: string;
@@ -13,11 +14,7 @@ interface WithdrawStatus {
 export const WithdrawHistoryPage = () => {
   const { withdrawals, total } = useAppSelector((state: RootState) => state.withdrawals);
   const { id_tg } = useAppSelector((state: RootState) => state.user);
-
-  const [page, setPage] = useState<number>(1);
-  const containerRef: MutableRefObject<HTMLLIElement | null> = useRef<HTMLLIElement | null>(null);
-  const observerRef: MutableRefObject<IntersectionObserver | null> =
-    useRef<IntersectionObserver | null>(null);
+  const [, setPage] = useState<number>(1);
 
   const dispatch = useAppDispatch();
 
@@ -34,38 +31,28 @@ export const WithdrawHistoryPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  const loadMore = (): void => {
+    setPage((prevPage: number): number => {
+      const newPage: number = prevPage + 1;
+      if (id_tg) void dispatch(getWithdrawHistory({ id_tg, page: newPage }));
+      return newPage;
+    });
+  };
 
-    observerRef.current = new IntersectionObserver(
-      (entries, observer): void => {
-        entries.forEach((entry): void => {
-          if (entry.isIntersecting) {
-            observer.unobserve(entry.target);
+  useEffect((): void => {
+    if (id_tg) void dispatch(getWithdrawHistory({ id_tg }));
+  }, []);
 
-            setPage(() => {
-              const newLimit = page + 1;
-              if (id_tg != null) {
-                void dispatch(getWithdrawHistory({ id_tg, page: newLimit }));
-              }
-              return newLimit;
-            });
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.5,
-      },
-    );
+  const targetRef = useIntersectionObserver<HTMLLIElement>({
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+    enabled: withdrawals.length < total,
 
-    observerRef.current.observe(containerRef.current);
-
-    if (withdrawals.length >= total) {
-      observerRef.current.disconnect();
-    }
-  }, [withdrawals.length]);
+    onIntersect: (): void => {
+      loadMore();
+    },
+  });
 
   return (
     <Page className="grid grid-rows-[auto_1fr_auto] h-screen gap-y-6">
@@ -95,9 +82,10 @@ export const WithdrawHistoryPage = () => {
               const currentStatus: WithdrawStatus = checkStatus(status);
 
               const isLast: boolean = index === arr.length - 1;
+
               return (
-                <li key={id} ref={isLast ? containerRef : null}>
-                  <article className="bg-[#161d27] w-full p-2 rounded-[6px] mb-5">
+                <li key={id} ref={isLast ? targetRef : null}>
+                  <article className="bg-[#161d27] w-full p-2 rounded-[6px] mb-4">
                     <header className="flex items-center justify-between mb-2">
                       <h3 className="text-operation">Операция #{id}</h3>
 

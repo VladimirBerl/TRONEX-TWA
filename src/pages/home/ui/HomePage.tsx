@@ -9,19 +9,15 @@ import {
   SpinningFan,
   LanguageSelector,
   getLevels,
-  getTasks,
   sendAuth,
   TonConnection,
   getReferrals,
-  getWithdrawHistory,
-  getDepositHistory,
 } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
 import { BannedPage, SplashScreen } from "@/pages";
-import { reset, setPage } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);
@@ -42,16 +38,8 @@ export const HomePage = () => {
 
     void dispatch(sendAuth({ first_name, id_tg }));
     void dispatch(getLevels({ id_tg }));
-    void dispatch(getTasks(id_tg));
     void dispatch(getReferrals(id_tg));
-    void dispatch(getWithdrawHistory({ id_tg, page: 1 }));
-    void dispatch(getDepositHistory(id_tg));
   }, []);
-
-  useEffect(() => {
-    dispatch(reset());
-    dispatch(setPage(1));
-  }, [dispatch]);
 
   if (loading) return <SplashScreen />;
   if (status === "banned") return <BannedPage />;

@@ -13,10 +13,14 @@ export interface Task {
 
 export interface TasksState {
   tasks: Task[];
+  page: number;
+  total: number;
 }
 
 const initialState: TasksState = {
   tasks: [],
+  page: 1,
+  total: 0,
 };
 
 export const tasksSlice = createSlice({
@@ -26,7 +30,11 @@ export const tasksSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(getTasks.fulfilled, (state, action) => {
-      state.tasks = action.payload;
+      const { tasks, page, total } = action.payload;
+
+      state.page = page;
+      state.total = total;
+      state.tasks = page === 1 ? tasks : [...state.tasks, ...tasks];
     });
   },
 });
