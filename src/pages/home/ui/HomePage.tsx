@@ -3,21 +3,15 @@ import {
   initDataState as _initDataState,
   useSignal,
 } from "@telegram-apps/sdk-react";
-import { ActionButtons } from "@/widgets";
+import { MobileToolbar } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
-import {
-  SpinningFan,
-  LanguageSelector,
-  getLevels,
-  sendAuth,
-  TonConnection,
-  getReferrals,
-} from "@/features";
+import { SpinningFan, sendAuth, getReferrals, getLevels } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
 import { BannedPage, SplashScreen } from "@/pages";
+import { HomeHeader } from "@/widgets";
 
 export const HomePage = () => {
   // const initDataRaw = useSignal(_initDataRaw);
@@ -46,8 +40,7 @@ export const HomePage = () => {
 
   return (
     <Page back={false} className="grid grid-rows-[auto_auto_auto_1fr_auto_auto] h-screen">
-      <LanguageSelector />
-      <TonConnection />
+      <HomeHeader />
       <TonBalance />
 
       <div className="flex flex-col items-center">
@@ -57,9 +50,7 @@ export const HomePage = () => {
 
       <LevelUpgrade />
 
-      <div className="h-full w-full pb-4">
-        <ActionButtons />
-      </div>
+      <MobileToolbar page="/" />
     </Page>
   );
 };

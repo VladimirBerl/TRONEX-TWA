@@ -33,7 +33,7 @@
     "title": "提现",
     "btn_text": "提现",
     "you_withdraw": "您提取：",
-    "fee": "手续费：3%（最低0.5 TON）",
+    "fee": "最低0.5 TON",
     "wallet_address": "钱包地址",
     "network": "网络",
     "note": "请确保您已正确输入所需信息。"

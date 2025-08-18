@@ -4,17 +4,14 @@ import axios from "axios";
 import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
 import { Address } from "ton";
+import { LanguageSelector } from "@/features";
 
-export const TonConnection = () => {
+export const HomeHeader = () => {
   const [tonConnectUI] = useTonConnectUI();
   const { id_tg, username } = useAppSelector((state: RootState) => state.user);
 
   const updateWalletOnServer = async (walletAddress: string | null): Promise<void> => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-    // console.log(walletAddress); // 0:8045476576b88910b292411238ce468026d4208bbb43f00f5f2be1b04f9bc048
-
-    // "0QCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASPkt" - что я должен был получить
-    // "EQCARUdldriJELKSQRI4zkaAJtQgi7tD8A9fK-GwT5vASB9i" - что получил
 
     try {
       await axios.patch(`${API_URL}/api/users/${id_tg}/wallet-address`, {
@@ -51,12 +48,12 @@ export const TonConnection = () => {
   }, [tonConnectUI]);
 
   return (
-    <div className="w-full mb-3 relative">
-      <p className="text-label absolute">{username ?? ""}</p>
+    <div className="flex justify-between items-center w-full mb-3">
+      <p className="text-label">{username ?? ""}</p>
 
-      <TonConnectButton
-        style={{ width: "100%", textAlign: "center", display: "flex", justifyContent: "center" }}
-      />
+      <TonConnectButton style={{ width: "100%", display: "flex", justifyContent: "center" }} />
+
+      <LanguageSelector />
     </div>
   );
 };

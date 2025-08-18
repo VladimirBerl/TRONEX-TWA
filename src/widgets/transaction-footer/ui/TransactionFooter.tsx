@@ -4,18 +4,32 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/model/navigation.ts";
 
+type TransactionType = "deposit" | "withdraw";
+
 interface TransactionFooterProps {
   btnText: string;
   buttonValue: string;
+  type: TransactionType;
 }
 
-export const TransactionFooter = ({ btnText, buttonValue }: TransactionFooterProps) => {
+const config: Record<TransactionType, { historyText: string; path: string }> = {
+  deposit: {
+    historyText: "История пополнений",
+    path: PATHS.DEPOSIT_HISTORY,
+  },
+  withdraw: {
+    historyText: "История выводов",
+    path: PATHS.WITHDRAW_HISTORY,
+  },
+};
+
+export const TransactionFooter = ({ btnText, buttonValue, type }: TransactionFooterProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
     <>
-      <footer className="flex w-full flex-wrap gap-y-1">
+      <footer className="flex w-full flex-wrap gap-y-2">
         <div className="w-full flex flex-col justify-end">
           <div className="flex justify-start gap-5 mb-5">
             <div className="w-[50px] h-[50px] rounded-full bg-[#18A7FB] flex items-center justify-center">
@@ -37,9 +51,9 @@ export const TransactionFooter = ({ btnText, buttonValue }: TransactionFooterPro
           variant="transparent"
           type="button"
           className="h-fit text-transaction text-center w-full no-hover"
-          onClick={() => void navigate(PATHS.WITHDRAW_HISTORY)}
+          onClick={(): void => void navigate(config[type].path)}
         >
-          История транзакций
+          {config[type].historyText}
         </Button>
       </footer>
     </>
