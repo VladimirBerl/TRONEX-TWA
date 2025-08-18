@@ -6,7 +6,6 @@ export { BenefitCard } from "./bonus/ui/BenefitCard.tsx";
 export { WithdrawForm } from "./withdraw-form/ui/WithdrawForm.tsx";
 export { DepositForm } from "./deposit-form/ui/DepositForm.tsx";
 export { LanguageSelector } from "./language-selector/ui/LanguageSelector.tsx";
-export { TonConnection } from "./ton-connect/ui/TonConnection.tsx";
 
 export { sendAuth } from "./auth/model/authThunk.ts";
 export { checkTask } from "./bonus/model/checkThunk.ts";

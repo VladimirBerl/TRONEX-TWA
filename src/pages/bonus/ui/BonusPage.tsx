@@ -7,6 +7,7 @@ import { Task } from "@/entities/bonus/model/tasksSlice.ts";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
+import { MobileToolbar } from "@/widgets";
 
 export const BonusPage = () => {
   const { t } = useTranslation();
@@ -33,13 +34,13 @@ export const BonusPage = () => {
   });
 
   return (
-    <Page className="grid grid-rows-[auto_1fr] gap-y-6 h-screen">
+    <Page className="grid grid-rows-[auto_1fr] gap-y-6 h-screen relative">
       <h1 className="text-title leading-none text-center mb-[20px]">{t("bonus.title")}</h1>
 
       <section className="w-full">
         <h2 className="text-heading mb-2">{t("bonus.opportunities")}</h2>
 
-        <ul>
+        <ul className="flex flex-col gap-y-3">
           {tasks.length === 0 ?
             <h2 className="text-white-heading text-center mt-[100px]">
               В данный момент задачи отсутствуют.
@@ -66,6 +67,10 @@ export const BonusPage = () => {
           }
         </ul>
       </section>
+
+      <div className="sticky bottom-0 w-full">
+        <MobileToolbar page="/bonus" />
+      </div>
     </Page>
   );
 };

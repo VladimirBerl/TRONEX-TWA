@@ -1,104 +1,40 @@
-import { Page, Form } from "@/shared/ui";
-import { TransactionFooter } from "@/widgets";
-import { DepositForm, DepositFormValues, depositSchema, deposit } from "@/features";
+import { Page, Button } from "@/shared/ui";
+import { MobileToolbar } from "@/widgets";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store.ts";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
-import { useNavigate } from "react-router-dom";
-import { FormEvent } from "react";
-import { Buffer } from "buffer";
-import { Cell } from "@ton/core";
+import { useState } from "react";
+import { DepositForm, WithdrawForm } from "@/features";
 
 export const DepositPage = () => {
   const { t } = useTranslation();
-  const [tonConnectUI] = useTonConnectUI();
-  const address: string = useTonAddress();
-  const { id_tg, wallet_address } = useSelector((state: RootState) => state.user);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const form = useForm<DepositFormValues>({
-    defaultValues: {
-      depositAmount: "",
-    },
-    resolver: zodResolver(depositSchema),
-  });
-
-  const handleDepositTransaction = async (data: DepositFormValues): Promise<void> => {
-    if (!address) {
-      alert("Connect wallet first");
-      return;
-    }
-
-    if (!wallet_address) {
-      alert("Deposit address is missing");
-      return;
-    }
-
-    const amountTON = parseFloat(data.depositAmount);
-    if (isNaN(amountTON) || amountTON <= 0) {
-      alert("Invalid deposit amount");
-      return;
-    }
-
-    const transaction = {
-      validUntil: Math.floor(Date.now() / 1000) + 600,
-      messages: [
-        {
-          address: wallet_address,
-          amount: (amountTON * 1_000_000_000).toString(),
-        },
-      ],
-    };
-
-    try {
-      const result = await tonConnectUI.sendTransaction(transaction);
-
-      const bocCell = Cell.fromBoc(Buffer.from(result.boc, "base64"))[0];
-      const hash = bocCell.hash().toString("hex");
-
-      const amount: string = data.depositAmount.toString();
-
-      if (id_tg != null) {
-        void dispatch(deposit({ id_tg, amount, wallet_address, hash }));
-      }
-      form.reset({ depositAmount: "" });
-      void navigate("/deposit", { replace: true });
-
-      alert("Transaction sent! Please confirm in your wallet");
-    } catch (e) {
-      console.error(e);
-      alert("Failed to send transaction");
-      return;
-    }
-  };
+  const [selectForm, setSelectForm] = useState<string>("deposit");
 
   return (
-    <Page className="grid grid-rows-[auto_1fr] h-screen">
-      <h1 className="text-title leading-none text-center mb-[26px]">{t("deposit.title")}</h1>
+    <Page className="grid grid-rows-[auto_auto_1fr] h-screen">
+      <h1 className="text-title leading-none text-center mb-[26px]">
+        {selectForm === "deposit" ? `${t("deposit.title")}` : `${t("withdraw.title")}`}
+      </h1>
 
-      <Form {...form}>
-        <form
-          className="flex flex-col h-full"
-          onSubmit={(event: FormEvent<HTMLFormElement>): void => {
-            event.preventDefault();
-            void form.handleSubmit(handleDepositTransaction)(event);
-          }}
+      <section className="flex w-full justify-around bg-[#1b1d29] p-1 mb-[26px] rounded-[12px]">
+        <Button
+          onClick={(): void => setSelectForm("deposit")}
+          className={`${selectForm === "deposit" ? "bg-[#18a7fb]" : "bg-transparent"} rounder-[6px] min-w-[140px] text-balance`}
         >
-          <DepositForm form={form} />
+          Депозит
+        </Button>
 
-          <div className="flex items-end h-full w-full pb-4 pt-2">
-            <TransactionFooter
-              btnText={t("deposit.btn_text")}
-              buttonValue={form.watch("depositAmount") || "0"}
-            />
-          </div>
-        </form>
-      </Form>
+        <Button
+          onClick={(): void => setSelectForm("withdraw")}
+          className={`${selectForm === "withdraw" ? "bg-[#18a7fb]" : "bg-transparent"} rounder-[6px] min-w-[140px] text-balance`}
+        >
+          Вывод
+        </Button>
+      </section>
+
+      {selectForm === "deposit" ?
+        <DepositForm />
+      : <WithdrawForm />}
+
+      <MobileToolbar page="/deposit" />
     </Page>
   );
 };

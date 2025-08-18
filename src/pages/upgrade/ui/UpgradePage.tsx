@@ -32,7 +32,7 @@ export const UpgradePage = () => {
 
   useEffect((): void => {
     if (id_tg != null) void dispatch(getLevels({ id_tg }));
-  }, [id_tg]);
+  }, []);
 
   return (
     <Page className="grid grid-rows-[auto_auto_1fr] gap-y-6 h-screen">
