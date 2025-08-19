@@ -115,7 +115,7 @@ export const DepositForm = () => {
 
                 <div className="absolute top-[8px] right-[10px] flex items-center gap-0.5">
                   <ChevronsDownUp className="stroke-[#18A7FB] w-[14px] h-[14px]" />
-                  <p className="text-subtitle">USDT</p>
+                  <p className="text-subtitle">TON</p>
                 </div>
               </div>
 

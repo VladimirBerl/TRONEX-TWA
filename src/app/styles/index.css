@@ -108,19 +108,10 @@ body {
   to   { transform: rotate(360deg); }
 }
 
-/*.spin-center {*/
-/*  animation: spin 2s linear infinite;*/
-/*  transform-origin: center center; !* центр вращения *!*/
-/*}*/
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+}
 
-/*@keyframes spin {*/
-/*  from {*/
-/*    transform: rotate(0deg);*/
-/*  }*/
-/*  to {*/
-/*    transform: rotate(360deg);*/
-/*  }*/
-/*}*/
 
 /* TODO: пока уберем там тем вроде нет */
 /* .dark {

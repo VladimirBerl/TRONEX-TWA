@@ -5,6 +5,7 @@ import { Withdrawals } from "@/entities/withdraw-history/model/withdrawalsSlice.
 import { useEffect, useState } from "react";
 import { getWithdrawHistory } from "@/features";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
+import { MobileNavBar } from "@/widgets";
 
 interface WithdrawStatus {
   status: string;
@@ -113,6 +114,10 @@ export const WithdrawHistoryPage = () => {
           }
         </ul>
       </section>
+
+      <div className="sticky bottom-0 w-full">
+        <MobileNavBar page="/deposit" />
+      </div>
     </Page>
   );
 };

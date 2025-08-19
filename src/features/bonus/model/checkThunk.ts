@@ -1,33 +1,34 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getTasks } from "@/features/bonus/model/tasksThunk.ts";
-import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
-import { RootState } from "@/app/store/store.ts";
 
-export const checkTask = createAsyncThunk<
-  string,
-  { id_tg: string; id: number },
-  { rejectValue: string }
->("tasks/checkTask", async ({ id_tg, id }, thunkAPI) => {
-  const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-  const { page } = useAppSelector((state: RootState) => state.tasks);
-  const { dispatch } = thunkAPI;
-  console.log(142124);
-  try {
-    await axios.patch(`${API_URL}/api/tasks/${id}/check`, {
-      id_tg: id_tg,
-    });
-    // TODO ЗДЕСЬ БАГ
-    if (id_tg != null) void dispatch(getTasks({ id_tg, page }));
+interface checkTaskRes {
+  status: string;
+}
 
-    return "Task checked successfully";
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    } else {
-      console.error("Unknown error", error);
+interface CheckTaskArgs {
+  id_tg: string;
+  id: number;
+}
+
+export const checkTask = createAsyncThunk<string, CheckTaskArgs, { rejectValue: string }>(
+  "tasks/checkTask",
+  async ({ id_tg, id }, thunkAPI) => {
+    const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
+
+    try {
+      const response = await axios.patch<checkTaskRes>(`${API_URL}/api/tasks/${id}/check`, {
+        id_tg: id_tg,
+      });
+      const { status } = response.data;
+      return status;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Unknown error", error);
+      }
+
+      return thunkAPI.rejectWithValue("Failed to check task");
     }
-
-    return thunkAPI.rejectWithValue("Failed to check task");
-  }
-});
+  },
+);

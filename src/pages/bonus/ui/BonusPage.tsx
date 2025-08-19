@@ -7,7 +7,7 @@ import { Task } from "@/entities/bonus/model/tasksSlice.ts";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
-import { MobileToolbar } from "@/widgets";
+import { MobileNavBar } from "@/widgets";
 
 export const BonusPage = () => {
   const { t } = useTranslation();
@@ -69,7 +69,7 @@ export const BonusPage = () => {
       </section>
 
       <div className="sticky bottom-0 w-full">
-        <MobileToolbar page="/bonus" />
+        <MobileNavBar page="/bonus" />
       </div>
     </Page>
   );

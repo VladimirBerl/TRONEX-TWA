@@ -3,7 +3,7 @@ import {
   initDataState as _initDataState,
   useSignal,
 } from "@telegram-apps/sdk-react";
-import { MobileToolbar } from "@/widgets";
+import { MobileNavBar } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
 import { SpinningFan, sendAuth, getReferrals, getLevels } from "@/features";
 import { Page } from "@/shared/ui";
@@ -50,7 +50,7 @@ export const HomePage = () => {
 
       <LevelUpgrade />
 
-      <MobileToolbar page="/" />
+      <MobileNavBar page="/" />
     </Page>
   );
 };
