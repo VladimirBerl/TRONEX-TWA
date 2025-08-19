@@ -85,7 +85,7 @@ export const WithdrawForm = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      className="bg-[#1b1b27] h-[50px] pr-[95px] pl-[16px] py-[12px] text-[24px] border border-[#2c2c3b] rounded-lg focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20 transition-all duration-200 placeholder:text-[24px] font-semibold [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                      className="bg-[#1b1b27] h-[50px] pl-[16px] py-[12px] text-[24px] border border-[#2c2c3b] rounded-lg focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20 transition-all duration-200 placeholder:text-[24px] font-semibold [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                       placeholder="0"
                       onChange={(e: ChangeEvent<HTMLInputElement>): void => {
                         const value: string = e.target.value;
@@ -121,7 +121,7 @@ export const WithdrawForm = () => {
 
                 <FormControl>
                   <Input
-                    className="bg-[#1b1b27] pr-[80px] border border-[#2c2c3b] rounded-lg focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20 transition-all duration-200"
+                    className="bg-[#1b1b27] border border-[#2c2c3b] rounded-lg focus:outline-none focus:border-[#5d8cf0]/40 focus:ring-1 focus:ring-[#5d8cf0]/20 transition-all duration-200"
                     placeholder="0QCARUdldrIjELKSQRI1zkaAJtQgi7tD8A9fK-GwT7vASPkt"
                     {...field}
                   />

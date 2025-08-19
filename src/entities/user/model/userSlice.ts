@@ -33,7 +33,11 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setWalletAddress: (state, action: { payload: string | null }) => {
+      state.wallet_address = action.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -89,4 +93,5 @@ export const userSlice = createSlice({
   },
 });
 
+export const { setWalletAddress } = userSlice.actions;
 export default userSlice.reducer;

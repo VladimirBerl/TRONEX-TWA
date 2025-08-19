@@ -1,14 +1,13 @@
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { Button } from "@/shared/ui";
 import { MutableRefObject, useRef, useState } from "react";
-// import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
 import { handleProgressUpdate } from "@/features/farm-currency/model/services.ts";
 import * as React from "react";
-// import { ReactComponent as SpinnerIcon } from "@/../public/images/Fan.svg";
-import { ReactComponent as TONIcon } from "@/../public/images/TON.svg";
+import { ReactComponent as SpinnerIcon } from "@/shared/assets/icons/Fan.svg";
+import { ReactComponent as TONIcon } from "@/shared/assets/icons/TonLogo.svg";
 
 export const SpinningFan = () => {
   const [isMaxReached, setIsMaxReached] = useState<boolean>(false);
@@ -36,7 +35,9 @@ export const SpinningFan = () => {
           })}
         />
 
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div
+          className={`${isMaxReached ? "pointer-events-none" : "pointer-events-auto"} absolute inset-0 flex items-center justify-center`}
+        >
           <Button
             onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
               void handleProgressUpdate({
@@ -50,27 +51,14 @@ export const SpinningFan = () => {
             }
             className="!p-0 w-[220px] h-[220px] rounded-full bg-transparent hover:bg-transparent cursor-pointer"
           >
-            {/*<SpinnerIcon className="select-none pointer-events-none w-full h-full spin" />*/}
+            <SpinnerIcon className="select-none pointer-events-none animate-spin" />
 
-            <div className="absolute w-[60px] h-[60px] rounded-full bg-[#18A7FB] flex items-center justify-center">
+            <div className="absolute  rounded-full bg-[#18A7FB] flex items-center justify-center">
               <TONIcon />
             </div>
-
-            {/*<img*/}
-            {/*  src="../../../../public/images/Fan_3.png"*/}
-            {/*  alt="Fan"*/}
-            {/*  className="w-[220px] h-[220px] flex items-center justify-center animate-spin object-cover"*/}
-            {/*  style={{ transformOrigin: "center center" }}*/}
-            {/*/>*/}
-
-            {/*<div className="absolute w-[60px] h-[60px] rounded-full bg-[#18A7FB] flex items-center justify-center">*/}
-            {/*  <Ton className="!w-[60px] !h-[60px] " />*/}
-            {/*</div>*/}
           </Button>
         </div>
       </div>
-      {/*<SpinnerIcon className="select-none pointer-events-none w-full h-full spin" />*/}
     </>
   );
 };
-// animate-spin

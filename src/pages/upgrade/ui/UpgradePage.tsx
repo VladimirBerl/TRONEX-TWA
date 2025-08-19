@@ -1,6 +1,6 @@
 import { Page } from "@/shared/ui";
 import { UpgradeControl, UpgradeTier, upgradeLevel, getLevels } from "@/features";
-import { HeaderUpgradeTier } from "@/widgets";
+import { HeaderUpgradeTier, MobileNavBar } from "@/widgets";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { Level } from "@/shared/api/upgrade/types.ts";
@@ -35,22 +35,35 @@ export const UpgradePage = () => {
   }, []);
 
   return (
-    <Page className="grid grid-rows-[auto_auto_1fr] gap-y-6 h-screen">
-      <h1 className="text-title leading-none text-center">{t("upgrade.title")}</h1>
-      <UpgradeControl
-        handleUpgradeLevel={(): undefined => void handleUpgradeLevel()}
-        isBalanceInsufficient={isBalanceInsufficient}
-      />
+    <Page className="flex flex-col h-screen relative">
+      <h1 className="text-title leading-none text-center mb-[24px]">{t("upgrade.title")}</h1>
 
-      <section className="w-full min-h-[200px]">
-        <HeaderUpgradeTier />
+      <main className="flex-1 grid grid-col-[auto_auto_auto] gap-y-6">
+        <UpgradeControl
+          handleUpgradeLevel={(): undefined => void handleUpgradeLevel()}
+          isBalanceInsufficient={isBalanceInsufficient}
+        />
 
-        <div className="py-3">
-          {levels?.map(({ level, price, percent }: Level, index: number) => (
-            <UpgradeTier key={level} level={level} price={price} percent={percent} index={index} />
-          ))}
-        </div>
-      </section>
+        <section className="w-full min-h-[200px]">
+          <HeaderUpgradeTier />
+
+          <div className="py-3">
+            {levels?.map(({ level, price, percent }: Level, index: number) => (
+              <UpgradeTier
+                key={level}
+                level={level}
+                price={price}
+                percent={percent}
+                index={index}
+              />
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <div className="sticky bottom-0 w-full">
+        <MobileNavBar page="/" />
+      </div>
     </Page>
   );
 };

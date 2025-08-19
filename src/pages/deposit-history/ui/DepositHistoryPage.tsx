@@ -5,6 +5,7 @@ import { Deposit } from "@/entities/deposit-history/model/depositHistorySlice.ts
 import { useEffect, useState } from "react";
 import { getDepositHistory } from "@/features";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
+import { MobileNavBar } from "@/widgets";
 
 export const DepositHistoryPage = () => {
   const [, setPage] = useState<number>(1);
@@ -31,7 +32,7 @@ export const DepositHistoryPage = () => {
   });
 
   return (
-    <Page className="grid grid-rows-[auto_1fr] gap-y-6 h-screen">
+    <Page className="grid grid-rows-[auto_1fr] gap-y-6 h-screen relative">
       <h1 className="text-title text-center leading-none">Пополнения</h1>
 
       <section className="w-full">
@@ -86,6 +87,10 @@ export const DepositHistoryPage = () => {
           }
         </ul>
       </section>
+
+      <div className="sticky bottom-0 w-full">
+        <MobileNavBar page="/deposit" />
+      </div>
     </Page>
   );
 };
