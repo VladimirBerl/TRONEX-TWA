@@ -2,7 +2,7 @@ import { Button } from "@/shared/ui";
 import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "@/shared/model/navigation.ts";
+import { PATHS } from "@/shared/config/navigation.ts";
 
 type TransactionType = "deposit" | "withdraw";
 

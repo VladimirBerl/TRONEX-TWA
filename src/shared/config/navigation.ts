@@ -8,4 +8,4 @@ export const PATHS = {
   WITHDRAW_HISTORY: "/withdraw-history",
   DEPOSIT_HISTORY: "/deposit-history",
   NOT_FOUND: "*",
-};
+} as const;

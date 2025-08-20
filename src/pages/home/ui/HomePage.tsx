@@ -8,7 +8,7 @@ import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
 import { SpinningFan, sendAuth, getReferrals, getLevels } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 import { RootState } from "@/app/store/store.ts";
 import { BannedPage, SplashScreen } from "@/pages";
 import { HomeHeader } from "@/widgets";
@@ -19,7 +19,8 @@ export const HomePage = () => {
    * initDataRaw - Сырые инициализацио́нные данные в виде строки
    * Используется, для валидации подлинности пользователя на сервере.
    */
-  const initDataState = useSignal(_initDataState); // Объект с пользователем
+  // const initDataRaw = useSignal(_initDataRaw);
+  const initDataState = useSignal(_initDataState);
   const dispatch = useAppDispatch();
   const { status, loading } = useAppSelector((state: RootState) => state.user);
 
