@@ -9,7 +9,7 @@ import {
   WithdrawHistoryPage,
   DepositHistoryPage,
 } from "@/pages";
-import { PATHS } from "@/shared/model/navigation.ts";
+import { PATHS } from "@/shared/config/navigation.ts";
 import { RouteObject } from "react-router-dom";
 
 export const routes: RouteObject[] = [

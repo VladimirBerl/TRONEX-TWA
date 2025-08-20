@@ -1,6 +1,6 @@
 import { Button } from "@/shared/ui";
 import { useNavigate } from "react-router-dom";
-import { PATHS } from "@/shared/model/navigation.ts";
+import { PATHS } from "@/shared/config/navigation.ts";
 import { useTranslation } from "react-i18next";
 import { Gift, Wallet, UsersRound, LoaderPinwheel } from "lucide-react";
 

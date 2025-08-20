@@ -10,7 +10,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Root } from "@/app/provider/root";
 
 import "@/shared/config/twa/mockEnv";
-
 import "@/app/styles/index.css";
 import "@/app/styles/typography.css";
 
