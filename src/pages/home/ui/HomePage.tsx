@@ -1,5 +1,5 @@
 import {
-  // initDataRaw as _initDataRaw,
+  initDataRaw as _initDataRaw,
   initDataState as _initDataState,
   useSignal,
 } from "@telegram-apps/sdk-react";
@@ -14,7 +14,7 @@ import { BannedPage, SplashScreen } from "@/pages";
 import { HomeHeader } from "@/widgets";
 
 export const HomePage = () => {
-  // const initDataRaw = useSignal(_initDataRaw);
+  const initDataRaw = useSignal(_initDataRaw);
   /**
    * initDataRaw - Сырые инициализацио́нные данные в виде строки
    * Используется, для валидации подлинности пользователя на сервере.
@@ -24,16 +24,17 @@ export const HomePage = () => {
   const { status, loading } = useAppSelector((state: RootState) => state.user);
 
   useEffect((): void => {
+    if (!initDataState || !initDataRaw) return;
     const { first_name, id } = initDataState?.user ?? {};
 
     if (!first_name || !id) return;
 
     const id_tg: string = id.toString();
 
-    void dispatch(sendAuth({ first_name, id_tg }));
+    void dispatch(sendAuth({ initDataRaw }));
     void dispatch(getLevels({ id_tg }));
     void dispatch(getReferrals(id_tg));
-  }, []);
+  }, [initDataRaw, initDataState]);
 
   if (loading) return <SplashScreen />;
   if (status === "banned") return <BannedPage />;

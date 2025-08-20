@@ -2,25 +2,26 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export interface AuthResponse {
-  id_tg: string | null;
-  farm_balance: number;
-  clicks_today: number;
-  level: number;
-  investment_balance: number | string;
-  wallet_address: string | null;
-  status: string;
-  username: string | null;
+  user: {
+    id_tg: string | null;
+    farm_balance: number;
+    clicks_today: number;
+    level: number;
+    investment_balance: number | string;
+    wallet_address: string | null;
+    status: string;
+    username: string | null;
+  };
 }
 
 export const sendAuth = createAsyncThunk(
   "auth/sendAuth",
-  async ({ first_name, id_tg }: { first_name: string; id_tg: string }, thunkAPI) => {
+  async ({ initDataRaw }: { initDataRaw: string }, thunkAPI) => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
     try {
       const response = await axios.post<AuthResponse>(`${API_URL}/api/auth`, {
-        username: first_name,
-        id_tg: id_tg,
+        initDataRaw,
       });
 
       const {
@@ -31,7 +32,8 @@ export const sendAuth = createAsyncThunk(
         wallet_address,
         status,
         username,
-      } = response.data;
+        id_tg,
+      } = response.data.user;
 
       const round6 = (num: number | string): number => parseFloat(Number(num).toFixed(6));
 
