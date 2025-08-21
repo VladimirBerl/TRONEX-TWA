@@ -5,24 +5,19 @@ import {
 } from "@telegram-apps/sdk-react";
 import { MobileNavBar } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
-import { SpinningFan, sendAuth, getReferrals, getLevels } from "@/features";
+import { SpinningFan, getReferrals, setStatusCookie } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks";
-import { RootState } from "@/app/store/store.ts";
-import { BannedPage, SplashScreen } from "@/pages";
+import { useAppDispatch } from "@/shared/hooks";
 import { HomeHeader } from "@/widgets";
+import { useSendAuthMutation, useLazyGetLevelsQuery, AuthData } from "@/shared/api/api.ts";
 
 export const HomePage = () => {
   const initDataRaw = useSignal(_initDataRaw);
-  /**
-   * initDataRaw - Сырые инициализацио́нные данные в виде строки
-   * Используется, для валидации подлинности пользователя на сервере.
-   */
-  // const initDataRaw = useSignal(_initDataRaw);
   const initDataState = useSignal(_initDataState);
   const dispatch = useAppDispatch();
-  const { status, loading } = useAppSelector((state: RootState) => state.user);
+  const [sendAuth] = useSendAuthMutation();
+  const [getLevels] = useLazyGetLevelsQuery();
 
   useEffect((): void => {
     if (!initDataState || !initDataRaw) return;
@@ -32,13 +27,20 @@ export const HomePage = () => {
 
     const id_tg: string = id.toString();
 
-    void dispatch(sendAuth({ initDataRaw }));
-    void dispatch(getLevels({ id_tg }));
+    sendAuth(initDataRaw)
+      .unwrap()
+      .then((data: AuthData) => {
+        const status = data.user?.status;
+        setStatusCookie(status);
+      })
+      .catch((error) => console.error(error));
+
+    getLevels(id_tg)
+      .unwrap()
+      .catch((error) => console.error(error));
+
     void dispatch(getReferrals(id_tg));
   }, [initDataRaw, initDataState]);
-
-  if (loading) return <SplashScreen />;
-  if (status === "banned") return <BannedPage />;
 
   return (
     <Page back={false} className="grid grid-rows-[auto_auto_auto_1fr_auto_auto] h-screen">

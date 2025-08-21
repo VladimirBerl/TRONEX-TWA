@@ -1,33 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getReferrals, sendAuth, sendClick, upgradeLevel } from "@/features";
+import { getReferrals, sendClick, upgradeLevel } from "@/features";
 import { ReferralsInfo } from "@/features/referrals/model/referralThunk.ts";
+import { api } from "@/shared/api/api.ts";
 
 export interface UserState {
-  loading: boolean;
-  username: string | null;
+  reward_added: number;
+  referrals: ReferralsInfo | null;
+
   id_tg: string | null;
-  level: number;
   farm_balance: number;
   clicks_today: number;
-  reward_added: number;
+  level: number;
   investment_balance: number;
   wallet_address: string | null;
   status: string;
-  referrals: ReferralsInfo | null;
+  username: string | null;
+
+  loading: boolean;
 }
 
 const initialState: UserState = {
-  loading: false,
-  username: null,
+  reward_added: 0,
+  referrals: null,
+
   id_tg: null,
-  level: 0,
   farm_balance: 0,
   clicks_today: 0,
-  reward_added: 0,
+  level: 0,
   investment_balance: 1,
   wallet_address: null,
   status: "",
-  referrals: null,
+  username: null,
+
+  loading: false,
 };
 
 export const userSlice = createSlice({
@@ -40,56 +45,43 @@ export const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder
-      .addCase(sendAuth.fulfilled, (state, action) => {
-        const {
-          id_tg,
-          farm_balance,
-          clicks_today,
-          level,
-          investment_balance,
-          wallet_address,
-          status,
-          username,
-        } = action.payload;
+    builder.addCase(sendClick.fulfilled, (state, action) => {
+      const { farm_balance, clicks_today, reward_added } = action.payload;
+      state.farm_balance = farm_balance;
+      state.clicks_today = clicks_today;
+      state.reward_added = reward_added;
+    });
 
-        state.id_tg = id_tg;
-        state.farm_balance = farm_balance;
-        state.clicks_today = clicks_today;
-        state.level = level;
-        state.investment_balance = investment_balance;
-        state.wallet_address = wallet_address;
-        state.status = status;
-        state.username = username;
-        state.loading = false;
-      })
+    builder.addCase(upgradeLevel.fulfilled, (state, action) => {
+      const { newLevel, newBalance } = action.payload;
+      state.level = newLevel;
+      state.investment_balance = newBalance;
+    });
 
-      .addCase(sendAuth.pending, (state) => {
-        state.loading = true;
-      })
+    builder.addCase(getReferrals.fulfilled, (state, action) => {
+      state.referrals = action.payload;
+    });
 
-      .addCase(sendAuth.rejected, (state) => {
-        state.loading = false;
-      })
+    builder.addMatcher(api.endpoints.sendAuth.matchFulfilled, (state, { payload }) => {
+      const { user } = payload;
+      state.id_tg = user.id_tg;
+      state.farm_balance = user.farm_balance;
+      state.clicks_today = user.clicks_today;
+      state.level = user.level;
+      state.investment_balance = user.investment_balance;
+      state.wallet_address = user.wallet_address;
+      state.status = user.status;
+      state.username = user.username;
+      state.loading = false;
+    });
 
-      .addCase(sendClick.fulfilled, (state, action) => {
-        const { farm_balance, clicks_today, reward_added } = action.payload;
+    builder.addMatcher(api.endpoints.sendAuth.matchPending, (state) => {
+      state.loading = true;
+    });
 
-        state.farm_balance = farm_balance;
-        state.clicks_today = clicks_today;
-        state.reward_added = reward_added;
-      })
-
-      .addCase(upgradeLevel.fulfilled, (state, action) => {
-        const { newLevel, newBalance } = action.payload;
-
-        state.level = newLevel;
-        state.investment_balance = newBalance;
-      })
-
-      .addCase(getReferrals.fulfilled, (state, action) => {
-        state.referrals = action.payload;
-      });
+    builder.addMatcher(api.endpoints.sendAuth.matchRejected, (state) => {
+      state.loading = false;
+    });
   },
 });
 

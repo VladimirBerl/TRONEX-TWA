@@ -1,17 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Level } from "@/shared/api/upgrade/types.ts";
+import { LevelData } from "@/shared/api/api.ts";
 
 interface UpgradeLevelParams {
   id_tg: string;
-  levels: Level[];
+  levels: LevelData[];
   level: number;
   investment_balance: number;
   price: number;
 }
 
 interface UpgradeLevelResult {
-  updatedLevels: Level[];
+  updatedLevels: LevelData[];
   newLevel: number;
   newBalance: number;
 }
@@ -22,11 +22,11 @@ export const upgradeLevel = createAsyncThunk<UpgradeLevelResult, UpgradeLevelPar
     const API_URL = import.meta.env.VITE_API_BASE_URL as string;
 
     try {
-      await axios.patch<Level[]>(`${API_URL}/api/upgrade-level`, {
+      await axios.patch<LevelData[]>(`${API_URL}/api/upgrade-level`, {
         id_tg,
       });
 
-      const updatedLevels: Level[] = levels.slice(1);
+      const updatedLevels: LevelData[] = levels.slice(1);
 
       return {
         updatedLevels,
