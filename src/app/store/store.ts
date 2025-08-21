@@ -6,6 +6,7 @@ import levelsReducer from "@/entities/level/model/levelsSlice";
 import tasksReducer from "@/entities/bonus/model/tasksSlice.ts";
 import withdrawReducer from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
 import depositReducer from "@/entities/deposit-history/model/depositHistorySlice";
+import { api } from "@/shared/api/api.ts";
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   tasks: tasksReducer,
   withdrawals: withdrawReducer,
   deposits: depositReducer,
+  [api.reducerPath]: api.reducer,
 });
 
 const persistConfig = {
@@ -28,7 +30,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(api.middleware),
 });
 
 export const persistor = persistStore(store);
