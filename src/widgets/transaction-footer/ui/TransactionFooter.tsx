@@ -3,6 +3,7 @@ import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/config/navigation.ts";
+import { TFunction } from "i18next";
 
 type TransactionType = "deposit" | "withdraw";
 
@@ -12,20 +13,24 @@ interface TransactionFooterProps {
   type: TransactionType;
 }
 
-const config: Record<TransactionType, { historyText: string; path: string }> = {
+const getConfig = (
+  t: TFunction,
+): Record<TransactionType, { historyText: string; path: string }> => ({
   deposit: {
-    historyText: "История пополнений",
+    historyText: t("deposit.historyText"),
     path: PATHS.DEPOSIT_HISTORY,
   },
   withdraw: {
-    historyText: "История выводов",
+    historyText: t("withdraw.historyText"),
     path: PATHS.WITHDRAW_HISTORY,
   },
-};
+});
 
 export const TransactionFooter = ({ btnText, buttonValue, type }: TransactionFooterProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const config = getConfig(t);
 
   return (
     <>

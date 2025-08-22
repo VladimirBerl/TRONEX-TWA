@@ -37,7 +37,21 @@ export const api = createApi({
     getLevels: builder.query<LevelData[], string>({
       query: (id_tg) => `/api/users/${id_tg}/levels`,
     }),
+    // WALLET INFO
+    updateWallet: builder.mutation<AuthData, { id_tg: string; walletAddress: string | null }>({
+      query: ({ id_tg, walletAddress }) => ({
+        url: `/api/users/${id_tg}/wallet_address`,
+        method: "PATCH",
+        // TODO Под вопросом
+        body: { wallet_address: walletAddress },
+      }),
+    }),
   }),
 });
 
-export const { useSendAuthMutation, useGetLevelsQuery, useLazyGetLevelsQuery } = api;
+export const {
+  useSendAuthMutation,
+  useGetLevelsQuery,
+  useLazyGetLevelsQuery,
+  useUpdateWalletMutation,
+} = api;

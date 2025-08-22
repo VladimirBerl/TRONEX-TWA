@@ -14,10 +14,11 @@ export const MobileNavBar = ({ page }: MobileToolbarProps) => {
 
   const navItems = [
     { label: t("home.deposit"), path: PATHS.DEPOSIT, Icon: Wallet },
-    { label: "Главная", path: PATHS.HOME, Icon: LoaderPinwheel },
+    { label: t("home.main"), path: PATHS.HOME, Icon: LoaderPinwheel },
     { label: t("home.invite"), path: PATHS.INVITE, Icon: UsersRound },
     { label: t("home.bonus"), path: PATHS.BONUS, Icon: Gift },
   ];
+
   return (
     <footer className="flex justify-between items-center h-[65px] bg-[#1B1D297F] rounded-t-[16px] border-[1px] border-solid border-[#18a7fb] px-2 pt-0.5 pb-2">
       {navItems.map((item) => {

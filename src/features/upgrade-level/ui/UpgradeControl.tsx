@@ -35,7 +35,9 @@ export const UpgradeControl = ({
       </FormItem>
 
       {isBalanceInsufficient && (
-        <span className="text-error absolute right-0 bottom-[-10px]">Недостаточно средств</span>
+        <span className="text-error absolute right-0 bottom-[-10px]">
+          {t("upgrade.insufficientFunds")}
+        </span>
       )}
     </div>
   );

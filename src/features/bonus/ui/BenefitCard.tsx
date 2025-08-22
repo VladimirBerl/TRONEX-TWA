@@ -5,14 +5,10 @@ import { RootState } from "@/app/store/store.ts";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
 import { checkTask } from "@/features/bonus/model/checkThunk.ts";
 import { useEffect, useState } from "react";
-
-const statusToLabelMap: Record<string, string> = {
-  pending: "get",
-  checking: "checking",
-  completed: "completed",
-};
+import { useTranslation } from "react-i18next";
 
 export const BenefitCard = ({ title, reward, reward_issued, status, url, id, imageUrl }: Task) => {
+  const { t } = useTranslation();
   const { id_tg } = useSelector((state: RootState) => state.user);
   const [localStatus, setLocalStatus] = useState(status);
 
@@ -21,6 +17,12 @@ export const BenefitCard = ({ title, reward, reward_issued, status, url, id, ima
   useEffect(() => {
     setLocalStatus(status);
   }, [status]);
+
+  const statusToLabelMap: Record<string, string> = {
+    completed: t("bonus.status.completed"),
+    checking: t("bonus.status.checking"),
+    get: t("bonus.status.get"),
+  };
 
   const handleTaskExecution = async (id: number, url: string) => {
     switch (localStatus) {
@@ -57,7 +59,7 @@ export const BenefitCard = ({ title, reward, reward_issued, status, url, id, ima
             disabled={reward_issued}
             onClick={(): void => void handleTaskExecution(id, url)}
           >
-            {statusToLabelMap[status] ?? "get"}
+            {statusToLabelMap[status] ?? t("bonus.status.get")}
           </Button>
 
           <p className="flex justify-end text-link-strong">

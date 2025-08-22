@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import { getDepositHistory } from "@/features";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
 import { MobileNavBar } from "@/widgets";
+import { useTranslation } from "react-i18next";
 
 export const DepositHistoryPage = () => {
+  const { t } = useTranslation();
   const [, setPage] = useState<number>(1);
   const dispatch = useAppDispatch();
 
@@ -33,19 +35,18 @@ export const DepositHistoryPage = () => {
 
   return (
     <Page className="grid grid-rows-[auto_1fr] gap-y-6 h-screen relative">
-      <h1 className="text-title text-center leading-none">Пополнения</h1>
+      <h1 className="text-title text-center leading-none">{t("depositHistory.title")}</h1>
 
       <section className="w-full">
-        <h2 className="text-heading mb-2">Пополнения</h2>
+        <h2 className="text-heading mb-2">{t("depositHistory.title")}</h2>
 
         <ul>
           {deposits.length === 0 ?
             <h2 className="text-white-heading text-center mt-[100px]">
-              Вы ещё не совершили ни одного пополнения...
+              {t("depositHistory.noHistory")}
             </h2>
           : deposits.map((operation: Deposit, index, arr) => {
               const { id, network, amount, createdAt } = operation;
-
               const dateObj = new Date(createdAt);
 
               const formattedDate = new Intl.DateTimeFormat(navigator.language, {
@@ -63,16 +64,22 @@ export const DepositHistoryPage = () => {
                   <article className="bg-[#161d27] w-full px-2 py-4 rounded-[6px] mb-3">
                     <div className="flex justify-between">
                       <header className="flex flex-col justify-between gap-2 pr-2.5">
-                        <h3 className="text-operation leading-none">Операция #{id}</h3>
-                        <p className="text-link-strong">Network: {network.toUpperCase()}</p>
+                        <h3 className="text-operation leading-none">
+                          {t("depositHistory.operation", { id })}
+                        </h3>
+                        <p className="text-link-strong">
+                          {t("depositHistory.network")}: {network.toUpperCase()}
+                        </p>
                       </header>
 
                       <div className="flex items-center justify-between">
                         <div className="text-end">
-                          <p className="text-link-strong">Количество: {amount.slice(0, 8)}</p>
+                          <p className="text-link-strong">
+                            {t("depositHistory.amount")}: {amount.slice(0, 8)}
+                          </p>
 
                           <p className="text-data">
-                            Дата:{" "}
+                            {t("depositHistory.date")}:{" "}
                             <time dateTime={createdAt}>
                               {formattedDate} ({formattedTime})
                             </time>
