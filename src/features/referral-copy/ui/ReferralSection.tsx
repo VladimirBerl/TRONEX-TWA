@@ -17,7 +17,7 @@ export const ReferralSection = () => {
 
     try {
       await navigator.clipboard.writeText(invite_link);
-      setTextButton("Скопировано!");
+      setTextButton(t("invite.copied"));
 
       if (isCopyRef.current) return;
       isCopyRef.current = true;

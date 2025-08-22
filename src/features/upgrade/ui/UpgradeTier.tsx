@@ -1,11 +1,11 @@
-import { Level } from "@/shared/api/upgrade/types.ts";
+import { LevelData } from "@/shared/api/api.ts";
 import { Button } from "@/shared/ui";
 
 interface UpgradeTierProps {
   index: number;
 }
 
-export const UpgradeTier = ({ level, price, percent }: UpgradeTierProps & Level) => {
+export const UpgradeTier = ({ level, price, percent }: UpgradeTierProps & LevelData) => {
   return (
     <Button className="w-full" variant="buyLevel">
       <div className="flex justify-between w-full border-[2px] border-solid border-[#2D2F33] rounded-[12px] py-1 px-2.5">

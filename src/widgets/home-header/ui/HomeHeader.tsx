@@ -1,34 +1,34 @@
 import { useEffect } from "react";
 import { TonConnectButton, useTonConnectUI } from "@tonconnect/ui-react";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
 import { Address } from "ton";
 import { LanguageSelector } from "@/features";
 import { setWalletAddress } from "@/entities/user/model/userSlice.ts";
-import { AuthData } from "@/shared/api/api.ts";
+import { AuthData, useUpdateWalletMutation } from "@/shared/api/api.ts";
 
 export const HomeHeader = () => {
   const [tonConnectUI] = useTonConnectUI();
   const { id_tg, username } = useAppSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
+  const [updateWallet] = useUpdateWalletMutation();
 
-  const updateWalletOnServer = async (walletAddress: string | null): Promise<void> => {
-    const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-    try {
-      const response = await axios.patch<AuthData>(`${API_URL}/api/users/${id_tg}/wallet-address`, {
-        wallet_address: walletAddress,
-      });
-
-      const { wallet_address } = response.data.user;
-      dispatch(setWalletAddress(wallet_address));
-    } catch (error: unknown) {
-      console.error(error instanceof Error ? error.message : error);
+  const updateWalletOnServer = (walletAddress: string | null) => {
+    if (id_tg != null) {
+      updateWallet({ id_tg, walletAddress })
+        .unwrap()
+        .then((data: AuthData) => {
+          const { wallet_address } = data.user;
+          dispatch(setWalletAddress(wallet_address));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
 
   useEffect(() => {
-    const unsubscribe = tonConnectUI.onStatusChange((wallet): void => {
+    const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
       try {
         if (wallet) {
           let friendlyAddress;

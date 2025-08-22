@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getWithdrawHistory } from "@/features";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
 import { MobileNavBar } from "@/widgets";
+import { useTranslation } from "react-i18next";
 
 interface WithdrawStatus {
   status: string;
@@ -16,17 +17,18 @@ export const WithdrawHistoryPage = () => {
   const { withdrawals, total } = useAppSelector((state: RootState) => state.withdrawals);
   const { id_tg } = useAppSelector((state: RootState) => state.user);
   const [, setPage] = useState<number>(1);
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
   const checkStatus = (status: string): WithdrawStatus => {
     switch (status) {
       case "pending":
-        return { status: "Ожидание", backgroundCol: "#c79f1a" };
+        return { status: t("withdrawHistory.status.pending"), backgroundCol: "#c79f1a" };
       case "paid":
-        return { status: "Выплачено", backgroundCol: "#228b22" };
+        return { status: t("withdrawHistory.status.paid"), backgroundCol: "#228b22" };
       case "rejected":
-        return { status: "Отказано", backgroundCol: "#721c24" };
+        return { status: t("withdrawHistory.status.rejected"), backgroundCol: "#721c24" };
       default:
         return { status: "", backgroundCol: "" };
     }
@@ -51,15 +53,15 @@ export const WithdrawHistoryPage = () => {
 
   return (
     <Page className="grid grid-rows-[auto_1fr_auto] h-screen gap-y-6">
-      <h1 className="text-title leading-none text-center">История</h1>
+      <h1 className="text-title leading-none text-center">{t("withdrawHistory.title")}</h1>
 
       <section className="w-full">
-        <h2 className="text-heading mb-2">Транзакции</h2>
+        <h2 className="text-heading mb-2">{t("withdrawHistory.transactions")}</h2>
 
         <ul>
           {withdrawals.length === 0 ?
             <h2 className="text-white-heading text-center mt-[100px]">
-              Вы ещё не совершили ни одной транзакции...
+              {t("withdrawHistory.noHistory")}
             </h2>
           : withdrawals.map((operation: Withdrawals, index, arr) => {
               const { id, status, network, amount, createdAt } = operation;
@@ -82,7 +84,7 @@ export const WithdrawHistoryPage = () => {
                 <li key={id} ref={isLast ? targetRef : null}>
                   <article className="bg-[#161d27] w-full p-2 rounded-[6px] mb-4">
                     <header className="flex items-center justify-between mb-2">
-                      <h3 className="text-operation">Операция #{id}</h3>
+                      <h3 className="text-operation">{t("withdrawHistory.operation", { id })}</h3>
 
                       <span
                         role="status"
@@ -94,13 +96,17 @@ export const WithdrawHistoryPage = () => {
                     </header>
 
                     <div className="flex items-center justify-between">
-                      <p className="text-link-strong pr-2.5">Network: {network.toUpperCase()}</p>
+                      <p className="text-link-strong pr-2.5">
+                        {t("withdrawHistory.network")}: {network.toUpperCase()}
+                      </p>
 
                       <div className="text-end">
-                        <p className="text-link-strong">Количество: {amount.slice(0, 8)}</p>
+                        <p className="text-link-strong">
+                          {t("withdrawHistory.amount")}: {amount.slice(0, 8)}
+                        </p>
 
                         <p className="text-data">
-                          Дата:{" "}
+                          {t("withdrawHistory.date")}:{" "}
                           <time dateTime={createdAt}>
                             {formattedDate} ({formattedTime})
                           </time>

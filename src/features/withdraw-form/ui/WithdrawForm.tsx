@@ -40,7 +40,7 @@ export const WithdrawForm = () => {
     if (Number(withdrawAmount) > investment_balance) {
       form.setError("withdrawAmount", {
         type: "manual",
-        message: "Недостаточно средств на балансе",
+        message: t("withdraw.insufficientBalance"),
       });
       return;
     }
@@ -52,7 +52,7 @@ export const WithdrawForm = () => {
         amount: withdrawAmount,
       });
 
-      alert(`Выведено: ${withdrawAmount}`);
+      alert(t("withdraw.withdrawn", { amount: withdrawAmount }));
 
       form.reset({ withdrawAmount: "" });
     } catch (error) {

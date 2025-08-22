@@ -8,7 +8,10 @@
     "deposit": "Депозит",
     "withdraw": "Вывод",
     "invite": "Пригласить",
-    "bonus": "Бонус"
+    "bonus": "Бонус",
+    "investment": "Инвестиции",
+    "farm": "Ферма",
+    "main": "Главная"
   },
 
   "invite": {
@@ -18,7 +21,8 @@
     "referral_statistics": "Статистика по рефералам",
     "all_time_referrals": "Всего рефералов",
     "referred_deposits": "Депозиты от рефералов",
-    "your_ton_deposited": "Ваш TON депозит"
+    "your_ton_deposited": "Ваш TON депозит",
+    "copied": "Скопировано!"
   },
 
   "upgrade": {
@@ -26,7 +30,8 @@
     "level": "Уровень",
     "upgrade": "Улучшить",
     "upgrade_cost": "Стоимость улучшения",
-    "income": "Доход"
+    "income": "Доход",
+    "insufficientFunds": "Недостаточно средств"
   },
 
   "withdraw": {
@@ -36,7 +41,16 @@
     "fee": "мин. 0.5 TON",
     "wallet_address": "Адрес кошелька",
     "network": "Сеть",
-    "note": "Пожалуйста, убедитесь, что вы ввели информацию правильно."
+    "note": "Пожалуйста, убедитесь, что вы ввели информацию правильно.",
+    "withdraw_button": "Вывод",
+    "historyText": "История выводов",
+    "enterAmount": "Введите сумму",
+    "mustBeNumber": "Должно быть числом",
+    "rangeError": "Сумма должна быть от {{min}} до {{max}}",
+    "addressRequired": "Введите адрес кошелька",
+    "invalidAddress": "Неверный формат адреса TON",
+    "insufficientBalance": "Недостаточно средств на балансе",
+    "withdrawn": "Выведено: {{amount}}"
   },
 
   "bonus": {
@@ -44,18 +58,64 @@
     "opportunities": "Возможности",
     "subscribe_bot": "Подпишитесь на бота",
     "subscribe_channel": "Подпишитесь на канал",
-    "get": "Получить"
+    "get": "Получить",
+    "status": {
+      "completed": "Завершено",
+      "checking": "Проверить",
+      "get": "Получить"
+    }
   },
 
   "deposit": {
     "title": "Депозит",
     "btn_text": "Внести",
     "your_deposit": "Ваш депозит:",
-    "fee_notice": "Платёжные сервисы могут взимать дополнительную комиссию за пополнение."
+    "fee_notice": "Платёжные сервисы могут взимать дополнительную комиссию за пополнение.",
+    "deposit_button": "Депозит",
+    "historyText": "История пополнений",
+    "enterAmount": "Введите сумму",
+    "mustBeNumber": "Должно быть числом",
+    "rangeError": "Сумма должна быть от 1 до 9999",
+    "connectWallet": "Сначала подключите кошелёк",
+    "addressMissing": "Адрес депозита отсутствует",
+    "invalidAmount": "Неверная сумма депозита",
+    "transactionSent": "Транзакция отправлена! Подтвердите в кошельке",
+    "transactionFailed": "Не удалось отправить транзакцию"
   },
 
   "transaction_footer": {
     "payment_method": "Способ оплаты",
     "crypto_wallet": "Крипто-кошелек"
+  },
+
+  "depositHistory": {
+    "title": "История",
+    "noHistory": "Вы ещё не совершили ни одного пополнения...",
+    "operation": "Операция #{{id}}",
+    "network": "Сеть",
+    "amount": "Количество",
+    "date": "Дата"
+  },
+
+  "withdrawHistory": {
+    "title": "История",
+    "transactions": "Транзакции",
+    "noHistory": "Вы ещё не совершили ни одной транзакции...",
+    "operation": "Операция #{{id}}",
+    "network": "Сеть",
+    "amount": "Количество",
+    "date": "Дата",
+    "status": {
+      "pending": "Ожидание",
+      "paid": "Выплачено",
+      "rejected": "Отказано"
+    }
+  },
+
+  "banned": {
+    "title": "Вы забанены",
+    "subtitle": "Доступ запрещён",
+    "description": "Ваш аккаунт был заблокирован за нарушение правил сообщества.",
+    "contact": "Если вы считаете, что произошла ошибка, обратитесь к администратору:"
   }
 }

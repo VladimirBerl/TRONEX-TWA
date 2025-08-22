@@ -34,18 +34,18 @@ export const DepositForm = () => {
 
   const handleDepositTransaction = async (data: DepositFormValues): Promise<void> => {
     if (!address) {
-      alert("Connect wallet first");
+      alert(t("deposit.connectWallet"));
       return;
     }
 
     if (!wallet_address) {
-      alert("Deposit address is missing");
+      alert(t("deposit.addressMissing"));
       return;
     }
 
     const amountTON = parseFloat(data.depositAmount);
     if (isNaN(amountTON) || amountTON <= 0) {
-      alert("Invalid deposit amount");
+      alert(t("deposit.invalidAmount"));
       return;
     }
 
@@ -73,10 +73,10 @@ export const DepositForm = () => {
       form.reset({ depositAmount: "" });
       void navigate("/deposit", { replace: true });
 
-      alert("Transaction sent! Please confirm in your wallet");
+      alert(t("deposit.transactionSent"));
     } catch (e) {
       console.error(e);
-      alert("Failed to send transaction");
+      alert(t("deposit.transactionFailed"));
       return;
     }
   };
@@ -119,7 +119,7 @@ export const DepositForm = () => {
                 </div>
               </div>
 
-              <FormMessage>{error?.message}</FormMessage>
+              <FormMessage>{error?.message || ""}</FormMessage>
             </FormItem>
           )}
         ></FormField>

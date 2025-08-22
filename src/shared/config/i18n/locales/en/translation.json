@@ -8,7 +8,10 @@
     "deposit": "Deposit",
     "withdraw": "Withdraw",
     "invite": "Invite",
-    "bonus": "Bonus"
+    "bonus": "Bonus",
+    "investment": "Investment",
+    "farm": "Farm",
+    "main": "Home"
   },
 
   "invite": {
@@ -18,7 +21,8 @@
     "referral_statistics": "Referral statistics",
     "all_time_referrals": "All-time referrals",
     "referred_deposits": "Referred deposits",
-    "your_ton_deposited": "Your TON deposited"
+    "your_ton_deposited": "Your TON deposited",
+    "copied": "Copied!"
   },
 
   "upgrade": {
@@ -26,7 +30,8 @@
     "level": "Level",
     "upgrade": "Upgrade",
     "upgrade_cost": "Upgrade cost",
-    "income": "Income"
+    "income": "Income",
+    "insufficientFunds": "Insufficient funds"
   },
 
   "withdraw": {
@@ -36,7 +41,16 @@
     "fee": "Min. 0.5 TON",
     "wallet_address": "Wallet Address",
     "network": "Network",
-    "note": "Make sure you have entered the required information correctly."
+    "note": "Make sure you have entered the required information correctly.",
+    "withdraw_button": "Withdraw",
+    "historyText": "Withdraw history",
+    "enterAmount": "Enter amount",
+    "mustBeNumber": "Must be a number",
+    "rangeError": "Amount must be between {{min}} and {{max}}",
+    "addressRequired": "Enter wallet address",
+    "invalidAddress": "Invalid TON wallet address format",
+    "insufficientBalance": "Insufficient balance",
+    "withdrawn": "Withdrawn: {{amount}}"
   },
 
   "bonus": {
@@ -44,18 +58,64 @@
     "opportunities": "Opportunities",
     "subscribe_bot": "Subscribe to the bot",
     "subscribe_channel": "Subscribe to the channel",
-    "get": "Get"
+    "get": "Get",
+    "status": {
+      "completed": "Completed",
+      "checking": "Checking",
+      "get": "Get"
+    }
   },
 
   "deposit": {
     "title": "Deposit",
     "btn_text": "Deposit",
     "your_deposit": "Your deposit:",
-    "fee_notice": "Payment services may charge an additional fee for top-ups."
+    "fee_notice": "Payment services may charge an additional fee for top-ups.",
+    "deposit_button": "Deposit",
+    "historyText": "Deposit history",
+    "enterAmount": "Enter amount",
+    "mustBeNumber": "Must be a number",
+    "rangeError": "Amount must be between 1 and 9999",
+    "connectWallet": "Connect wallet first",
+    "addressMissing": "Deposit address is missing",
+    "invalidAmount": "Invalid deposit amount",
+    "transactionSent": "Transaction sent! Please confirm in your wallet",
+    "transactionFailed": "Failed to send transaction"
   },
 
   "transaction_footer": {
     "payment_method": "Payment Method",
     "crypto_wallet": "Crypto Wallet"
+  },
+
+  "depositHistory": {
+    "title": "History",
+    "noHistory": "You have not made any deposits yet...",
+    "operation": "Operation #{{id}}",
+    "network": "Network",
+    "amount": "Amount",
+    "date": "Date"
+  },
+
+  "withdrawHistory": {
+    "title": "History",
+    "transactions": "Transactions",
+    "noHistory": "You have not made any withdrawals yet...",
+    "operation": "Operation #{{id}}",
+    "network": "Network",
+    "amount": "Amount",
+    "date": "Date",
+    "status": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "rejected": "Rejected"
+    }
+  },
+
+  "banned": {
+    "title": "You are banned",
+    "subtitle": "Access denied",
+    "description": "Your account has been blocked for violating community rules.",
+    "contact": "If you believe this is a mistake, please contact the administrator:"
   }
 }
