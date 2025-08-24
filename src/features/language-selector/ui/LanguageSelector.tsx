@@ -6,10 +6,12 @@ export const LanguageSelector = () => {
     void i18n.changeLanguage(lng);
   };
 
+  const currentLng: string | null = localStorage.getItem("i18nextLng");
+
   return (
     <Select onValueChange={(lng: string): void => changeLanguage(lng)}>
       <SelectTrigger className="[&>svg]:hidden bg-[#1B1D29] top-[5px] right-[5px] z-50 flex justify-center min-w-[40px] p-2 border-[#535A64] cursor-pointer text-link-strong">
-        <SelectValue className="text-link-strong" placeholder="EN" />
+        <SelectValue className="text-link-strong" placeholder={currentLng?.toUpperCase()} />
       </SelectTrigger>
 
       <SelectContent className="bg-[#1B1D29] text-link-strong">
