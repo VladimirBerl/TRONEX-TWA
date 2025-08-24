@@ -15,7 +15,6 @@ export { deposit } from "./deposit-form/model/depositThunk.ts";
 export { getReferrals } from "./referrals/model/referralThunk.ts";
 export { getWithdrawHistory } from "@/features/withdraw-history/model/withdrawalsThunk.ts";
 export { withdrawalsSlice } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
-export { getDepositHistory } from "@/features/deposit-history/model/depositHistoryThunk.ts";
 export { setStatusCookie } from "@/features/auth/lib/setStatusCookie.ts";
 
 export { depositSchema, type DepositFormValues } from "./deposit-form/model/depositSchema.ts";

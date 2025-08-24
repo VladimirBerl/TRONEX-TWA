@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDepositHistory } from "@/features";
+import { api } from "@/shared/api/api.ts";
 
-export interface Deposit {
+export interface DepositInfo {
   id: number;
   network: string;
   amount: string;
@@ -9,13 +9,13 @@ export interface Deposit {
   createdAt: string;
 }
 
-export interface DepositHistory {
+export interface DepositData {
   page: number;
   total: number;
-  deposits: Deposit[];
+  deposits: DepositInfo[];
 }
 
-const initialState: DepositHistory = {
+const initialState: DepositData = {
   page: 1,
   total: 0,
   deposits: [],
@@ -27,8 +27,8 @@ export const depositHistorySlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    builder.addCase(getDepositHistory.fulfilled, (state, action) => {
-      const { page, total, deposits } = action.payload;
+    builder.addMatcher(api.endpoints.getDepositHistory.matchFulfilled, (state, { payload }) => {
+      const { page, total, deposits } = payload;
 
       state.page = page;
       state.total = total;

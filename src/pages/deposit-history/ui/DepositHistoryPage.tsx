@@ -1,26 +1,26 @@
 import { Page } from "@/shared/ui";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
+import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
-import { Deposit } from "@/entities/deposit-history/model/depositHistorySlice.ts";
+import { DepositInfo } from "@/entities/deposit-history/model/depositHistorySlice.ts";
 import { useEffect, useState } from "react";
-import { getDepositHistory } from "@/features";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
 import { MobileNavBar } from "@/widgets";
 import { useTranslation } from "react-i18next";
+import { useLazyGetDepositHistoryQuery } from "@/shared/api/api.ts";
 
 export const DepositHistoryPage = () => {
   const { t } = useTranslation();
   const [, setPage] = useState<number>(1);
-  const dispatch = useAppDispatch();
 
   const { deposits, total } = useAppSelector((state: RootState) => state.deposits);
   const { id_tg } = useAppSelector((state: RootState) => state.user);
+  const [getDepositHistory] = useLazyGetDepositHistoryQuery();
 
   useEffect(() => {
-    if (id_tg != null) void dispatch(getDepositHistory({ id_tg, page: 1 }));
+    if (id_tg != null) void getDepositHistory({ id_tg, page: 1 });
   }, []);
 
-  const targetRef = useIntersectionObserver<HTMLLIElement, Deposit>({
+  const targetRef = useIntersectionObserver<HTMLLIElement, DepositInfo>({
     root: null,
     rootMargin: "0px",
     threshold: 0.5,
@@ -28,7 +28,7 @@ export const DepositHistoryPage = () => {
     items: deposits,
     total: total,
     handleGetItems: ({ id_tg, page }) => {
-      void dispatch(getDepositHistory({ id_tg, page }));
+      if (id_tg != null) void getDepositHistory({ id_tg, page });
     },
     setPage: setPage,
   });
@@ -45,7 +45,7 @@ export const DepositHistoryPage = () => {
             <h2 className="text-white-heading text-center mt-[100px]">
               {t("depositHistory.noHistory")}
             </h2>
-          : deposits.map((operation: Deposit, index, arr) => {
+          : deposits.map((operation: DepositInfo, index, arr) => {
               const { id, network, amount, createdAt } = operation;
               const dateObj = new Date(createdAt);
 
@@ -67,6 +67,7 @@ export const DepositHistoryPage = () => {
                         <h3 className="text-operation leading-none">
                           {t("depositHistory.operation", { id })}
                         </h3>
+
                         <p className="text-link-strong">
                           {t("depositHistory.network")}: {network.toUpperCase()}
                         </p>

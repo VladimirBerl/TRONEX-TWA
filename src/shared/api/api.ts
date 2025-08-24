@@ -21,6 +21,20 @@ export interface LevelData {
   percent: number;
 }
 
+interface DepositInfo {
+  id: number;
+  network: string;
+  amount: string;
+  status: string;
+  createdAt: string;
+}
+
+interface DepositData {
+  page: number;
+  total: number;
+  deposits: DepositInfo[];
+}
+
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
@@ -46,6 +60,10 @@ export const api = createApi({
         body: { wallet_address: walletAddress },
       }),
     }),
+    // DEPOSIT HISTORY
+    getDepositHistory: builder.query<DepositData, { id_tg: string; page: number }>({
+      query: ({ id_tg, page = 1 }) => `${API_URL}/api/deposit/${id_tg}?page=${page}`,
+    }),
   }),
 });
 
@@ -54,4 +72,5 @@ export const {
   useGetLevelsQuery,
   useLazyGetLevelsQuery,
   useUpdateWalletMutation,
+  useLazyGetDepositHistoryQuery,
 } = api;
