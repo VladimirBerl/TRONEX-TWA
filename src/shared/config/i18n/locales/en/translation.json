@@ -113,9 +113,7 @@
   },
 
   "banned": {
-    "title": "You are banned",
-    "subtitle": "Access denied",
-    "description": "Your account has been blocked for violating community rules.",
-    "contact": "If you believe this is a mistake, please contact the administrator:"
+    "message": "You are banned. Please contact support.",
+    "support": "Support"
   }
 }
