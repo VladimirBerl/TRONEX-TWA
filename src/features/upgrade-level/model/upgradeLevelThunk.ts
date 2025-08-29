@@ -6,7 +6,7 @@ interface UpgradeLevelParams {
   id_tg: string;
   levels: LevelData[];
   level: number;
-  investment_balance: number;
+  investment_balance: string;
   price: number;
 }
 
@@ -31,7 +31,7 @@ export const upgradeLevel = createAsyncThunk<UpgradeLevelResult, UpgradeLevelPar
       return {
         updatedLevels,
         newLevel: level + 1,
-        newBalance: investment_balance - price,
+        newBalance: parseFloat(investment_balance) - price,
       };
     } catch (error) {
       if (axios.isAxiosError(error)) {

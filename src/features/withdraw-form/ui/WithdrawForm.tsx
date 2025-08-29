@@ -37,7 +37,7 @@ export const WithdrawForm = () => {
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
     const { withdrawAmount, walletAddress } = data;
 
-    if (Number(withdrawAmount) > investment_balance) {
+    if (parseFloat(withdrawAmount) > parseFloat(investment_balance)) {
       form.setError("withdrawAmount", {
         type: "manual",
         message: t("withdraw.insufficientBalance"),

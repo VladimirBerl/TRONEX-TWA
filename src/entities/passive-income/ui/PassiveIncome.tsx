@@ -16,7 +16,7 @@ export const PassiveIncome = () => {
         <span className="text-large block leading-none">
           {checkLengthNumbers(
             levels?.[level]?.percent != null ?
-              ((levels[level].percent / 100) * investment_balance * 24).toFixed(6)
+              ((levels[level].percent / 100) * parseFloat(investment_balance) * 24).toFixed(6)
             : "N/A",
             14,
             32,
