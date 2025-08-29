@@ -2,13 +2,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
+console.log(API_URL)
+
 export interface AuthData {
   user: {
     id_tg: string | null;
-    farm_balance: number;
+    farm_balance: string;
     clicks_today: number;
     level: number;
-    investment_balance: number;
+    investment_balance: string;
     wallet_address: string | null;
     status: string;
     username: string | null;

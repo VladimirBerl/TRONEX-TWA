@@ -8,10 +8,10 @@ export interface UserState {
   referrals: ReferralsInfo | null;
 
   id_tg: string | null;
-  farm_balance: number;
+  farm_balance: string;
   clicks_today: number;
   level: number;
-  investment_balance: number;
+  investment_balance: string;
   wallet_address: string | null;
   status: string;
   username: string | null;
@@ -24,10 +24,10 @@ const initialState: UserState = {
   referrals: null,
 
   id_tg: null,
-  farm_balance: 0,
+  farm_balance: "0",
   clicks_today: 0,
   level: 0,
-  investment_balance: 1,
+  investment_balance: "0",
   wallet_address: null,
   status: "",
   username: null,
@@ -47,7 +47,7 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(sendClick.fulfilled, (state, action) => {
       const { farm_balance, clicks_today, reward_added } = action.payload;
-      state.farm_balance = farm_balance;
+      state.farm_balance = String(farm_balance);
       state.clicks_today = clicks_today;
       state.reward_added = reward_added;
     });
@@ -55,7 +55,7 @@ export const userSlice = createSlice({
     builder.addCase(upgradeLevel.fulfilled, (state, action) => {
       const { newLevel, newBalance } = action.payload;
       state.level = newLevel;
-      state.investment_balance = newBalance;
+      state.investment_balance = String(newBalance);
     });
 
     builder.addCase(getReferrals.fulfilled, (state, action) => {
