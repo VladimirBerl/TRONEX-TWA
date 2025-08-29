@@ -34,8 +34,8 @@ export const useIntersectionObserver = <T extends Element, U>({
   const { id_tg } = useAppSelector((state: RootState) => state.user);
 
   const loadMore = () => {
-    setPage((prevPage: number): number => {
-      const newPage: number = prevPage + 1;
+    setPage((prevPage) => {
+      const newPage = prevPage + 1;
       if (id_tg && items.length < total) {
         handleGetItems({ id_tg, page: newPage });
       }

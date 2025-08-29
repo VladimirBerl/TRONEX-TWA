@@ -27,7 +27,7 @@ export const HomePage = () => {
 
     const id_tg: string = id.toString();
 
-    sendAuth(initDataRaw)
+    sendAuth({ initDataRaw })
       .unwrap()
       .then((data: AuthData) => {
         const status = data.user?.status;

@@ -40,11 +40,11 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
     // REGISTER
-    sendAuth: builder.mutation<AuthData, string>({
-      query: (initDataRaw) => ({
+    sendAuth: builder.mutation<AuthData, { initDataRaw: string }>({
+      query: (body) => ({
         url: "/api/auth",
         method: "POST",
-        body: initDataRaw,
+        body,
       }),
     }),
     // LEVELS
@@ -56,7 +56,6 @@ export const api = createApi({
       query: ({ id_tg, walletAddress }) => ({
         url: `/api/users/${id_tg}/wallet_address`,
         method: "PATCH",
-        // TODO Под вопросом
         body: { wallet_address: walletAddress },
       }),
     }),
