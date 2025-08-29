@@ -1,5 +1,5 @@
 import { Button } from "@/shared/ui";
-import { ReactComponent as Ton } from "@/shared/assets/icons/Ton.svg";
+import { ReactComponent as Ton } from "@/shared/assets/icons/ton-icon.svg";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/config/navigation.ts";
