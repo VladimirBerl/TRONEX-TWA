@@ -5,8 +5,8 @@ import mkcert from "vite-plugin-mkcert";
 import tailwindcss from "@tailwindcss/vite";
 import svgr from "@svgr/rollup";
 import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: "/",
   css: {
@@ -16,9 +16,19 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), svgr(), tailwindcss(), tsconfigPaths(), process.env.HTTPS && mkcert()],
+  plugins: [
+    react(),
+    svgr(),
+    tailwindcss(),
+    tsconfigPaths(),
+    process.env.HTTPS && mkcert(),
+    nodePolyfills(),
+  ],
   define: {
     global: "globalThis",
+  },
+  resolve: {
+    alias: [{ find: /^buffer$/, replacement: "buffer/" }],
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -34,6 +44,13 @@ export default defineConfig({
   },
   build: {
     target: "esnext",
+    rollupOptions: {
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          buffer: true,
+        }),
+      ],
+    },
   },
   server: {
     allowedHosts: [
