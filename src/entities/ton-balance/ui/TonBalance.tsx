@@ -14,7 +14,7 @@ export const TonBalance = () => {
           <h2 className="text-heading-balance text-center mb-1">{t("home.investment")}</h2>
 
           <span className="text-balance leading-none">
-            {checkLengthNumbers(parseFloat(investment_balance).toFixed(2), 12, 24, 2)}
+            {checkLengthNumbers(parseFloat(investment_balance).toFixed(6), 12, 24, 2)}
           </span>
         </div>
 
@@ -22,7 +22,7 @@ export const TonBalance = () => {
           <h2 className="text-heading-balance text-center mb-1">{t("home.farm")}</h2>
 
           <span className="text-balance leading-none">
-            {checkLengthNumbers(parseFloat(farm_balance).toFixed(2), 12, 24, 2)}
+            {checkLengthNumbers(parseFloat(farm_balance).toFixed(6), 12, 24, 2)}
           </span>
         </div>
       </div>

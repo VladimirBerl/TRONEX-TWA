@@ -22,7 +22,6 @@ export const HomePage = () => {
   useEffect((): void => {
     if (!initDataState || !initDataRaw) return;
     const { first_name, id } = initDataState?.user ?? {};
-    console.log(initDataRaw);
 
     if (!first_name || !id) return;
 

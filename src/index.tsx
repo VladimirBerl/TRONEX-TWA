@@ -15,12 +15,6 @@ import "@/app/styles/typography.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
-import { Buffer } from "buffer";
-
-if (!globalThis.Buffer) {
-  globalThis.Buffer = Buffer;
-}
-
 window.addEventListener("unhandledrejection", (event) => {
   const reason = event.reason as unknown;
 
