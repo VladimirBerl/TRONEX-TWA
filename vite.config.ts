@@ -17,26 +17,29 @@ export default defineConfig({
     },
   },
   plugins: [react(), svgr(), tailwindcss(), tsconfigPaths(), process.env.HTTPS && mkcert()],
+  define: {
+    global: "globalThis",
+  },
   optimizeDeps: {
     esbuildOptions: {
       define: {
-        global: 'globalThis'
+        global: "globalThis",
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
-          buffer: true
-        })
-      ]
-    }
+          buffer: true,
+        }),
+      ],
+    },
   },
   build: {
-    target: 'esnext'
+    target: "esnext",
   },
   server: {
     allowedHosts: [
-      'delightedly-original-shrike.cloudpub.ru',
-      'luckily-renewing-kookaburra.cloudpub.ru'
+      "delightedly-original-shrike.cloudpub.ru",
+      "luckily-renewing-kookaburra.cloudpub.ru",
     ],
-    host: true
-  }
+    host: true,
+  },
 });
