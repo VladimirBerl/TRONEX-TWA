@@ -14,6 +14,7 @@ import { useSendAuthMutation, useLazyGetLevelsQuery } from "@/shared/api/api.ts"
 import { AuthData } from "@/shared/types";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/config/navigation.ts";
+import { isApiError } from "@/shared/lib";
 
 export const HomePage = () => {
   const initDataRaw = useSignal(_initDataRaw);
@@ -22,6 +23,16 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const [sendAuth] = useSendAuthMutation();
   const [getLevels] = useLazyGetLevelsQuery();
+
+  const handleAuth = async (initDataRaw: string) => {
+    const data: AuthData = await sendAuth({ initDataRaw }).unwrap();
+    if (data.token) localStorage.setItem("token", data.token);
+
+    if (data.user?.status === "banned") {
+      void navigate(PATHS.BANNED);
+      return;
+    }
+  };
 
   useEffect((): void => {
     if (!initDataState || !initDataRaw) return;
@@ -33,18 +44,15 @@ export const HomePage = () => {
 
     const run = async () => {
       try {
-        const data: AuthData = await sendAuth({ initDataRaw }).unwrap();
-        if (data.token) localStorage.setItem("token", data.token);
-
-        if (data.user?.status === "banned") {
-          void navigate(PATHS.BANNED);
-          return;
-        }
+        void handleAuth(initDataRaw);
 
         await getLevels(id_tg).unwrap();
         void dispatch(getReferrals(id_tg));
-      } catch (e) {
-        console.error(e);
+      } catch (error: unknown) {
+        if (isApiError(error) && error.status === 401) {
+          void handleAuth(initDataRaw);
+        }
+        console.error(error);
       }
     };
 
