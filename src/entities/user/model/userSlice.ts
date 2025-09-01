@@ -1,23 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getReferrals, sendClick, upgradeLevel } from "@/features";
-import { ReferralsInfo } from "@/features/referrals/model/referralThunk.ts";
 import { api } from "@/shared/api/api.ts";
-
-export interface UserState {
-  reward_added: number;
-  referrals: ReferralsInfo | null;
-
-  id_tg: string | null;
-  farm_balance: string;
-  clicks_today: number;
-  level: number;
-  investment_balance: string;
-  wallet_address: string | null;
-  status: string;
-  username: string | null;
-
-  loading: boolean;
-}
+import { UserState } from "@/shared/types/user.ts";
 
 const initialState: UserState = {
   reward_added: 0,
@@ -31,6 +15,7 @@ const initialState: UserState = {
   wallet_address: null,
   status: "",
   username: null,
+  token: "",
 
   loading: false,
 };
@@ -63,7 +48,7 @@ export const userSlice = createSlice({
     });
 
     builder.addMatcher(api.endpoints.sendAuth.matchFulfilled, (state, { payload }) => {
-      const { user } = payload;
+      const { user, token } = payload;
       state.id_tg = user.id_tg;
       state.farm_balance = user.farm_balance;
       state.clicks_today = user.clicks_today;
@@ -72,6 +57,8 @@ export const userSlice = createSlice({
       state.wallet_address = user.wallet_address;
       state.status = user.status;
       state.username = user.username;
+      state.token = token;
+
       state.loading = false;
     });
 

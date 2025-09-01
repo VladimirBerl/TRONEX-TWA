@@ -1,1 +1,1 @@
-export { authLoader } from "./ui/authLoader.ts";
+export { authLoader } from "./services/authLoader.ts";
