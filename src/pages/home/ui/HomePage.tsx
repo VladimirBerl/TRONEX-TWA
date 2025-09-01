@@ -5,17 +5,21 @@ import {
 } from "@telegram-apps/sdk-react";
 import { MobileNavBar } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
-import { SpinningFan, getReferrals, setStatusCookie } from "@/features";
+import { SpinningFan, getReferrals } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/shared/hooks";
 import { HomeHeader } from "@/widgets";
-import { useSendAuthMutation, useLazyGetLevelsQuery, AuthData } from "@/shared/api/api.ts";
+import { useSendAuthMutation, useLazyGetLevelsQuery } from "@/shared/api/api.ts";
+import { AuthData } from "@/shared/types";
+import { useNavigate } from "react-router-dom";
+import { PATHS } from "@/shared/config/navigation.ts";
 
 export const HomePage = () => {
   const initDataRaw = useSignal(_initDataRaw);
   const initDataState = useSignal(_initDataState);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [sendAuth] = useSendAuthMutation();
   const [getLevels] = useLazyGetLevelsQuery();
 
@@ -27,19 +31,24 @@ export const HomePage = () => {
 
     const id_tg: string = id.toString();
 
-    sendAuth({ initDataRaw })
-      .unwrap()
-      .then((data: AuthData) => {
-        const status = data.user?.status;
-        setStatusCookie(status);
-      })
-      .catch((error) => console.error(error));
+    const run = async () => {
+      try {
+        const data: AuthData = await sendAuth({ initDataRaw }).unwrap();
+        if (data.token) localStorage.setItem("token", data.token);
 
-    getLevels(id_tg)
-      .unwrap()
-      .catch((error) => console.error(error));
+        if (data.user?.status === "banned") {
+          void navigate(PATHS.BANNED);
+          return;
+        }
 
-    void dispatch(getReferrals(id_tg));
+        await getLevels(id_tg).unwrap();
+        void dispatch(getReferrals(id_tg));
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    void run();
   }, [initDataRaw, initDataState]);
 
   return (

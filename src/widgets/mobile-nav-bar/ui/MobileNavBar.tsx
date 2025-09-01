@@ -20,7 +20,7 @@ export const MobileNavBar = ({ page }: MobileToolbarProps) => {
   ];
 
   return (
-    <footer className="flex justify-between items-center h-[65px] bg-[#1B1D297F] rounded-t-[16px] border-[1px] border-solid border-[#18a7fb] px-2 pt-0.5 pb-2">
+    <footer className="flex justify-between items-center h-[65px] bg-[#1B1D297F] rounded-t-[16px] border-[1px] border-solid border-[#18a7fb] px-2 pt-0.5 pb-2 mb-1.5">
       {navItems.map((item) => {
         const isActive = page === item.path.toLowerCase();
         const Icon = item.Icon;
@@ -31,7 +31,7 @@ export const MobileNavBar = ({ page }: MobileToolbarProps) => {
             className="bg-transparent hover:bg-transparent p-0"
             onClick={() => void navigate(item.path)}
           >
-            <div className="group flex flex-col items-center justify-center min-w-[60px] px-2 py-1.5 transition-colors duration-100 rounded-t-[12px]">
+            <div className="group flex flex-col items-center justify-center min-w-[60px] px-2 pt-1.5 transition-colors duration-100 rounded-t-[12px]">
               <Icon
                 size={18}
                 className={`transition-colors duration-100 ${isActive ? "text-[#18a7fb]" : "group-hover:text-[#18a7fb] group-active:text-[#18a7fb]"} `}

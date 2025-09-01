@@ -1,21 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { AuthData } from "@/shared/types/user.ts";
 
 const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-
-console.log(API_URL);
-
-export interface AuthData {
-  user: {
-    id_tg: string | null;
-    farm_balance: string;
-    clicks_today: number;
-    level: number;
-    investment_balance: string;
-    wallet_address: string | null;
-    status: string;
-    username: string | null;
-  };
-}
 
 export interface LevelData {
   level: number;
@@ -39,7 +25,14 @@ interface DepositData {
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) headers.set("Authorization", `Bearer ${token}`);
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     // REGISTER
     sendAuth: builder.mutation<AuthData, { initDataRaw: string }>({
