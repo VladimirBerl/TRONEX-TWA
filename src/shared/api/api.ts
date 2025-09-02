@@ -23,6 +23,13 @@ interface DepositData {
   deposits: DepositInfo[];
 }
 
+export interface ReferralsInfo {
+  all_referrals: string;
+  all_referrals_deposit: string;
+  invite_link: string;
+  deposit_amount: string;
+}
+
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
@@ -35,17 +42,27 @@ export const api = createApi({
   }),
   endpoints: (builder) => ({
     // REGISTER
-    sendAuth: builder.mutation<AuthData, { initDataRaw: string }>({
-      query: (body) => ({
+    sendAuth: builder.mutation<AuthData, string>({
+      query: (initDataRaw: string) => ({
         url: "/api/auth",
         method: "POST",
-        body,
+        body: initDataRaw,
+        headers: {
+          "Content-Type": "text/plain",
+        },
       }),
     }),
+
     // LEVELS
     getLevels: builder.query<LevelData[], string>({
       query: (id_tg) => `/api/users/${id_tg}/levels`,
     }),
+
+    // REFERRALS
+    getReferrals: builder.query<ReferralsInfo, string>({
+      query: (id_tg) => `/api/users/${id_tg}/referrals`,
+    }),
+
     // WALLET INFO
     updateWallet: builder.mutation<AuthData, { id_tg: string; walletAddress: string | null }>({
       query: ({ id_tg, walletAddress }) => ({
@@ -54,6 +71,7 @@ export const api = createApi({
         body: { wallet_address: walletAddress },
       }),
     }),
+
     // DEPOSIT HISTORY
     getDepositHistory: builder.query<DepositData, { id_tg: string; page: number }>({
       query: ({ id_tg, page = 1 }) => `${API_URL}/api/deposit/${id_tg}?page=${page}`,
@@ -65,6 +83,7 @@ export const {
   useSendAuthMutation,
   useGetLevelsQuery,
   useLazyGetLevelsQuery,
+  useLazyGetReferralsQuery,
   useUpdateWalletMutation,
   useLazyGetDepositHistoryQuery,
 } = api;

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getReferrals, sendClick, upgradeLevel } from "@/features";
+import { sendClick, upgradeLevel } from "@/features";
 import { api } from "@/shared/api/api.ts";
 import { UserState } from "@/shared/types/user.ts";
 
@@ -43,8 +43,8 @@ export const userSlice = createSlice({
       state.investment_balance = String(newBalance);
     });
 
-    builder.addCase(getReferrals.fulfilled, (state, action) => {
-      state.referrals = action.payload;
+    builder.addMatcher(api.endpoints.getReferrals.matchFulfilled, (state, { payload }) => {
+      state.referrals = payload;
     });
 
     builder.addMatcher(api.endpoints.sendAuth.matchFulfilled, (state, { payload }) => {

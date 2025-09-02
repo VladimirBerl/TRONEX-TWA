@@ -12,7 +12,6 @@ export { getTasks } from "./bonus/model/tasksThunk.ts";
 export { sendClick } from "@/features/spinning-fan/model/clickThunk.ts";
 export { upgradeLevel } from "./upgrade-level/model/upgradeLevelThunk.ts";
 export { deposit } from "./deposit-form/model/depositThunk.ts";
-export { getReferrals } from "./referrals/model/referralThunk.ts";
 export { getWithdrawHistory } from "@/features/withdraw-history/model/withdrawalsThunk.ts";
 export { withdrawalsSlice } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
 export { setStatusCookie } from "@/features/auth/lib/setStatusCookie.ts";

@@ -7,5 +7,3 @@ export { levelsSlice } from "./level/model/levelsSlice.ts";
 export { depositHistorySlice } from "./deposit-history/model/depositHistorySlice.ts";
 export { withdrawalsSlice } from "./withdraw-history/model/withdrawalsSlice.ts";
 export { tasksSlice } from "./bonus/model/tasksSlice.ts";
-
-export { selectReferralsInfo } from "./user/model/selectors.ts";

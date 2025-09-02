@@ -5,12 +5,15 @@ import {
 } from "@telegram-apps/sdk-react";
 import { MobileNavBar } from "@/widgets";
 import { TonBalance, PassiveIncome, LevelUpgrade } from "@/entities";
-import { SpinningFan, getReferrals } from "@/features";
+import { SpinningFan } from "@/features";
 import { Page } from "@/shared/ui";
 import { useEffect } from "react";
-import { useAppDispatch } from "@/shared/hooks";
 import { HomeHeader } from "@/widgets";
-import { useSendAuthMutation, useLazyGetLevelsQuery } from "@/shared/api/api.ts";
+import {
+  useSendAuthMutation,
+  useLazyGetLevelsQuery,
+  useLazyGetReferralsQuery,
+} from "@/shared/api/api.ts";
 import { AuthData } from "@/shared/types";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "@/shared/config/navigation.ts";
@@ -19,18 +22,22 @@ import { isApiError } from "@/shared/lib";
 export const HomePage = () => {
   const initDataRaw = useSignal(_initDataRaw);
   const initDataState = useSignal(_initDataState);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const [sendAuth] = useSendAuthMutation();
   const [getLevels] = useLazyGetLevelsQuery();
+  const [getReferrals] = useLazyGetReferralsQuery();
 
   const handleAuth = async (initDataRaw: string) => {
-    const data: AuthData = await sendAuth({ initDataRaw }).unwrap();
-    if (data.token) localStorage.setItem("token", data.token);
+    const data: AuthData = await sendAuth(initDataRaw).unwrap();
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      return data.token;
+    }
 
     if (data.user?.status === "banned") {
       void navigate(PATHS.BANNED);
-      return;
+      return null;
     }
   };
 
@@ -44,13 +51,15 @@ export const HomePage = () => {
 
     const run = async () => {
       try {
-        void handleAuth(initDataRaw);
+        const token = await handleAuth(initDataRaw);
+
+        if (!token) return;
 
         await getLevels(id_tg).unwrap();
-        void dispatch(getReferrals(id_tg));
+        await getReferrals(id_tg).unwrap();
       } catch (error: unknown) {
         if (isApiError(error) && error.status === 401) {
-          void handleAuth(initDataRaw);
+          await handleAuth(initDataRaw);
         }
         console.error(error);
       }

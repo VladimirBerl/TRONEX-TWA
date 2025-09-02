@@ -1,4 +1,4 @@
-import { ReferralsInfo } from "@/features/referrals/model/referralThunk.ts";
+import { ReferralsInfo } from "@/shared/api/api.ts";
 
 export interface User {
   id_tg: string | null;
