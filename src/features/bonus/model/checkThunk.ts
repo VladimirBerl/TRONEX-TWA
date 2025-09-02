@@ -1,3 +1,4 @@
+import { getAccessTokenBearer } from "@/shared/api/token";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -18,7 +19,12 @@ export const checkTask = createAsyncThunk<string, CheckTaskArgs, { rejectValue: 
     try {
       const response = await axios.patch<checkTaskRes>(`${API_URL}/api/tasks/${id}/check`, {
         id_tg: id_tg,
-      });
+      },
+    {
+      headers: {
+        "Authorization": getAccessTokenBearer(),
+      }
+    });
       const { status } = response.data;
       return status;
     } catch (error: unknown) {

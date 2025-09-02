@@ -18,6 +18,7 @@ import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { getAccessTokenBearer } from "@/shared/api/token";
 
 export const WithdrawForm = () => {
   const { t } = useTranslation();
@@ -50,7 +51,8 @@ export const WithdrawForm = () => {
         network: "TON",
         wallet_address: walletAddress,
         amount: withdrawAmount,
-      });
+      },
+    { headers: { Authorization: getAccessTokenBearer() } });
 
       alert(t("withdraw.withdrawn", { amount: withdrawAmount }));
 

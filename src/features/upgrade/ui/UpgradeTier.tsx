@@ -14,7 +14,7 @@ export const UpgradeTier = ({ level, price, percent }: UpgradeTierProps & LevelD
           <span className="text-white-strong-16">{Number(price).toFixed()} TON</span>
         </div>
 
-        <span className="text-medium-strong">{percent} TON/h</span>
+        <span className="text-medium-strong">{percent} TON/24h</span>
       </div>
     </Button>
   );

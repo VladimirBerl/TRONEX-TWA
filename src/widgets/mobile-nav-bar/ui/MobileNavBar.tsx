@@ -20,7 +20,7 @@ export const MobileNavBar = ({ page }: MobileToolbarProps) => {
   ];
 
   return (
-    <footer className="flex justify-between items-center h-[65px] bg-[#1B1D297F] rounded-t-[16px] border-[1px] border-solid border-[#18a7fb] px-2 pt-0.5 pb-2 mb-1.5">
+    <footer className="flex justify-between items-center h-[65px] bg-[#1b1d29d2] rounded-t-[16px] border-[1px] border-solid border-[#18a7fb] px-2 pt-0.5 pb-2 mb-1.5">
       {navItems.map((item) => {
         const isActive = page === item.path.toLowerCase();
         const Icon = item.Icon;

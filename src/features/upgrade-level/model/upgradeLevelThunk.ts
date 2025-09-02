@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { LevelData } from "@/shared/api/api.ts";
+import { getAccessTokenBearer } from "@/shared/api/token";
 
 interface UpgradeLevelParams {
   id_tg: string;
@@ -24,7 +25,8 @@ export const upgradeLevel = createAsyncThunk<UpgradeLevelResult, UpgradeLevelPar
     try {
       await axios.patch<LevelData[]>(`${API_URL}/api/upgrade-level`, {
         id_tg,
-      });
+      },
+    { headers: { Authorization: getAccessTokenBearer() } });
 
       const updatedLevels: LevelData[] = levels.slice(1);
 

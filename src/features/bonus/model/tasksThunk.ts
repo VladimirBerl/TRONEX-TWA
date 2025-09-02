@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Task } from "@/entities/bonus/model/tasksSlice.ts";
+import { getAccessTokenBearer } from "@/shared/api/token";
 
 interface tasksRes {
   tasks: Task[];
@@ -21,6 +22,7 @@ export const getTasks = createAsyncThunk<tasksRes, getTasksArgs, { rejectValue: 
     try {
       const response = await axios.get<tasksRes>(
         `${API_URL}/api/users/${id_tg}/tasks?page=${page}`,
+        { headers: { Authorization: getAccessTokenBearer() } },
       );
       return response.data;
     } catch (error) {

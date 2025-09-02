@@ -1,3 +1,4 @@
+import { getAccessTokenBearer } from "@/shared/api/token";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -19,7 +20,8 @@ export const deposit = createAsyncThunk<string, depositArgs>(
         amount: amount,
         wallet_address: wallet_address,
         hash: hash,
-      });
+      },
+    { headers: { Authorization: getAccessTokenBearer() } });
 
       return "Deposit successful";
     } catch (error) {

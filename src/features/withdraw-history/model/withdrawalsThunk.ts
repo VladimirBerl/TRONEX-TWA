@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { WithdrawHistoryInfo } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
+import { getAccessTokenBearer } from "@/shared/api/token";
 
 interface getWithdrawHistoryArgs {
   id_tg: string;
@@ -19,6 +20,7 @@ export const getWithdrawHistory = createAsyncThunk<
   try {
     const response = await axios.get<WithdrawHistoryInfo>(
       `${API_URL}/api/withdraw/${id_tg}?page=${page}`,
+      { headers: { Authorization: getAccessTokenBearer() } },
     );
     return response.data;
   } catch (error) {
