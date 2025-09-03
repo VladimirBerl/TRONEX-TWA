@@ -16,6 +16,12 @@ export interface AuthData {
   user: User;
 }
 
+export interface FarmClickData {
+  farm_balance: string;
+  clicks_today: number;
+  reward_added: number;
+}
+
 export interface UserState extends User {
   reward_added: number;
   referrals: ReferralsInfo | null;

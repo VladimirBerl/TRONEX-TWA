@@ -47,12 +47,15 @@ export const WithdrawForm = () => {
     }
 
     try {
-      await axios.post(`${API_URL}/api/withdraw/${id_tg}/create`, {
-        network: "TON",
-        wallet_address: walletAddress,
-        amount: withdrawAmount,
-      },
-    { headers: { Authorization: getAccessTokenBearer() } });
+      await axios.post(
+        `${API_URL}/api/withdraw/${id_tg}/create`,
+        {
+          network: "TON",
+          wallet_address: walletAddress,
+          amount: withdrawAmount,
+        },
+        { headers: { Authorization: getAccessTokenBearer() } },
+      );
 
       alert(t("withdraw.withdrawn", { amount: withdrawAmount }));
 

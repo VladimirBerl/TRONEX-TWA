@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { sendClick, upgradeLevel } from "@/features";
 import { api } from "@/shared/api/api.ts";
-import { UserState } from "@/shared/types/user.ts";
+import { UserState, FarmClickData } from "@/shared/types/user.ts";
 
-const initialState: UserState = {
+const initialState: UserState & FarmClickData = {
   reward_added: 0,
+  farm_balance: "0",
+  clicks_today: 0,
+
   referrals: null,
 
   id_tg: null,
-  farm_balance: "0",
-  clicks_today: 0,
   level: 0,
   investment_balance: "0",
   wallet_address: null,
@@ -28,19 +28,14 @@ export const userSlice = createSlice({
       state.wallet_address = action.payload;
     },
   },
-
+  // Клики
   extraReducers: (builder) => {
-    builder.addCase(sendClick.fulfilled, (state, action) => {
-      const { farm_balance, clicks_today, reward_added } = action.payload;
-      state.farm_balance = String(farm_balance);
-      state.clicks_today = clicks_today;
-      state.reward_added = reward_added;
+    builder.addMatcher(api.endpoints.sendClick.matchFulfilled, (state, { payload }) => {
+      return { ...state, ...payload };
     });
 
-    builder.addCase(upgradeLevel.fulfilled, (state, action) => {
-      const { newLevel, newBalance } = action.payload;
-      state.level = newLevel;
-      state.investment_balance = String(newBalance);
+    builder.addMatcher(api.endpoints.sendClick.matchFulfilled, (state, { payload }) => {
+      return { ...state, ...payload };
     });
 
     builder.addMatcher(api.endpoints.getReferrals.matchFulfilled, (state, { payload }) => {

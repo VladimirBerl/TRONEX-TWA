@@ -1,14 +1,13 @@
 import { useState, useRef, useCallback } from "react";
-import { useAppDispatch } from "@/shared/hooks/useAppDispatch";
-import { sendClick } from "@/features/spinning-fan/model/clickThunk";
 import * as React from "react";
+import { useSendClickMutation } from "@/shared/api/api.ts";
 
 const MAX_CLICKS = 1000;
 
 export const useProgressClick = (id_tg: string | null, clicks_today: number | null) => {
   const [isMaxReached, setIsMaxReached] = useState(false);
   const timerRef = useRef(false);
-  const dispatch = useAppDispatch();
+  const [sendClick] = useSendClickMutation();
 
   const showFloatingText = (e: React.MouseEvent, text: string) => {
     const div = document.createElement("div");
@@ -56,9 +55,9 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
         return;
       }
 
-      if (id_tg != null) void dispatch(sendClick(id_tg));
+      if (id_tg != null) void sendClick(id_tg);
     },
-    [clicks_today, id_tg, dispatch, showFloatingText],
+    [clicks_today, id_tg, showFloatingText],
   );
 
   const progress = ((clicks_today ?? 0) / MAX_CLICKS) * 100;

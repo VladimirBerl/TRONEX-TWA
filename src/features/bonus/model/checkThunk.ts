@@ -17,14 +17,17 @@ export const checkTask = createAsyncThunk<string, CheckTaskArgs, { rejectValue: 
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
     try {
-      const response = await axios.patch<checkTaskRes>(`${API_URL}/api/tasks/${id}/check`, {
-        id_tg: id_tg,
-      },
-    {
-      headers: {
-        "Authorization": getAccessTokenBearer(),
-      }
-    });
+      const response = await axios.patch<checkTaskRes>(
+        `${API_URL}/api/tasks/${id}/check`,
+        {
+          id_tg: id_tg,
+        },
+        {
+          headers: {
+            Authorization: getAccessTokenBearer(),
+          },
+        },
+      );
       const { status } = response.data;
       return status;
     } catch (error: unknown) {

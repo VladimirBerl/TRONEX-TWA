@@ -15,13 +15,16 @@ export const deposit = createAsyncThunk<string, depositArgs>(
     const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
     try {
-      await axios.post(`${API_URL}/api/deposit/${id_tg}/create`, {
-        network: "TON",
-        amount: amount,
-        wallet_address: wallet_address,
-        hash: hash,
-      },
-    { headers: { Authorization: getAccessTokenBearer() } });
+      await axios.post(
+        `${API_URL}/api/deposit/${id_tg}/create`,
+        {
+          network: "TON",
+          amount: amount,
+          wallet_address: wallet_address,
+          hash: hash,
+        },
+        { headers: { Authorization: getAccessTokenBearer() } },
+      );
 
       return "Deposit successful";
     } catch (error) {

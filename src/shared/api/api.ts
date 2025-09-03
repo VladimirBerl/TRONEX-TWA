@@ -1,13 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AuthData } from "@/shared/types/user.ts";
+import { AuthData, FarmClickData } from "@/shared/types/user.ts";
+import { LevelInfo, LevelUpgradeResult } from "@/shared/types/levels.ts";
 
 const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-
-export interface LevelData {
-  level: number;
-  price: string;
-  percent: number;
-}
 
 interface DepositInfo {
   id: number;
@@ -53,8 +48,17 @@ export const api = createApi({
       }),
     }),
 
+    // CLICKS
+    sendClick: builder.mutation<FarmClickData, string>({
+      query: (id_tg) => ({
+        url: `${API_URL}/api/click`,
+        method: "POST",
+        body: { id_tg, clicks: 1 },
+      }),
+    }),
+
     // LEVELS
-    getLevels: builder.query<LevelData[], string>({
+    getLevels: builder.query<LevelInfo[], string>({
       query: (id_tg) => `/api/users/${id_tg}/levels`,
     }),
 
@@ -76,6 +80,15 @@ export const api = createApi({
     getDepositHistory: builder.query<DepositData, { id_tg: string; page: number }>({
       query: ({ id_tg, page = 1 }) => `${API_URL}/api/deposit/${id_tg}?page=${page}`,
     }),
+
+    // UPGRADE LEVEL
+    upgradeLevel: builder.mutation<LevelUpgradeResult, string>({
+      query: (id_tg) => ({
+        url: `/api/upgrade-level`,
+        method: "PATCH",
+        body: { id_tg },
+      }),
+    }),
   }),
 });
 
@@ -86,4 +99,6 @@ export const {
   useLazyGetReferralsQuery,
   useUpdateWalletMutation,
   useLazyGetDepositHistoryQuery,
+  useSendClickMutation,
+  useUpgradeLevelMutation,
 } = api;

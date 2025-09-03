@@ -6,7 +6,7 @@ import { Address } from "ton";
 import { LanguageSelector } from "@/features";
 import { setWalletAddress } from "@/entities/user/model/userSlice.ts";
 import { useUpdateWalletMutation } from "@/shared/api/api.ts";
-import { AuthData } from "@/shared/types";
+import { AuthData } from "@/shared/types/user.ts";
 
 export const HomeHeader = () => {
   const [tonConnectUI] = useTonConnectUI();
