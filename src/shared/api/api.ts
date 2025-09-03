@@ -52,7 +52,7 @@ export const api = createApi({
     sendClick: builder.mutation<FarmClickData, string>({
       query: (id_tg) => ({
         url: `${API_URL}/api/click`,
-        method: "POST",
+        method: "PATCH",
         body: { id_tg, clicks: 1 },
       }),
     }),

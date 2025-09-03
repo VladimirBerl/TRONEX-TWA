@@ -57,7 +57,9 @@ export const HomeHeader = () => {
     <div className="flex justify-between items-center w-full mb-3">
       <p className="text-label">{username ?? ""}</p>
 
-      <TonConnectButton style={{ width: "100%", display: "flex", justifyContent: "center" }} />
+      <div className="absolute flex w-full flex-center">
+        <TonConnectButton style={{ width: "100%", display: "flex", justifyContent: "center" }} />
+      </div>
 
       <LanguageSelector />
     </div>

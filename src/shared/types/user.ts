@@ -2,7 +2,7 @@ import { ReferralsInfo } from "@/shared/api/api.ts";
 
 export interface User {
   id_tg: string | null;
-  farm_balance: string;
+  farm_balance: number;
   clicks_today: number;
   level: number;
   investment_balance: string;
@@ -17,7 +17,7 @@ export interface AuthData {
 }
 
 export interface FarmClickData {
-  farm_balance: string;
+  farm_balance: number;
   clicks_today: number;
   reward_added: number;
 }

@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import * as React from "react";
 import { useSendClickMutation } from "@/shared/api/api.ts";
+import { FarmClickData } from "@/shared/types/user.ts";
 
 const MAX_CLICKS = 1000;
 
@@ -55,7 +56,22 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
         return;
       }
 
-      if (id_tg != null) void sendClick(id_tg);
+      if (id_tg != null)
+        sendClick(id_tg)
+          .unwrap()
+          .then((data: FarmClickData) => {
+            const { farm_balance, clicks_today, reward_added } = data;
+            const round6 = (n: number) => parseFloat(n.toFixed(6));
+
+            return {
+              farm_balance: round6(farm_balance),
+              clicks_today,
+              reward_added,
+            };
+          })
+          .catch((error) => {
+            console.error(error);
+          });
     },
     [clicks_today, id_tg, showFloatingText],
   );
