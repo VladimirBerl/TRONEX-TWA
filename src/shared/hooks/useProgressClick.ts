@@ -64,7 +64,7 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
             const round6 = (n: number) => parseFloat(n.toFixed(6));
 
             return {
-              farm_balance: round6(farm_balance),
+              farm_balance: round6(parseFloat(farm_balance)),
               clicks_today,
               reward_added,
             };
