@@ -22,6 +22,7 @@ export const DepositForm = () => {
   const { id_tg, wallet_address } = useSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const WALLET_ADDRESS = "UQAVOcL-9aRmHxodpLjMU4BIcbP1EdC-XqnhC0vaUISnmnAS";
 
   const form = useForm<DepositFormValues>({
     defaultValues: {
@@ -49,11 +50,21 @@ export const DepositForm = () => {
       return;
     }
 
+    const isConfirmed = window.confirm(
+      t("deposit.confirm", {
+        amount: amountTON,
+        wallet: WALLET_ADDRESS,
+      }),
+    );
+    if (!isConfirmed) {
+      return;
+    }
+
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 600,
       messages: [
         {
-          address: wallet_address,
+          address: WALLET_ADDRESS,
           amount: (amountTON * 1_000_000_000).toString(),
         },
       ],

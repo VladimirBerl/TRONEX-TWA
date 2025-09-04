@@ -80,7 +80,8 @@
     "addressMissing": "Адрес депозита отсутствует",
     "invalidAmount": "Неверная сумма депозита",
     "transactionSent": "Транзакция отправлена! Подтвердите в кошельке",
-    "transactionFailed": "Не удалось отправить транзакцию"
+    "transactionFailed": "Не удалось отправить транзакцию",
+    "confirm": "Хотите внести {{amount}} TON на адрес {{wallet}}?"
   },
 
   "transaction_footer": {

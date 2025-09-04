@@ -80,7 +80,8 @@
     "addressMissing": "Deposit address is missing",
     "invalidAmount": "Invalid deposit amount",
     "transactionSent": "Transaction sent! Please confirm in your wallet",
-    "transactionFailed": "Failed to send transaction"
+    "transactionFailed": "Failed to send transaction",
+    "confirm": "Do you want to deposit {{amount}} TON to {{wallet}}?"
   },
 
   "transaction_footer": {
