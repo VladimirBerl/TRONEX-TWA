@@ -5,24 +5,12 @@ import { useForm } from "react-hook-form";
 import { DepositFormValues, depositSchema } from "@/features/deposit-form/model/depositSchema.ts";
 import { ChangeEvent, FormEvent } from "react";
 import { TransactionFooter } from "@/widgets";
-import { deposit } from "@/features";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store.ts";
-import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
-import { useNavigate } from "react-router-dom";
-import { Buffer } from "buffer";
-import { Cell } from "@ton/core";
+import { useDepositTransaction } from "@/shared/hooks";
 
 export const DepositForm = () => {
   const { t } = useTranslation();
-  const [tonConnectUI] = useTonConnectUI();
-  const address: string = useTonAddress();
-  const { id_tg, wallet_address } = useSelector((state: RootState) => state.user);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const WALLET_ADDRESS = "UQAVOcL-9aRmHxodpLjMU4BIcbP1EdC-XqnhC0vaUISnmnAS";
+  const executeDeposit = useDepositTransaction();
 
   const form = useForm<DepositFormValues>({
     defaultValues: {
@@ -33,63 +21,8 @@ export const DepositForm = () => {
 
   const error = form.formState.errors.depositAmount;
 
-  const handleDepositTransaction = async (data: DepositFormValues): Promise<void> => {
-    if (!address) {
-      alert(t("deposit.connectWallet"));
-      return;
-    }
-
-    if (!wallet_address) {
-      alert(t("deposit.addressMissing"));
-      return;
-    }
-
-    const amountTON = parseFloat(data.depositAmount);
-    if (isNaN(amountTON) || amountTON <= 0) {
-      alert(t("deposit.invalidAmount"));
-      return;
-    }
-
-    const isConfirmed = window.confirm(
-      t("deposit.confirm", {
-        amount: amountTON,
-        wallet: WALLET_ADDRESS,
-      }),
-    );
-    if (!isConfirmed) {
-      return;
-    }
-
-    const transaction = {
-      validUntil: Math.floor(Date.now() / 1000) + 600,
-      messages: [
-        {
-          address: WALLET_ADDRESS,
-          amount: (amountTON * 1_000_000_000).toString(),
-        },
-      ],
-    };
-
-    try {
-      const result = await tonConnectUI.sendTransaction(transaction);
-
-      const bocCell = Cell.fromBoc(Buffer.from(result.boc, "base64"))[0];
-      const hash = bocCell.hash().toString("hex");
-
-      const amount: string = data.depositAmount.toString();
-
-      if (id_tg != null) {
-        void dispatch(deposit({ id_tg, amount, wallet_address, hash }));
-      }
-      form.reset({ depositAmount: "" });
-      void navigate("/deposit", { replace: true });
-
-      alert(t("deposit.transactionSent"));
-    } catch (e) {
-      console.error(e);
-      alert(t("deposit.transactionFailed"));
-      return;
-    }
+  const handleDepositTransaction = (data: DepositFormValues) => {
+    void executeDeposit(data, form);
   };
 
   return (

@@ -79,7 +79,7 @@
     "connectWallet": "Connect wallet first",
     "addressMissing": "Deposit address is missing",
     "invalidAmount": "Invalid deposit amount",
-    "transactionSent": "Transaction sent! Please confirm in your wallet",
+    "transactionSent": "Transaction sent!",
     "transactionFailed": "Failed to send transaction",
     "confirm": "Do you want to deposit {{amount}} TON to {{wallet}}?"
   },

@@ -16,8 +16,6 @@ const initialState: UserState & FarmClickData = {
   status: "",
   username: null,
   token: "",
-
-  loading: false,
 };
 
 export const userSlice = createSlice({
@@ -28,12 +26,8 @@ export const userSlice = createSlice({
       state.wallet_address = action.payload;
     },
   },
-  // Клики
-  extraReducers: (builder) => {
-    builder.addMatcher(api.endpoints.sendClick.matchFulfilled, (state, { payload }) => {
-      return { ...state, ...payload };
-    });
 
+  extraReducers: (builder) => {
     builder.addMatcher(api.endpoints.sendClick.matchFulfilled, (state, { payload }) => {
       return { ...state, ...payload };
     });
@@ -43,26 +37,7 @@ export const userSlice = createSlice({
     });
 
     builder.addMatcher(api.endpoints.sendAuth.matchFulfilled, (state, { payload }) => {
-      const { user, token } = payload;
-      state.id_tg = user.id_tg;
-      state.farm_balance = user.farm_balance;
-      state.clicks_today = user.clicks_today;
-      state.level = user.level;
-      state.investment_balance = user.investment_balance;
-      state.wallet_address = user.wallet_address;
-      state.status = user.status;
-      state.username = user.username;
-      state.token = token;
-
-      state.loading = false;
-    });
-
-    builder.addMatcher(api.endpoints.sendAuth.matchPending, (state) => {
-      state.loading = true;
-    });
-
-    builder.addMatcher(api.endpoints.sendAuth.matchRejected, (state) => {
-      state.loading = false;
+      return { ...state, ...payload };
     });
   },
 });
