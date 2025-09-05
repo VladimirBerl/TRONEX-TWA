@@ -6,7 +6,7 @@ import { Address } from "ton";
 import { LanguageSelector } from "@/features";
 import { setWalletAddress } from "@/entities/user/model/userSlice.ts";
 import { useUpdateWalletMutation } from "@/shared/api/api.ts";
-import { AuthData } from "@/shared/types/user.ts";
+import { UpdateWalletData } from "@/shared/types/user.ts";
 
 export const HomeHeader = () => {
   const [tonConnectUI] = useTonConnectUI();
@@ -18,8 +18,8 @@ export const HomeHeader = () => {
     if (id_tg != null) {
       updateWallet({ id_tg, walletAddress })
         .unwrap()
-        .then((data: AuthData) => {
-          const { wallet_address } = data.user;
+        .then((data: UpdateWalletData) => {
+          const wallet_address: string | null = data.wallet_address;
           dispatch(setWalletAddress(wallet_address));
         })
         .catch((error) => {

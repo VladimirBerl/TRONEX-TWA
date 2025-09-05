@@ -79,7 +79,7 @@
     "connectWallet": "请先连接钱包",
     "addressMissing": "存款地址缺失",
     "invalidAmount": "无效的存款金额",
-    "transactionSent": "交易已发送！请在钱包中确认",
+    "transactionSent": "交易已发送",
     "transactionFailed": "交易发送失败",
     "confirm": "您要存入 {{amount}} TON 到地址 {{wallet}} 吗？"
   },

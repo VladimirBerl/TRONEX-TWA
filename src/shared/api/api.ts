@@ -1,22 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AuthData, FarmClickData } from "@/shared/types/user.ts";
+import { AuthData, FarmClickData, UpdateWalletData } from "@/shared/types/user.ts";
 import { LevelInfo, LevelUpgradeResult } from "@/shared/types/levels.ts";
+import { DepositData } from "@/shared/types/deposit.ts";
 
 const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-
-interface DepositInfo {
-  id: number;
-  network: string;
-  amount: string;
-  status: string;
-  createdAt: string;
-}
-
-interface DepositData {
-  page: number;
-  total: number;
-  deposits: DepositInfo[];
-}
 
 export interface ReferralsInfo {
   all_referrals: string;
@@ -67,10 +54,13 @@ export const api = createApi({
       query: (id_tg) => `/api/users/${id_tg}/referrals`,
     }),
 
-    // WALLET INFO
-    updateWallet: builder.mutation<AuthData, { id_tg: string; walletAddress: string | null }>({
+    // UPDATE WALLET
+    updateWallet: builder.mutation<
+      UpdateWalletData,
+      { id_tg: string; walletAddress: string | null }
+    >({
       query: ({ id_tg, walletAddress }) => ({
-        url: `/api/users/${id_tg}/wallet_address`,
+        url: `/api/users/${id_tg}/wallet-address`,
         method: "PATCH",
         body: { wallet_address: walletAddress },
       }),
@@ -89,6 +79,22 @@ export const api = createApi({
         body: { id_tg },
       }),
     }),
+
+    // WITHDRAW
+    withdraw: builder.mutation<
+      string,
+      { id_tg: string; walletAddress: string; withdrawAmount: string }
+    >({
+      query: ({ id_tg, walletAddress, withdrawAmount }) => ({
+        url: `/api/withdraw/${id_tg}/create`,
+        method: "POST",
+        body: {
+          network: "TON",
+          wallet_address: walletAddress,
+          amount: withdrawAmount,
+        },
+      }),
+    }),
   }),
 });
 
@@ -101,4 +107,5 @@ export const {
   useLazyGetDepositHistoryQuery,
   useSendClickMutation,
   useUpgradeLevelMutation,
+  useWithdrawMutation,
 } = api;

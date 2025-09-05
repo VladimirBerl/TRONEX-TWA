@@ -27,6 +27,8 @@ export interface UserState extends User {
   referrals: ReferralsInfo | null;
 
   token: string;
+}
 
-  loading: boolean;
+export interface UpdateWalletData extends User {
+  data: User;
 }

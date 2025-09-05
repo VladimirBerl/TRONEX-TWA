@@ -79,7 +79,7 @@
     "connectWallet": "Сначала подключите кошелёк",
     "addressMissing": "Адрес депозита отсутствует",
     "invalidAmount": "Неверная сумма депозита",
-    "transactionSent": "Транзакция отправлена! Подтвердите в кошельке",
+    "transactionSent": "Транзакция отправлена!",
     "transactionFailed": "Не удалось отправить транзакцию",
     "confirm": "Хотите внести {{amount}} TON на адрес {{wallet}}?"
   },
