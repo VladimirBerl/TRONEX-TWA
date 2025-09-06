@@ -63,7 +63,7 @@ if (import.meta.env.DEV) {
         [
           "tgWebAppData",
           new URLSearchParams(
-            "user=%7B%22id%22%3A694603801%2C%22first_name%22%3A%22Berlin%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22Deadlife1912%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FXIB8q_IQ9UeqJdisXiVUMe6aGepyrrERplMHSyO68DM.svg%22%7D&chat_instance=1642272146855910987&chat_type=private&auth_date=1757155306&signature=AjPMT970-ZReFVJ70hVJBE2dCl7Xbv1fYHWJqU2b6XoivhSU7cb4V8gV8OsKiYUT-dIEN0bWOaO4t0oJ2R1pDQ&hash=f3a34b96f0a03c47db37468743ecb2ecad6b7a740c82044e275a59b1bd650bc0",
+            "user=%7B%22id%22%3A694603801%2C%22first_name%22%3A%22Berlin%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22Deadlife1912%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FXIB8q_IQ9UeqJdisXiVUMe6aGepyrrERplMHSyO68DM.svg%22%7D&chat_instance=-7847544974083287592&chat_type=private&auth_date=1757162221&signature=AmFZl5hMaG2izy9azE6MF3sPebkZCmZxsVSPPrFF8WgXJsO108V3XB4zaLmQ8S78UWUw5H3eAhIv-gwvZSXWDw&hash=4560170171ca26f174ed3095b87a30106bdf52a3274c195ce376d8e9fb10a9f8",
           ).toString(),
         ],
         ["tgWebAppVersion", "8.4"],

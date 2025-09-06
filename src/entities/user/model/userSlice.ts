@@ -25,6 +25,27 @@ export const userSlice = createSlice({
     setWalletAddress: (state, action: { payload: string | null }) => {
       state.wallet_address = action.payload;
     },
+
+    setInvestmentBalance: (state, action: { payload: string }) => {
+      state.investment_balance = action.payload;
+    },
+
+    setFarmBalance: (state, action: { payload: string }) => {
+      if (action.payload) state.farm_balance = action.payload;
+    },
+
+    setNewLevel: (state, action: { payload: { newLevel: number; newBalance: string } }) => {
+      state.level = action.payload.newLevel;
+      state.investment_balance = action.payload.newBalance;
+    },
+
+    setNewBalance: (
+      state,
+      action: { payload: { newInvestmentBalance: string; newFarmBalance: string } },
+    ) => {
+      state.farm_balance = action.payload.newFarmBalance;
+      state.investment_balance = action.payload.newInvestmentBalance;
+    },
   },
 
   extraReducers: (builder) => {
@@ -42,5 +63,11 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setWalletAddress } = userSlice.actions;
+export const {
+  setWalletAddress,
+  setInvestmentBalance,
+  setNewLevel,
+  setNewBalance,
+  setFarmBalance,
+} = userSlice.actions;
 export default userSlice.reducer;

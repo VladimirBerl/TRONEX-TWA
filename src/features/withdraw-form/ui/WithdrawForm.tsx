@@ -8,7 +8,7 @@ import {
   NetworkInfo,
 } from "@/features";
 import { useForm } from "react-hook-form";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { TransactionFooter } from "@/widgets";
 import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { RootState } from "@/app/store/store.ts";
@@ -17,6 +17,7 @@ import { useWithdrawTransaction } from "@/shared/hooks";
 
 export const WithdrawForm = () => {
   const { t } = useTranslation();
+  const [isBlockedButton, setIsBlockedButton] = useState(false);
   const { wallet_address } = useAppSelector((state: RootState) => state.user);
   const executeWithdraw = useWithdrawTransaction();
 
@@ -28,8 +29,10 @@ export const WithdrawForm = () => {
     resolver: zodResolver(withdrawSchema),
   });
 
-  const handleWithdrawTransaction = (data: WithdrawFormValues) => {
-    void executeWithdraw(data, form);
+  const handleWithdrawTransaction = async (data: WithdrawFormValues) => {
+    setIsBlockedButton(true);
+    await executeWithdraw(data, form);
+    setIsBlockedButton(false);
   };
 
   return (
@@ -54,6 +57,7 @@ export const WithdrawForm = () => {
             btnText={t("withdraw.btn_text")}
             type="withdraw"
             buttonValue={form.watch("withdrawAmount") || "0"}
+            isBlockedButton={isBlockedButton}
           />
         </div>
       </form>

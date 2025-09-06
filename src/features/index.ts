@@ -10,9 +10,6 @@ export { NetworkInfo } from "./withdraw-form/ui/NetworkInfo.tsx";
 export { DepositForm } from "./deposit-form/ui/DepositForm.tsx";
 export { LanguageSelector } from "./language-selector/ui/LanguageSelector.tsx";
 
-export { checkTask } from "./bonus/model/checkThunk.ts";
-export { getTasks } from "./bonus/model/tasksThunk.ts";
-export { deposit } from "./deposit-form/model/depositThunk.ts";
 export { getWithdrawHistory } from "@/features/withdraw-history/model/withdrawalsThunk.ts";
 export { withdrawalsSlice } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
 export { setStatusCookie } from "@/features/auth/lib/setStatusCookie.ts";
