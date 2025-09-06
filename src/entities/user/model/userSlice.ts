@@ -37,7 +37,7 @@ export const userSlice = createSlice({
     });
 
     builder.addMatcher(api.endpoints.sendAuth.matchFulfilled, (state, { payload }) => {
-      return { ...state, ...payload };
+      return { ...state, ...payload.user };
     });
   },
 });

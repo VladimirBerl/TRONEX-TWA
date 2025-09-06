@@ -62,12 +62,9 @@ if (import.meta.env.DEV) {
         // But in case you don't really need a valid init data, use this one:
         [
           "tgWebAppData",
-          new URLSearchParams([
-            ["auth_date", ((new Date().getTime() / 1000) | 0).toString()],
-            ["hash", "some-hash"],
-            ["signature", "some-signature"],
-            ["user", JSON.stringify({ id: 889424083, first_name: "Vladislav" })],
-          ]).toString(),
+          new URLSearchParams(
+            "user=%7B%22id%22%3A694603801%2C%22first_name%22%3A%22Berlin%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22Deadlife1912%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FXIB8q_IQ9UeqJdisXiVUMe6aGepyrrERplMHSyO68DM.svg%22%7D&chat_instance=1642272146855910987&chat_type=private&auth_date=1757155306&signature=AjPMT970-ZReFVJ70hVJBE2dCl7Xbv1fYHWJqU2b6XoivhSU7cb4V8gV8OsKiYUT-dIEN0bWOaO4t0oJ2R1pDQ&hash=f3a34b96f0a03c47db37468743ecb2ecad6b7a740c82044e275a59b1bd650bc0",
+          ).toString(),
         ],
         ["tgWebAppVersion", "8.4"],
         ["tgWebAppPlatform", "tdesktop"],
@@ -79,4 +76,3 @@ if (import.meta.env.DEV) {
     // );
   }
 }
-// 694603801
