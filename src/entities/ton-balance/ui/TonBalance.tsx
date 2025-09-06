@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { checkLengthNumbers } from "@/shared/lib/checkLengthNumber.tsx";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "@/shared/hooks";
 
 export const TonBalance = () => {
   const { t } = useTranslation();
-  const { farm_balance, investment_balance } = useSelector((state: RootState) => state.user);
+  const { farm_balance, investment_balance } = useAppSelector((state: RootState) => state.user);
 
   return (
     <section className="flex gap-3 justify-center items-center mb-6">

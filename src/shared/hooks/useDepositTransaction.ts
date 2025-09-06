@@ -1,21 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
-import { useAppDispatch } from "@/shared/hooks/useAppDispatch.ts";
-import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
-import { deposit, DepositFormValues } from "@/features";
+import { DepositFormValues } from "@/features";
 import { UseFormReturn } from "react-hook-form";
 import { Buffer } from "buffer";
 import { Cell } from "@ton/core";
+import { useDepositMutation } from "@/shared/api/api.ts";
+import { setInvestmentBalance } from "@/entities/user/model/userSlice.ts";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 
 export const useDepositTransaction = () => {
   const { t } = useTranslation();
   const [tonConnectUI] = useTonConnectUI();
   const address = useTonAddress();
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { id_tg, wallet_address } = useSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
+  const { id_tg, wallet_address, investment_balance } = useAppSelector(
+    (state: RootState) => state.user,
+  );
+  const [deposit] = useDepositMutation();
   const WALLET_ADDRESS = "UQAVOcL-9aRmHxodpLjMU4BIcbP1EdC-XqnhC0vaUISnmnAS";
 
   return async (data: DepositFormValues, form: UseFormReturn<DepositFormValues>) => {
@@ -43,8 +47,12 @@ export const useDepositTransaction = () => {
       const bocCell = Cell.fromBoc(Buffer.from(result.boc, "base64"))[0];
       const hash = bocCell.hash().toString("hex");
 
-      if (id_tg)
-        await dispatch(deposit({ id_tg, amount: data.depositAmount, wallet_address, hash }));
+      if (id_tg) {
+        await deposit({ id_tg, amount: data.depositAmount, wallet_address, hash });
+
+        const newBalance = parseFloat(investment_balance) + parseFloat(data.depositAmount);
+        dispatch(setInvestmentBalance(newBalance.toString()));
+      }
 
       form.reset({ depositAmount: "" });
       void navigate("/deposit", { replace: true });

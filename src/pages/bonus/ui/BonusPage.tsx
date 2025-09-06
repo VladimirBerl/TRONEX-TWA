@@ -1,26 +1,27 @@
 import { Page } from "@/shared/ui";
-import { BenefitCard, getTasks } from "@/features";
+import { BenefitCard } from "@/features";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
-import { Task } from "@/entities/bonus/model/tasksSlice.ts";
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
+import { useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
 import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver.ts";
 import { MobileNavBar } from "@/widgets";
+import { useLazyGetBonusTasksQuery } from "@/shared/api/api.ts";
+import { BonusTask } from "@/shared/types/tasks.ts";
 
 export const BonusPage = () => {
   const { t } = useTranslation();
   const { tasks, total } = useSelector((state: RootState) => state.tasks);
   const { id_tg } = useAppSelector((state: RootState) => state.user);
   const [, setPage] = useState<number>(1);
-  const dispatch = useAppDispatch();
+  const [getBonusTasks] = useLazyGetBonusTasksQuery();
 
   useEffect(() => {
-    if (id_tg != null) void dispatch(getTasks({ id_tg }));
+    if (id_tg != null) void getBonusTasks({ id_tg, page: 1 });
   }, []);
 
-  const targetRef = useIntersectionObserver<HTMLLIElement, Task>({
+  const targetRef = useIntersectionObserver<HTMLLIElement, BonusTask>({
     root: null,
     rootMargin: "0px",
     threshold: 0.5,
@@ -28,7 +29,7 @@ export const BonusPage = () => {
     items: tasks,
     total: total,
     handleGetItems: ({ id_tg, page }) => {
-      void dispatch(getTasks({ id_tg, page }));
+      if (id_tg != null) void getBonusTasks({ id_tg, page });
     },
     setPage: setPage,
   });
@@ -45,7 +46,7 @@ export const BonusPage = () => {
             <h2 className="text-white-heading text-center mt-[100px]">
               В данный момент задачи отсутствуют.
             </h2>
-          : tasks?.map((task: Task, index, arr) => {
+          : tasks?.map((task: BonusTask, index, arr) => {
               const { id, title, reward, url, imageUrl, reward_issued, status } = task;
 
               const isLast: boolean = index === arr.length - 1;

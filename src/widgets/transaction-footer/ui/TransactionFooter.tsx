@@ -11,6 +11,7 @@ interface TransactionFooterProps {
   btnText: string;
   buttonValue: string;
   type: TransactionType;
+  isBlockedButton?: boolean;
 }
 
 const getConfig = (
@@ -26,7 +27,12 @@ const getConfig = (
   },
 });
 
-export const TransactionFooter = ({ btnText, buttonValue, type }: TransactionFooterProps) => {
+export const TransactionFooter = ({
+  btnText,
+  buttonValue,
+  type,
+  isBlockedButton,
+}: TransactionFooterProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -47,7 +53,7 @@ export const TransactionFooter = ({ btnText, buttonValue, type }: TransactionFoo
             </div>
           </div>
 
-          <Button variant="action" type="submit" hover="buyLevel">
+          <Button variant="action" type="submit" hover="buyLevel" disabled={isBlockedButton}>
             {`${btnText} ${buttonValue} TON`}
           </Button>
         </div>
@@ -57,6 +63,7 @@ export const TransactionFooter = ({ btnText, buttonValue, type }: TransactionFoo
           type="button"
           className="h-fit text-transaction text-center w-full no-hover"
           onClick={(): void => void navigate(config[type].path)}
+          disabled={isBlockedButton}
         >
           {config[type].historyText}
         </Button>

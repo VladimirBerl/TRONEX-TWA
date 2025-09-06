@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { AuthData, FarmClickData, UpdateWalletData } from "@/shared/types/user.ts";
 import { LevelInfo, LevelUpgradeResult } from "@/shared/types/levels.ts";
 import { DepositData } from "@/shared/types/deposit.ts";
+import { BonusTasksRes } from "@/shared/types/tasks.ts";
 
 const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
 
@@ -49,6 +50,15 @@ export const api = createApi({
       query: (id_tg) => `/api/users/${id_tg}/levels`,
     }),
 
+    // UPGRADE LEVEL
+    upgradeLevel: builder.mutation<LevelUpgradeResult, string>({
+      query: (id_tg) => ({
+        url: `/api/upgrade-level`,
+        method: "PATCH",
+        body: { id_tg },
+      }),
+    }),
+
     // REFERRALS
     getReferrals: builder.query<ReferralsInfo, string>({
       query: (id_tg) => `/api/users/${id_tg}/referrals`,
@@ -71,15 +81,6 @@ export const api = createApi({
       query: ({ id_tg, page = 1 }) => `${API_URL}/api/deposit/${id_tg}?page=${page}`,
     }),
 
-    // UPGRADE LEVEL
-    upgradeLevel: builder.mutation<LevelUpgradeResult, string>({
-      query: (id_tg) => ({
-        url: `/api/upgrade-level`,
-        method: "PATCH",
-        body: { id_tg },
-      }),
-    }),
-
     // WITHDRAW
     withdraw: builder.mutation<
       string,
@@ -95,6 +96,40 @@ export const api = createApi({
         },
       }),
     }),
+
+    // DEPOSIT
+    deposit: builder.mutation<
+      string,
+      { id_tg: string; wallet_address: string; amount: string; hash: string }
+    >({
+      query: ({ id_tg, amount, wallet_address, hash }) => ({
+        url: `${API_URL}/api/deposit/${id_tg}/create`,
+        method: "POST",
+        body: {
+          network: "TON",
+          amount: amount,
+          wallet_address: wallet_address,
+          hash: hash,
+        },
+      }),
+    }),
+
+    // GET BOUS TASKS
+    getBonusTasks: builder.query<BonusTasksRes, { id_tg: string; page?: number }>({
+      query: ({ id_tg, page = 1 }) => `/api/users/${id_tg}/tasks?page=${page}`,
+    }),
+
+    // CHECK BONUS TASK
+    checkBonusTask: builder.mutation<
+      { reward: string; status: string },
+      { id_tg: string; id: number }
+    >({
+      query: ({ id_tg, id }) => ({
+        url: `/api/tasks/${id}/check`,
+        method: "PATCH",
+        body: { id_tg },
+      }),
+    }),
   }),
 });
 
@@ -108,4 +143,7 @@ export const {
   useSendClickMutation,
   useUpgradeLevelMutation,
   useWithdrawMutation,
+  useDepositMutation,
+  useLazyGetBonusTasksQuery,
+  useCheckBonusTaskMutation,
 } = api;
