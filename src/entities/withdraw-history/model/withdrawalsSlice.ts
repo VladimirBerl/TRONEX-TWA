@@ -1,21 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getWithdrawHistory } from "@/features";
+import { api } from "@/shared/api/api.ts";
+import { WithdrawInfo } from "@/shared/types/withdraw.ts";
 
-export interface Withdrawals {
-  id: number;
-  network: string;
-  amount: string;
-  status: string;
-  createdAt: string;
-}
-
-export interface WithdrawHistoryInfo {
+export interface WithdrawState {
   page: number;
   total: number;
-  withdrawals: Withdrawals[];
+  withdrawals: WithdrawInfo[];
 }
 
-const initialState: WithdrawHistoryInfo = {
+const initialState: WithdrawState = {
   page: 1,
   total: 0,
   withdrawals: [],
@@ -27,8 +20,8 @@ export const withdrawalsSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    builder.addCase(getWithdrawHistory.fulfilled, (state, action) => {
-      const { page, total, withdrawals } = action.payload;
+    builder.addMatcher(api.endpoints.getWithdrawHistory.matchFulfilled, (state, { payload }) => {
+      const { page, total, withdrawals } = payload;
 
       state.page = page;
       state.total = total;

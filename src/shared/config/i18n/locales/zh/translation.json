@@ -59,6 +59,7 @@
     "subscribe_bot": "订阅机器人",
     "subscribe_channel": "订阅频道",
     "get": "领取",
+    "noTasks": "当前没有任务。",
     "status": {
       "completed": "已完成",
       "checking": "检查中",

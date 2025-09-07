@@ -1,4 +1,4 @@
-import { ReferralsInfo } from "@/shared/api/api.ts";
+import { ReferralsInfo } from "@/shared/types/referral.ts";
 
 export interface User {
   id_tg: string | null;

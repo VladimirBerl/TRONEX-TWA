@@ -59,6 +59,7 @@
     "subscribe_bot": "Subscribe to the bot",
     "subscribe_channel": "Subscribe to the channel",
     "get": "Get",
+    "noTasks": "There are currently no tasks.",
     "status": {
       "completed": "Completed",
       "checking": "Checking",

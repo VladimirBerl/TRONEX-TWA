@@ -17,7 +17,7 @@ export const BenefitCard = ({
   imageUrl,
 }: BonusTask) => {
   const { t } = useTranslation();
-  const { id_tg } = useAppSelector((state: RootState) => state.user);
+  const { id_tg, farm_balance } = useAppSelector((state: RootState) => state.user);
   const [localStatus, setLocalStatus] = useState(status);
   const dispatch = useAppDispatch();
   const [checkBonusTask] = useCheckBonusTaskMutation();
@@ -32,7 +32,7 @@ export const BenefitCard = ({
     pending: t("bonus.status.get"),
   };
 
-  const handleCheckTask = async (newStatus: string) => {
+  const handleCheckTask = async () => {
     if (!id_tg) return;
 
     await checkBonusTask({ id_tg, id })
@@ -40,12 +40,13 @@ export const BenefitCard = ({
       .then((data) => {
         const { reward, status } = data;
 
-        if (newStatus === "pending") {
+        if (localStatus === "pending") {
           setLocalStatus(status);
 
           return { status };
-        } else if (newStatus === "checking") {
-          dispatch(setFarmBalance(reward));
+        } else if (localStatus === "checking") {
+          const newFarmBalance = parseFloat(reward) + parseFloat(farm_balance);
+          dispatch(setFarmBalance(newFarmBalance.toString()));
           setLocalStatus(status);
 
           return { status };
@@ -61,12 +62,12 @@ export const BenefitCard = ({
     switch (localStatus) {
       case "pending":
         if (id_tg && id) {
-          await handleCheckTask(localStatus);
+          await handleCheckTask();
           window.open(url, "_blank");
         }
         break;
       case "checking":
-        if (id_tg && id) await handleCheckTask(localStatus);
+        if (id_tg && id) await handleCheckTask();
         break;
       case "completed":
         break;
@@ -76,18 +77,22 @@ export const BenefitCard = ({
   return (
     <article className="bg-[#161d27] p-2 rounded-[12px]">
       <div className="flex items-center justify-between">
-        <header className="flex gap-2 items-center">
-          <div className="border-[#18a7fb] border-dashed border-[1px] w-[90px] min-w-[90px] h-full rounded-[12px]">
-            <img className="w-full h-full object-cover rounded-[12px]" src={imageUrl} alt="image" />
+        <header className="flex flex-1 gap-2 items-center h-full mr-1.5">
+          <div className="border-[#18a7fb] border-dashed border-[1px] rounded-[12px]">
+            <img
+              className="w-[90px] h-[78px] object-cover rounded-[12px]"
+              src={imageUrl}
+              alt="image"
+            />
           </div>
 
-          <p className="max-w-[100px] mr-1.5 sm:text-[16px] text-[14px] wrap-break-word">{title}</p>
+          <p className="flex-1 text-[14px] break-all">{title}</p>
         </header>
 
         <div className="flex flex-col gap-y-3">
           <Button
             variant={localStatus === "completed" || reward_issued ? "positiveDisabled" : "get"}
-            disabled={reward_issued}
+            disabled={reward_issued || localStatus === "completed"}
             onClick={(): void => void handleTaskExecution(id, url)}
           >
             {statusToLabelMap[localStatus] ?? t("bonus.status.get")}

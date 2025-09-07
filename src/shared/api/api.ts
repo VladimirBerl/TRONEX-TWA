@@ -3,15 +3,10 @@ import { AuthData, FarmClickData, UpdateWalletData } from "@/shared/types/user.t
 import { LevelInfo, LevelUpgradeResult } from "@/shared/types/levels.ts";
 import { DepositData } from "@/shared/types/deposit.ts";
 import { BonusTasksRes } from "@/shared/types/tasks.ts";
+import { WithdrawData } from "@/shared/types/withdraw.ts";
+import { ReferralsInfo } from "@/shared/types/referral.ts";
 
 const API_URL: string = import.meta.env.VITE_API_BASE_URL! as string;
-
-export interface ReferralsInfo {
-  all_referrals: string;
-  all_referrals_deposit: string;
-  invite_link: string;
-  deposit_amount: string;
-}
 
 export const api = createApi({
   reducerPath: "api",
@@ -78,7 +73,12 @@ export const api = createApi({
 
     // DEPOSIT HISTORY
     getDepositHistory: builder.query<DepositData, { id_tg: string; page: number }>({
-      query: ({ id_tg, page = 1 }) => `${API_URL}/api/deposit/${id_tg}?page=${page}`,
+      query: ({ id_tg, page = 1 }) => `/api/deposit/${id_tg}?page=${page}`,
+    }),
+
+    // WITHDRAW HISTORY
+    getWithdrawHistory: builder.query<WithdrawData, { id_tg: string; page: number }>({
+      query: ({ id_tg, page = 1 }) => `/api/withdraw/${id_tg}?page=${page}`,
     }),
 
     // WITHDRAW
@@ -134,6 +134,7 @@ export const api = createApi({
 });
 
 export const {
+  useLazyGetWithdrawHistoryQuery,
   useSendAuthMutation,
   useGetLevelsQuery,
   useLazyGetLevelsQuery,

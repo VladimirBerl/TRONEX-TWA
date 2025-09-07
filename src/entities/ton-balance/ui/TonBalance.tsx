@@ -1,5 +1,5 @@
 import { RootState } from "@/app/store/store.ts";
-import { checkLengthNumbers } from "@/shared/lib/checkLengthNumber.tsx";
+import { checkLengthNumbers } from "@/shared/ui/checkLengthNumber.tsx";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/shared/hooks";
 

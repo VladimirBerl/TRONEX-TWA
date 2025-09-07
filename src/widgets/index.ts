@@ -3,3 +3,8 @@ export { MobileNavBar } from "@/widgets/mobile-nav-bar/ui/MobileNavBar.tsx";
 export { HeaderUpgradeTier } from "./header-upgrade-tier/ui/HeaderUpgradeTier.tsx";
 export { TransactionFooter } from "@/widgets/transaction-footer/ui/TransactionFooter.tsx";
 export { HomeHeader } from "@/widgets/home-header/ui/HomeHeader.tsx";
+export { WithdrawHistoryList } from "@/widgets/withdraw-history-list/ui/WithdrawHistoryList.tsx";
+export { DepositHistoryList } from "@/widgets/deposit-history-list/ui/DepositHistoryList.tsx";
+export { BonusTaskList } from "@/widgets/bonus-list/ui/BonusTaskList.tsx";
+export { FormDisplay } from "@/widgets/form-display/ui/FormDisplay.tsx";
+export { UpgradeContent } from "@/widgets/upgrade-content/ui/UpgradeContent.tsx";

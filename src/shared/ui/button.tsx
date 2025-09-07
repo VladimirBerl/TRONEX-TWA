@@ -17,12 +17,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "shadow-xs bg-[#1B1D29] flex items-center ",
-        action: "grow !h-[40px] px-2 text-button-md bg-[#1B1D29] flex items-center",
+        action: "grow !h-[40px] px-2 text-button-md bg-[#1B1D29] items-center",
         upgrade:
           "border-solid border-[#47bfe8] border-[1px] text-button-sm !px-[8px] max-w-fit flex items-center",
-        get: "text-button-sm px-2 bg-[#1B1D29] flex items-center",
+        get: "text-button-sm !p-1 bg-[#1B1D29] flex items-center",
         buyLevel: "bg-transparent border-none !p-0 mb-2 rounded-[12px] flex items-center",
-        positiveDisabled: "bg-[#228b22]/40 text-button-sm flex items-center",
+        positiveDisabled: "bg-[#228b22]/40 !p-1 text-button-sm flex items-center",
         transparent: "bg-transparent border-none !p-0",
         page: "bg-[#1B1D29] border-[1px] border-solid border-[#18a7fb]",
         banned:

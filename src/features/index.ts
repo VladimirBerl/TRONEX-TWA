@@ -9,10 +9,7 @@ export { WalletAddressField } from "./withdraw-form/ui/WalletAddressField.tsx";
 export { NetworkInfo } from "./withdraw-form/ui/NetworkInfo.tsx";
 export { DepositForm } from "./deposit-form/ui/DepositForm.tsx";
 export { LanguageSelector } from "./language-selector/ui/LanguageSelector.tsx";
-
-export { getWithdrawHistory } from "@/features/withdraw-history/model/withdrawalsThunk.ts";
-export { withdrawalsSlice } from "@/entities/withdraw-history/model/withdrawalsSlice.ts";
-export { setStatusCookie } from "@/features/auth/lib/setStatusCookie.ts";
+export { FormSwitcher } from "./form-switcher/ui/FormSwitcher.tsx";
 
 export { depositSchema, type DepositFormValues } from "./deposit-form/model/depositSchema.ts";
 export { withdrawSchema, type WithdrawFormValues } from "./withdraw-form/model/withdrawSchema.ts";

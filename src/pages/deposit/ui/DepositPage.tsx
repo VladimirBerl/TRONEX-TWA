@@ -1,8 +1,8 @@
-import { Page, Button } from "@/shared/ui";
-import { MobileNavBar } from "@/widgets";
+import { Page } from "@/shared/ui";
+import { FormDisplay, MobileNavBar } from "@/widgets";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { DepositForm, WithdrawForm } from "@/features";
+import { FormSwitcher } from "@/features";
 
 export const DepositPage = () => {
   const { t } = useTranslation();
@@ -14,25 +14,9 @@ export const DepositPage = () => {
         {selectForm === "deposit" ? t("deposit.title") : t("withdraw.title")}
       </h1>
 
-      <section className="flex w-full justify-around bg-[#1b1d29] p-1 mb-[26px] rounded-[12px]">
-        <Button
-          onClick={(): void => setSelectForm("deposit")}
-          className={`${selectForm === "deposit" ? "bg-[#18a7fb] hover:bg-[#18a7fb]" : "bg-transparent"} rounder-[6px] min-w-[140px] text-balance`}
-        >
-          {t("deposit.deposit_button")}
-        </Button>
+      <FormSwitcher selectForm={selectForm} setSelectForm={setSelectForm} />
 
-        <Button
-          onClick={(): void => setSelectForm("withdraw")}
-          className={`${selectForm === "withdraw" ? "bg-[#18a7fb] hover:bg-[#18a7fb]" : "bg-transparent"} rounder-[6px] min-w-[140px] text-balance`}
-        >
-          {t("withdraw.withdraw_button")}
-        </Button>
-      </section>
-
-      {selectForm === "deposit" ?
-        <DepositForm />
-      : <WithdrawForm />}
+      <FormDisplay selectForm={selectForm} />
 
       <MobileNavBar page="/deposit" />
     </Page>

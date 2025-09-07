@@ -50,7 +50,7 @@ export const WithdrawForm = () => {
 
         <NetworkInfo />
 
-        <p className="text-body-strong pt-2">{t("withdraw.note")}</p>
+        <p className="text-body pt-2">{t("withdraw.note")}</p>
 
         <div className="flex items-end h-full w-full pb-2 pt-2">
           <TransactionFooter

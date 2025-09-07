@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { RootState } from "@/app/store/store.ts";
-import { checkLengthNumbers } from "@/shared/lib/checkLengthNumber.tsx";
+import { checkLengthNumbers } from "@/shared/ui/checkLengthNumber.tsx";
 import { useAppSelector } from "@/shared/hooks";
 
 export const PassiveIncome = () => {
@@ -10,7 +10,7 @@ export const PassiveIncome = () => {
 
   return (
     <section className="my-[26px]">
-      <h2 className="text-heading-light text-center">{t("home.passive_income")}</h2>
+      <h2 className="text-heading text-center">{t("home.passive_income")}</h2>
 
       <div className="flex gap-2.5 items-center justify-center">
         <span className="text-large block leading-none">

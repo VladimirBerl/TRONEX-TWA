@@ -48,7 +48,7 @@ export const TransactionFooter = ({
             </div>
 
             <div className="flex flex-col justify-center">
-              <h3 className="text-body-strong">{t("transaction_footer.payment_method")}</h3>
+              <h3 className="text-body">{t("transaction_footer.payment_method")}</h3>
               <p className="font-semibold">{t("transaction_footer.crypto_wallet")}</p>
             </div>
           </div>

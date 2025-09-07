@@ -56,22 +56,23 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
         return;
       }
 
-      if (id_tg != null)
-        sendClick(id_tg)
-          .unwrap()
-          .then((data: FarmClickData) => {
-            const { farm_balance, clicks_today, reward_added } = data;
-            const round6 = (n: number) => parseFloat(n.toFixed(6));
+      if (!id_tg) return;
 
-            return {
-              farm_balance: round6(parseFloat(farm_balance)),
-              clicks_today,
-              reward_added,
-            };
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+      sendClick(id_tg)
+        .unwrap()
+        .then((data: FarmClickData) => {
+          const { farm_balance, clicks_today, reward_added } = data;
+          const round6 = (n: number) => parseFloat(n.toFixed(6));
+
+          return {
+            farm_balance: round6(parseFloat(farm_balance)),
+            clicks_today,
+            reward_added,
+          };
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     [clicks_today, id_tg, showFloatingText],
   );
