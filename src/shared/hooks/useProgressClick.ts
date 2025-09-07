@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import * as React from "react";
 import { useSendClickMutation } from "@/shared/api/api.ts";
 import { FarmClickData } from "@/shared/types/user.ts";
@@ -6,9 +6,10 @@ import { FarmClickData } from "@/shared/types/user.ts";
 const MAX_CLICKS = 1000;
 
 export const useProgressClick = (id_tg: string | null, clicks_today: number | null) => {
-  const [isMaxReached, setIsMaxReached] = useState(false);
   const timerRef = useRef(false);
   const [sendClick] = useSendClickMutation();
+
+  const isMaxReached = (clicks_today ?? 0) >= MAX_CLICKS;
 
   const showFloatingText = (e: React.MouseEvent, text: string) => {
     const div = document.createElement("div");
@@ -42,7 +43,7 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
 
   const handleProgressUpdate = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (timerRef.current) return;
+      if (timerRef.current || isMaxReached) return;
 
       showFloatingText(e, "tap");
 
@@ -50,11 +51,6 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
       setTimeout(() => {
         timerRef.current = false;
       }, 200);
-
-      if (clicks_today !== null && clicks_today >= MAX_CLICKS) {
-        setIsMaxReached(true);
-        return;
-      }
 
       if (!id_tg) return;
 
