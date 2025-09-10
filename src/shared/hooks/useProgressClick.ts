@@ -9,7 +9,7 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
   const timerRef = useRef(false);
   const [sendClick] = useSendClickMutation();
 
-  const isMaxReached = (clicks_today ?? 0) >= MAX_CLICKS;
+  const isMaxReached = clicks_today === 0;
 
   const showFloatingText = (e: React.MouseEvent, text: string) => {
     const div = document.createElement("div");
@@ -73,7 +73,7 @@ export const useProgressClick = (id_tg: string | null, clicks_today: number | nu
     [clicks_today, id_tg, showFloatingText],
   );
 
-  const progress = ((clicks_today ?? 0) / MAX_CLICKS) * 100;
+  const progress = ((MAX_CLICKS - (clicks_today ?? 0)) / MAX_CLICKS) * 100;
 
   return {
     handleProgressUpdate,

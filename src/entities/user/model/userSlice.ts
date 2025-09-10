@@ -5,7 +5,7 @@ import { UserState, FarmClickData } from "@/shared/types/user.ts";
 const initialState: UserState & FarmClickData = {
   reward_added: 0,
   farm_balance: "0",
-  clicks_today: 0,
+  clicks_today: 1000,
 
   referrals: null,
 
