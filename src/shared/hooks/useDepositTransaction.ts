@@ -4,8 +4,6 @@ import { useTonAddress, useTonConnectUI } from "@tonconnect/ui-react";
 import { RootState } from "@/app/store/store.ts";
 import { DepositFormValues } from "@/features";
 import { UseFormReturn } from "react-hook-form";
-import { Buffer } from "buffer";
-import { Cell } from "@ton/core";
 import { useDepositMutation } from "@/shared/api/api.ts";
 import { setInvestmentBalance } from "@/entities/user/model/userSlice.ts";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/useAppDispatch.ts";
@@ -44,11 +42,12 @@ export const useDepositTransaction = () => {
       };
 
       const result = await tonConnectUI.sendTransaction(transaction);
-      const bocCell = Cell.fromBoc(Buffer.from(result.boc, "base64"))[0];
-      const hash = bocCell.hash().toString("hex");
+      const boc = result.boc;
+      // const bocCell = Cell.fromBoc(Buffer.from(result.boc, "base64"))[0];
+      // const hash = bocCell.hash().toString("hex");
 
       if (id_tg) {
-        await deposit({ id_tg, amount: data.depositAmount, wallet_address, hash });
+        await deposit({ id_tg, amount: data.depositAmount, wallet_address, boc });
 
         const newBalance = parseFloat(investment_balance) + parseFloat(data.depositAmount);
         dispatch(setInvestmentBalance(newBalance.toString()));

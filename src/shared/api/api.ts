@@ -100,16 +100,16 @@ export const api = createApi({
     // DEPOSIT
     deposit: builder.mutation<
       string,
-      { id_tg: string; wallet_address: string; amount: string; hash: string }
+      { id_tg: string; wallet_address: string; amount: string; boc: string }
     >({
-      query: ({ id_tg, amount, wallet_address, hash }) => ({
+      query: ({ id_tg, amount, wallet_address, boc }) => ({
         url: `${API_URL}/api/deposit/${id_tg}/create`,
         method: "POST",
         body: {
           network: "TON",
           amount: amount,
           wallet_address: wallet_address,
-          hash: hash,
+          boc: boc,
         },
       }),
     }),

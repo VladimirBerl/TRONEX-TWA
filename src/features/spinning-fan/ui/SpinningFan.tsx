@@ -1,6 +1,5 @@
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { Button } from "@/shared/ui";
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store.ts";
 import { useProgressClick } from "@/shared/hooks";
@@ -8,18 +7,14 @@ import { ReactComponent as SpinnerIcon } from "@/shared/assets/icons/Fan.svg";
 import { ReactComponent as TONIcon } from "@/shared/assets/icons/TonLogo.svg";
 
 export const SpinningFan = () => {
-  const { id_tg, clicks_today = 0 } = useSelector((state: RootState) => state.user);
+  const { id_tg, clicks_today } = useSelector((state: RootState) => state.user);
   const { handleProgressUpdate, isMaxReached, progress } = useProgressClick(id_tg, clicks_today);
 
-  const progressStyles = useMemo(
-    () =>
-      buildStyles({
-        pathColor: isMaxReached ? "#00B2FF" : "#18A7FB",
-        trailColor: "#001735",
-        strokeLinecap: "round",
-      }),
-    [isMaxReached],
-  );
+  const progressStyles = buildStyles({
+    pathColor: isMaxReached ? "#00B2FF" : "#18A7FB",
+    trailColor: "#001735",
+    strokeLinecap: "round",
+  });
 
   return (
     <div
